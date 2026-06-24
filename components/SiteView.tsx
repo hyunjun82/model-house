@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { Site } from "@/lib/sites";
+import Img from "@/components/Img";
 
 const PhoneIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M5 4h4l2 5-3 2a11 11 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" /></svg>
@@ -74,8 +75,8 @@ export default function SiteView({ site }: { site: Site }) {
         </div>
         <div className="hero-grid">
           <div>
-            <div className="hvideo reveal" style={{ backgroundImage: `url(${a("aerial_hi.png")})` }}>
-              <video ref={videoRef} src={a("intro.mp4")} poster={a("aerial_hi.png")} autoPlay muted loop playsInline preload="metadata" />
+            <div className="hvideo reveal" style={{ backgroundImage: `url(${a("aerial_hi.avif")})` }}>
+              <video ref={videoRef} src={a("intro.mp4")} poster={a("aerial_hi.avif")} autoPlay muted loop playsInline preload="metadata" />
               <button className="soundbtn" onClick={toggleSound} aria-label="소리 켜기">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
                   <path d="M11 5L6 9H3v6h3l5 4V5z" /><path d="M16 9.5a3.5 3.5 0 010 5M19 7a7 7 0 010 10" />
@@ -86,7 +87,7 @@ export default function SiteView({ site }: { site: Site }) {
               <div className="ov"><div className="vt"><b>입지 소개 영상</b><span>드론 조감 · 교통·생활권을 한눈에</span></div></div>
             </div>
             <figure className="reveal" style={{ position: "relative", marginTop: 14, borderRadius: 18, overflow: "hidden", border: "1px solid var(--line2)" }}>
-              <img src={a("ctx.png")} alt="CTX 청주역 이미지" />
+              <Img src={a("ctx.png")} alt="CTX 청주역 이미지" />
               <figcaption style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "14px 18px", fontSize: 14, fontWeight: 700, color: "#fff", background: "linear-gradient(transparent,rgba(8,11,20,.88))" }}>
                 CTX 청주역 이미지 <small style={{ display: "block", fontWeight: 400, fontSize: 11.5, color: "#aab4c8", marginTop: 2 }}>※ 이해를 돕기 위해 AI로 제작된 이미지로, 실제와 다를 수 있습니다.</small>
               </figcaption>
@@ -133,14 +134,14 @@ export default function SiteView({ site }: { site: Site }) {
       <section className="sec alt" id="plans"><div className="container">
         <div className="sec-head reveal"><p className="kicker">UNIT PLAN</p><h2>국민평형 평면</h2><p>가장 수요가 두꺼운 평형으로 구성했습니다.</p></div>
         <div className="plans">{site.plans.map((pl) => (
-          <div className="plan reveal" key={pl.name}><div className="ph"><b>{pl.name}</b><span>{pl.spec}</span></div><div className="im"><img src={a(pl.img)} alt={`${pl.name} 평면도`} /></div></div>
+          <div className="plan reveal" key={pl.name}><div className="ph"><b>{pl.name}</b><span>{pl.spec}</span></div><div className="im"><Img src={a(pl.img)} alt={`${pl.name} 평면도`} /></div></div>
         ))}</div>
       </div></section>
 
       <section className="sec" id="news"><div className="container">
         <div className="sec-head reveal"><p className="kicker">NEWS</p><h2>보도자료</h2><p>국토교통부 · 청주시 · 충청북도 공식 자료</p></div>
         <div className="newsgrid">{site.news.map((n, i) => (
-          <figure className={`reveal${n.wide ? " wide" : ""}`} key={i}><img src={a(n.img)} alt={n.cap || "보도자료"} />{n.cap && <figcaption>{n.cap}</figcaption>}</figure>
+          <figure className={`reveal${n.wide ? " wide" : ""}`} key={i}><Img src={a(n.img)} alt={n.cap || "보도자료"} />{n.cap && <figcaption>{n.cap}</figcaption>}</figure>
         ))}</div>
         <p className="newsnote reveal">※ 출처: 국토교통부·청주시·충청북도 공식 공고/보도자료. 노선·역 위치·일정은 협의 및 인허가 진행에 따라 변경될 수 있습니다.</p>
       </div></section>
