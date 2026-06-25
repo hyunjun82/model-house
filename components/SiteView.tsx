@@ -13,6 +13,7 @@ const KakaoIcon = () => (
 );
 
 const SUBPAD = { paddingTop: 150, minHeight: "70vh" } as const;
+const imgStyle = { width: "100%", borderRadius: 14, border: "1px solid var(--line2)" } as const;
 
 export default function SiteView({ site, page = "home" }: { site: Site; page?: PageKey }) {
   const a = (img: string) => `/${site.slug}/assets/${img}`;
@@ -129,10 +130,13 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
 
       {page === "dev" && (
         <section className="sec" id="dev" style={SUBPAD}><div className="container">
-          <div className="sec-head reveal"><p className="kicker">DEVELOPMENT</p><h2>미래가 이미 그려진 자리</h2><p>구호가 아니라 착공 일정과 국책 사업으로 손에 잡히는 호재들이 가경동 한가운데로 모입니다.</p></div>
-          <div className="cards">{site.dev.map((d) => (
-            <div className="card reveal" key={d.tag}><div className="tag">{d.tag}</div><h3>{d.title}</h3><p>{d.body}</p></div>
-          ))}</div>
+          <div className="sec-head center reveal"><p className="kicker">DEVELOPMENT</p><h2>개발호재</h2></div>
+          <div style={{ display: "grid", gap: 22 }}>
+            <img className="reveal" src={a("dev1.avif")} alt="개발환경 CTX 광역철도 - 정부 대전·세종·충북 광역철도 CTX 도입 결정" style={imgStyle} loading="lazy" />
+            <img className="reveal" src={a("dev2.avif")} alt="개발환경 CTX 광역철도 - 충청권 1시간 시대, 2028년 착공 2034년 개통 목표" style={imgStyle} loading="lazy" />
+            <img className="reveal" src={a("dev3.avif")} alt="개발환경 청주고속터미널 현대화 사업" style={imgStyle} loading="lazy" />
+            <img className="reveal" src={a("dev4.avif")} alt="개발환경 SK하이닉스 투자 - 청주 신규 D램 생산기지, 20조원 이상 투자" style={imgStyle} loading="lazy" />
+          </div>
         </div></section>
       )}
 
@@ -140,9 +144,9 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
         <section className="sec" id="location" style={SUBPAD}><div className="container">
           <div className="sec-head center reveal"><p className="kicker">LOCATION</p><h2>입지환경</h2></div>
           <div style={{ display: "grid", gap: 22 }}>
-            <img className="reveal" src={a("loc1.jpg")} alt="입지환경 지역입지 - 경부·중부 고속도로 및 KTX오송역, 청주국제공항 광역 교통 최중심 입지" style={{ width: "100%", borderRadius: 14, border: "1px solid var(--line2)" }} loading="lazy" />
-            <img className="reveal" src={a("loc2.jpg")} alt="입지환경 세부입지 - 특권이 되는 센트럴 청주의 압도적 입지" style={{ width: "100%", borderRadius: 14, border: "1px solid var(--line2)" }} loading="lazy" />
-            <img className="reveal" src={a("loc3.jpg")} alt="입지환경 광역입지 - 중부권 대표 100만 자족도시, BIT 융복합 클러스터 최대 수혜지" style={{ width: "100%", borderRadius: 14, border: "1px solid var(--line2)" }} loading="lazy" />
+            <img className="reveal" src={a("loc1.avif")} alt="입지환경 지역입지 - 경부·중부 고속도로 및 KTX오송역, 청주국제공항 광역 교통 최중심 입지" style={imgStyle} loading="lazy" />
+            <img className="reveal" src={a("loc2.avif")} alt="입지환경 세부입지 - 특권이 되는 센트럴 청주의 압도적 입지" style={imgStyle} loading="lazy" />
+            <img className="reveal" src={a("loc3.avif")} alt="입지환경 광역입지 - 중부권 대표 100만 자족도시, BIT 융복합 클러스터 최대 수혜지" style={imgStyle} loading="lazy" />
           </div>
         </div></section>
       )}
