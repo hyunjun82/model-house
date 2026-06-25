@@ -138,14 +138,12 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
 
       {page === "location" && (
         <section className="sec" id="location" style={SUBPAD}><div className="container">
-          <div className="sec-head center reveal"><p className="kicker">LOCATION</p><h2>입지</h2><p>{site.address}</p></div>
-          <div className="reveal" style={{ borderRadius: 22, overflow: "hidden", border: "1px solid var(--line2)", aspectRatio: "16/9" }}>
-            <iframe loading="lazy" style={{ width: "100%", height: "100%", border: 0, filter: "grayscale(.2) contrast(1.05)" }}
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&z=15&output=embed`} />
+          <div className="sec-head center reveal"><p className="kicker">LOCATION</p><h2>입지환경</h2></div>
+          <div style={{ display: "grid", gap: 22 }}>
+            <img className="reveal" src={a("loc1.jpg")} alt="입지환경 지역입지 - 경부·중부 고속도로 및 KTX오송역, 청주국제공항 광역 교통 최중심 입지" style={{ width: "100%", borderRadius: 14, border: "1px solid var(--line2)" }} loading="lazy" />
+            <img className="reveal" src={a("loc2.jpg")} alt="입지환경 세부입지 - 특권이 되는 센트럴 청주의 압도적 입지" style={{ width: "100%", borderRadius: 14, border: "1px solid var(--line2)" }} loading="lazy" />
+            <img className="reveal" src={a("loc3.jpg")} alt="입지환경 광역입지 - 중부권 대표 100만 자족도시, BIT 융복합 클러스터 최대 수혜지" style={{ width: "100%", borderRadius: 14, border: "1px solid var(--line2)" }} loading="lazy" />
           </div>
-          <div style={{ marginTop: 30 }}>{site.location.map((l) => (
-            <div className="loc reveal" key={l.n}><div className="ln">{l.n}</div><div><h4>{l.h}</h4><p>{l.p}</p></div></div>
-          ))}</div>
         </div></section>
       )}
 
