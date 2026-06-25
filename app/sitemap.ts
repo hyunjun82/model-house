@@ -1,14 +1,20 @@
 import type { MetadataRoute } from "next";
 import { siteSlugs } from "@/lib/sites";
 
-// 배포 도메인으로 변경하세요.
+// 배포 도메인
 const BASE = "https://model-house.net";
+const SECTIONS = ["news", "dev", "location", "plans"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return siteSlugs.map((slug) => ({
-    url: `${BASE}/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 1,
-  }));
+  const now = new Date();
+  const urls: MetadataRoute.Sitemap = [
+    { url: `${BASE}/`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+  ];
+  for (const slug of siteSlugs) {
+    urls.push({ url: `${BASE}/${slug}`, lastModified: now, changeFrequency: "weekly", priority: 1 });
+    for (const sec of SECTIONS) {
+      urls.push({ url: `${BASE}/${slug}/${sec}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
+    }
+  }
+  return urls;
 }
