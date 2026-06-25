@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://model-house.net/sitemap.xml
+
+#DaumWebMasterTool:481c711c09926ed5aafa47055475a303ad8174882096418352c9db04b7e5b3d7:/rROxydMIOcaD59/dAkQxg==
