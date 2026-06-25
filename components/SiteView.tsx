@@ -15,6 +15,30 @@ const KakaoIcon = () => (
 const SUBPAD = { paddingTop: 150, minHeight: "70vh" } as const;
 const imgStyle = { width: "100%", borderRadius: 14, border: "1px solid var(--line2)" } as const;
 
+function ReservationForm({ site, onSubmit, openKakao }: { site: Site; onSubmit: (e: React.FormEvent<HTMLFormElement>) => void; openKakao: () => void }) {
+  return (
+    <form className="glass reveal" onSubmit={onSubmit}>
+      <p className="gtag">RESERVATION</p><h3>관심고객 등록</h3>
+      <p className="gp">연락처를 남기시면 평형·동호수 안내와 방문 일정을 도와드립니다.</p>
+      <div className="fg"><input type="text" name="name" placeholder="성함" required /></div>
+      <div className="fg"><input type="tel" name="phone" placeholder="연락처 (010-0000-0000)" required /></div>
+      <div className="fg"><select name="type"><option value="미정">관심 타입 선택</option>{site.plans.map((pl) => <option key={pl.name}>{pl.name}</option>)}<option>오피스텔</option></select></div>
+      <label className="agree"><input type="checkbox" name="agree" required /><span>개인정보 수집·이용에 동의합니다. 수집항목(성함·연락처)은 분양 상담 목적으로만 이용됩니다.</span></label>
+      <button type="submit" className="submit">상담 예약 신청하기</button>
+      {site.kakaoUrl ? <a className="kbtn" onClick={openKakao}><KakaoIcon />카카오톡으로 상담하기</a> : null}
+    </form>
+  );
+}
+
+function ContactBox({ site }: { site: Site }) {
+  return (
+    <a className="contactbox" href={`tel:${site.tel}`}>
+      <span className="ph"><PhoneIcon /></span>
+      <span className="info"><span className="l">대표문의</span><span className="n" style={{ whiteSpace: "nowrap" }}>{site.tel}</span></span>
+    </a>
+  );
+}
+
 export default function SiteView({ site, page = "home" }: { site: Site; page?: PageKey }) {
   const a = (img: string) => `/${site.slug}/assets/${img}`;
   const base = `/${site.slug}`;
@@ -46,7 +70,6 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
   };
   const openKakao = () => {
     if (site.kakaoUrl) window.open(site.kakaoUrl, "_blank");
-    else alert("카카오 채널 URL을 lib/sites.ts 의 kakaoUrl 에 넣어주세요.");
   };
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -109,20 +132,8 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
               <div className="hpills reveal">{site.pills.map((p) => <span key={p}>{p}</span>)}</div>
             </div>
             <div className="hero-right">
-              <form className="glass reveal" onSubmit={submit}>
-                <p className="gtag">RESERVATION</p><h3>관심고객 등록</h3>
-                <p className="gp">연락처를 남기시면 평형·동호수 안내와 방문 일정을 도와드립니다.</p>
-                <div className="fg"><input type="text" name="name" placeholder="성함" required /></div>
-                <div className="fg"><input type="tel" name="phone" placeholder="연락처 (010-0000-0000)" required /></div>
-                <div className="fg"><select name="type"><option value="미정">관심 타입 선택</option>{site.plans.map((pl) => <option key={pl.name}>{pl.name}</option>)}<option>오피스텔</option></select></div>
-                <label className="agree"><input type="checkbox" name="agree" required /><span>개인정보 수집·이용에 동의합니다. 수집항목(성함·연락처)은 분양 상담 목적으로만 이용됩니다.</span></label>
-                <button type="submit" className="submit">상담 예약 신청하기</button>
-                <a className="kbtn" onClick={openKakao}><KakaoIcon />카카오톡으로 상담하기</a>
-              </form>
-              <a className="contactbox" href={`tel:${site.tel}`}>
-                <span className="ph"><PhoneIcon /></span>
-                <span className="info"><span className="l">대표문의</span><span className="n">{site.tel}</span></span>
-              </a>
+              <ReservationForm site={site} onSubmit={submit} openKakao={openKakao} />
+              <ContactBox site={site} />
             </div>
           </div>
         </div></header>
@@ -171,11 +182,11 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
       )}
 
       {!home && (
-        <section className="sec alt"><div className="container">
-          <div className="sec-head center reveal"><p className="kicker">RESERVATION</p><h2>관심 있으세요?</h2><p>연락처를 남기시면 평형·동호수 안내와 방문 일정을 도와드립니다.</p></div>
-          <div className="reveal" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href={`${base}/#reserve`} className="navcta" style={{ padding: "16px 30px", fontSize: 16 }}>관심고객 등록하기</a>
-            <a href={`tel:${site.tel}`} style={{ display: "inline-flex", alignItems: "center", gap: 9, border: "1.5px solid rgba(216,183,106,.55)", color: "#f0d699", borderRadius: 10, padding: "15px 26px", fontWeight: 700, fontSize: 16 }}><PhoneIcon />대표문의 {site.tel}</a>
+        <section className="sec alt" id="reserve"><div className="container">
+          <div className="sec-head center reveal"><p className="kicker">RESERVATION</p><h2>방문상담 예약</h2><p>아래에 연락처를 남기시면 평형·동호수 안내와 방문 일정을 도와드립니다.</p></div>
+          <div style={{ maxWidth: 460, margin: "0 auto" }}>
+            <ReservationForm site={site} onSubmit={submit} openKakao={openKakao} />
+            <ContactBox site={site} />
           </div>
         </div></section>
       )}
@@ -193,7 +204,7 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
 
       <div className="fab">
         <a className="call" href={`tel:${site.tel}`}><PhoneIcon /></a>
-        <a className="kakao" onClick={openKakao}><KakaoIcon /></a>
+        {site.kakaoUrl ? <a className="kakao" onClick={openKakao}><KakaoIcon /></a> : null}
       </div>
 
       <div className={`modal${ok ? " on" : ""}`}><div className="mc">
