@@ -22,10 +22,10 @@ function ReservationForm({ site, onSubmit, openKakao }: { site: Site; onSubmit: 
       <p className="gp">연락처를 남기시면 평형·동호수 안내와 방문 일정을 도와드립니다.</p>
       <div className="fg"><input type="text" name="name" placeholder="성함" required /></div>
       <div className="fg"><input type="tel" name="phone" placeholder="연락처 (010-0000-0000)" required /></div>
-      <div className="fg"><select name="type"><option value="미정">관심 타입 선택</option>{site.plans.map((pl) => <option key={pl.name}>{pl.name}</option>)}<option>오피스텔</option></select></div>
+      <div className="fg"><select name="type"><option value="미정">관심 타입 선택</option>{site.plans.map((pl) => <option key={pl.name}>{pl.name}</option>)}</select></div>
       <label className="agree"><input type="checkbox" name="agree" required /><span>개인정보 수집·이용에 동의합니다. 수집항목(성함·연락처)은 분양 상담 목적으로만 이용됩니다.</span></label>
       <button type="submit" className="submit">상담 예약 신청하기</button>
-      {site.kakaoUrl ? <a className="kbtn" onClick={openKakao}><KakaoIcon />카카오톡으로 상담하기</a> : null}
+      <a className="kbtn" onClick={openKakao}><KakaoIcon />카카오톡으로 상담하기</a>
     </form>
   );
 }
@@ -70,6 +70,7 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
   };
   const openKakao = () => {
     if (site.kakaoUrl) window.open(site.kakaoUrl, "_blank");
+    else window.location.href = `tel:${site.tel}`;
   };
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -204,7 +205,7 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
 
       <div className="fab">
         <a className="call" href={`tel:${site.tel}`}><PhoneIcon /></a>
-        {site.kakaoUrl ? <a className="kakao" onClick={openKakao}><KakaoIcon /></a> : null}
+        <a className="kakao" onClick={openKakao}><KakaoIcon /></a>
       </div>
 
       <div className={`modal${ok ? " on" : ""}`}><div className="mc">
