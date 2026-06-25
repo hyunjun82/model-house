@@ -74,6 +74,7 @@ export const sites: Record<string, Site> = {
       { name: "전용 84㎡", spec: "방3 · 화장실2 · 드레스룸·팬트리", img: "render_p36.png" },
     ],
     news: [
+      { img: "gosi.png", cap: "청주시 고시 제2026-132호 — 주택건설 사업계획 승인 및 도시관리계획 결정 (청주시장, 2026.3.13)", wide: true },
       { img: "news_ctx_p1.png", cap: "① 전략환경영향평가 (국토교통부, 2026.5)" },
       { img: "news_ctx_p3.png", cap: "② 제1장 계획의 개요 · 추진경위" },
       { img: "news_ctx_p4.png", cap: "③ 추진경위 · 사업개요 (착공 2028 / 준공 2034)" },
