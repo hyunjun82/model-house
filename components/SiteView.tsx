@@ -22,7 +22,14 @@ function ReservationForm({ site, onSubmit, openKakao }: { site: Site; onSubmit: 
       <p className="gp">연락처를 남기시면 평형·동호수 안내와 방문 일정을 도와드립니다.</p>
       <div className="fg"><input type="text" name="name" placeholder="성함" required /></div>
       <div className="fg"><input type="tel" name="phone" placeholder="연락처 (010-0000-0000)" required /></div>
-      <div className="fg"><select name="type"><option value="미정">관심 타입 선택</option>{site.plans.map((pl) => <option key={pl.name}>{pl.name}</option>)}</select></div>
+      <p style={{ fontSize: 13, color: "var(--mut)", margin: "2px 2px 8px" }}>모델하우스 방문 희망 일시</p>
+      <div className="fg"><input type="date" name="visitDate" required style={{ colorScheme: "dark" }} /></div>
+      <div className="fg"><select name="visitTime" defaultValue="">
+        <option value="" disabled>방문 시간 선택</option>
+        <option>오전 10:00</option><option>오전 11:00</option><option>오후 12:00</option>
+        <option>오후 1:00</option><option>오후 2:00</option><option>오후 3:00</option>
+        <option>오후 4:00</option><option>오후 5:00</option><option>시간 협의 (전화 조율)</option>
+      </select></div>
       <label className="agree"><input type="checkbox" name="agree" required /><span>개인정보 수집·이용에 동의합니다. 수집항목(성함·연락처)은 분양 상담 목적으로만 이용됩니다.</span></label>
       <button type="submit" className="submit">상담 예약 신청하기</button>
       <a className="kbtn" onClick={openKakao}><KakaoIcon />카카오톡으로 상담하기</a>
@@ -79,9 +86,11 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
       site: site.slug,
       name: (f.elements.namedItem("name") as HTMLInputElement).value.trim(),
       phone: (f.elements.namedItem("phone") as HTMLInputElement).value.trim(),
-      type: (f.elements.namedItem("type") as HTMLSelectElement).value,
+      visitDate: (f.elements.namedItem("visitDate") as HTMLInputElement).value,
+      visitTime: (f.elements.namedItem("visitTime") as HTMLSelectElement).value,
     };
     if (!data.name || !data.phone) return alert("성함과 연락처를 입력해주세요.");
+    if (!data.visitDate) return alert("모델하우스 방문 희망 날짜를 선택해주세요.");
     if (!(f.elements.namedItem("agree") as HTMLInputElement).checked) return alert("개인정보 수집·이용에 동의해주세요.");
     try {
       await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
