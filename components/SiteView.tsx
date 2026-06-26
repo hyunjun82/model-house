@@ -93,7 +93,19 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
     if (!data.visitDate) return alert("모델하우스 방문 희망 날짜를 선택해주세요.");
     if (!(f.elements.namedItem("agree") as HTMLInputElement).checked) return alert("개인정보 수집·이용에 동의해주세요.");
     try {
-      await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+      await fetch("https://formsubmit.co/ajax/jmj0963@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `[방문예약] ${site.brand} 청주 - ${data.name}`,
+          _template: "table",
+          현장: site.brand,
+          성함: data.name,
+          연락처: data.phone,
+          방문희망일: data.visitDate,
+          방문희망시간: data.visitTime,
+        }),
+      });
     } catch {}
     f.reset(); setOk(true);
   };
