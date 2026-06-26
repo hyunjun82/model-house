@@ -88,7 +88,7 @@ export default function Page({ params }: { params: { site: string } }) {
         breadcrumb: { "@id": `${url}#breadcrumb` },
       },
       {
-        "@type": ["ApartmentComplex", "Residence", "Product"],
+        "@type": ["ApartmentComplex", "Residence"],
         "@id": `${url}#residence`,
         name: `${s.brand} 청주`,
         description: s.metaDescription,
@@ -108,7 +108,7 @@ export default function Page({ params }: { params: { site: string } }) {
           availability: "https://schema.org/InStock",
           areaServed: "KR",
           seller: { "@id": `${url}#org` },
-          itemOffered: { "@type": "Product", name: `${s.brand} 청주 ${planNames}` },
+          itemOffered: { "@type": "Apartment", name: `${s.brand} 청주 ${planNames}` },
         },
       },
       {
