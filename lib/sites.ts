@@ -41,7 +41,7 @@ export const sites: Record<string, Site> = {
     brandSub: "CHEONGJU GAGYEONG",
     kicker: "청주 가경동 49층 프리미엄 랜드마크",
     h1Top: "CTX 충청 광역급행철도 정부 심의 통과",
-    h1Gold: "청주 도심 통과 → 청주 고속터미널역 (예정)",
+    h1Gold: "청주 도심 통과 → CTX 청주역 (예정)",
     subLine1: "CTX 도보 3분 초역세권, 최대 수혜 아파트",
     subLine2Html: '단지 바로 옆 실거래가 <b style="color:#f0d699;font-weight:800">8억 7천!!!</b>',
     pills: ["지상 49층 · 2개 동", "총 547세대", "전용 59·84㎡", "사업계획승인 완료"],
