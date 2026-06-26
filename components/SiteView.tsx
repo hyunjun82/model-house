@@ -146,9 +146,9 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
                 <div className="ov"><div className="vt"><b>입지 소개 영상</b><span>드론 조감 · 교통·생활권을 한눈에</span></div></div>
               </div>
               <figure className="reveal" style={{ position: "relative", marginTop: 14, borderRadius: 18, overflow: "hidden", border: "1px solid var(--line2)" }}>
-                <Img src={a("ctx.png")} alt="CTX 청주역 이미지" />
+                <Img src={a("ctx.png")} alt="청주 고속터미널역 이미지" />
                 <figcaption style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "14px 18px", fontSize: 14, fontWeight: 700, color: "#fff", background: "linear-gradient(transparent,rgba(8,11,20,.88))" }}>
-                  CTX 청주역 이미지 <small style={{ display: "block", fontWeight: 400, fontSize: 11.5, color: "#aab4c8", marginTop: 2 }}>※ 이해를 돕기 위해 AI로 제작된 이미지로, 실제와 다를 수 있습니다.</small>
+                  청주 고속터미널역 이미지 <small style={{ display: "block", fontWeight: 400, fontSize: 11.5, color: "#aab4c8", marginTop: 2 }}>※ 이해를 돕기 위해 AI로 제작된 이미지로, 실제와 다를 수 있습니다.</small>
                 </figcaption>
               </figure>
               <div className="hpills reveal">{site.pills.map((p) => <span key={p}>{p}</span>)}</div>
