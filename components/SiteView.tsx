@@ -206,6 +206,9 @@ export default function SiteView({ site, page = "home" }: { site: Site; page?: P
           <div className="fb">{site.brand} 청주<small>{site.brandSub}</small></div>
           <div className="info"><b style={{ color: "#cdd6e8" }}>사업주체</b> {site.developer} · <b style={{ color: "#cdd6e8" }}>분양 문의</b> {site.tel}<br />{site.address}</div>
         </div>
+        <p style={{ color: "#7a8398", fontSize: 12.5, marginTop: 18, lineHeight: 1.9 }}>
+          청주 센트럴 더 플래티넘 분양·모델하우스 안내 — 청주 가경동 센트럴 더 플래티넘은 전용 59·84㎡ 총 547세대 지상 49층 규모의 민간임대아파트로, 사업계획승인(청주시 고시 제2026-132호)을 완료했습니다. 청주 아파트 분양·견본주택·잔여세대·방문예약 문의는 대표문의 {site.tel} 로 안내드립니다.
+        </p>
         <div className="disc">
           ※ 본 단지는 「민간임대주택에 관한 특별법」상 장기일반민간임대주택(10년 임대 후 분양전환)으로, 일반 분양(즉시 소유권 취득)과 계약 방식이 다릅니다. 자세한 조건은 모집공고 및 계약서를 반드시 확인하시기 바랍니다.<br />
           ※ 조감도·평면도·CTX 노선 등은 소비자 이해를 돕기 위한 자료로 실제와 차이가 있을 수 있으며, 수치·일정은 인허가 및 사업 진행에 따라 변경될 수 있습니다.
