@@ -46,7 +46,7 @@ export const sites: Record<string, Site> = {
     subLine2Html: '단지 바로 옆 실거래가 <b style="color:#f0d699;font-weight:800">8억 7천!!!</b>',
     pills: ["지상 49층 · 2개 동", "총 547세대", "전용 59·84㎡", "사업계획승인 완료"],
     tel: "1599-9433",
-    kakaoUrl: "https://pf.kakao.com/_NUxmxfX/chat",
+    kakaoUrl: "https://pf.kakao.com/_NUxmxfX",
     developer: "㈜에스스퀘어",
     address: "청주시 흥덕구 가경동 1018번지 일원",
     metaTitle: "청주 센트럴 더 플래티넘 분양가·모델하우스 안내 | 가경동 49층 (공식)",
