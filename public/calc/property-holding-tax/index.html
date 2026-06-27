@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>종합부동산세·재산세 계산기 — 집계산 | 2026년 보유세 자동 계산</title>
+<meta name="description" content="공시가격만 입력하면 재산세·지방교육세·종합부동산세·농어촌특별세를 2026년 기준으로 한 번에 계산합니다. 1세대1주택 12억 공제, 고령자·장기보유 세액공제, 다주택 중과까지 자동 반영. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/property-holding-tax/">
+<meta property="og:title" content="종합부동산세·재산세 계산기 — 집계산">
+<meta property="og:description" content="공시가격으로 보유세(재산세+종부세)를 2026년 기준 즉시 계산. 1주택 공제·세액공제 반영. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/property-holding-tax/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } .rate-tbl{ font-size:12px; } .rate-tbl th,.rate-tbl td{ padding:7px 6px; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"종합부동산세·재산세 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/property-holding-tax/","inLanguage":"ko-KR","description":"공시가격으로 재산세·종합부동산세·지방교육세·농어촌특별세를 2026년 기준 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-27" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"종합부동산세 계산기","item":"https://model-house.net/calc/property-holding-tax/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"종합부동산세 기본공제는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"기본공제는 9억원이며, 1세대 1주택자는 12억원까지 공제합니다. 공시가격 합산액에서 공제 후 공정시장가액비율 60%를 곱해 과세표준을 구합니다."}},
+ {"@type":"Question","name":"1세대 1주택 고령자·장기보유 세액공제는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"고령자공제는 60세 20%, 65세 30%, 70세 40%, 장기보유공제는 5년 20%, 10년 40%, 15년 50%이며 합산 최대 80%까지 종합부동산세에서 공제합니다."}},
+ {"@type":"Question","name":"재산세와 종합부동산세는 언제 내나요?","acceptedAnswer":{"@type":"Answer","text":"매년 6월 1일 보유자 기준으로 재산세는 7월·9월에 나누어, 종합부동산세는 12월에 납부합니다."}},
+ {"@type":"Question","name":"다주택자는 종부세가 중과되나요?","acceptedAnswer":{"@type":"Answer","text":"3주택 이상 보유자는 과세표준 12억 초과 구간부터 0.5%~5.0%의 중과세율이 적용됩니다. 2주택 이하는 0.5%~2.7%입니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">종합부동산세</span>
+    </nav>
+
+    <div style="margin-bottom: 32px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">종합부동산세·재산세 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 580px;">공시가격만 입력하면 재산세·지방교육세·종합부동산세·농어촌특별세를 2026년 기준으로 한 번에 계산합니다. 1세대1주택 12억 공제, 고령자·장기보유 세액공제, 다주택 중과까지 자동 반영됩니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 18px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: flex; align-items: baseline; justify-content: space-between; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;"><span>공시가격 합산</span><span id="priceLabel" style="font-size: 13px; font-weight: 600; color: #6155F5;">15억원</span></label>
+            <div style="position: relative;"><input id="price" type="text" inputmode="numeric" value="150,000" class="fld tnum"><span class="unit">만원</span></div>
+            <div style="display: flex; gap: 6px; margin-top: 10px;">
+              <button data-chip="90000" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">9억</button>
+              <button data-chip="120000" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">12억</button>
+              <button data-chip="150000" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">15억</button>
+              <button data-chip="250000" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">25억</button>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">보유 주택 수</label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-homes="1">1세대1주택</button><button data-homes="2">2주택</button><button data-homes="3">3주택+</button>
+            </div>
+            <p id="homesNote" style="font-size: 12px; color: #9298A1; margin: 8px 0 0;">1세대1주택: 12억 공제 · 세액공제 가능</p>
+          </div>
+
+          <div id="block-credit" style="display:flex; gap:12px; padding: 18px 0 0;">
+            <div style="flex:1;">
+              <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">나이 <span style="color:#9298A1; font-weight:400;">(고령자공제)</span></label>
+              <div style="position:relative;"><input id="age" type="text" inputmode="numeric" value="0" class="fld tnum"><span class="unit">세</span></div>
+            </div>
+            <div style="flex:1;">
+              <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">보유 기간 <span style="color:#9298A1; font-weight:400;">(장기보유)</span></label>
+              <div style="position:relative;"><input id="hold" type="text" inputmode="numeric" value="0" class="fld tnum"><span class="unit">년</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">연간 총 보유세 <span style="font-size:12px; color:#9298A1;">(재산세+종부세)</span></div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="total-big" class="tnum" style="font-size: clamp(30px, 4.6vw, 42px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">3,175,200</span>
+              <span style="font-size: 17px; font-weight: 700; color: #15171C;">원</span>
+            </div>
+            <div style="margin-top: 22px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div style="font-size:11.5px; font-weight:600; color:#9298A1; padding:10px 0 4px;">재산세</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;">재산세</span><span id="r-prop" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">2,070,000</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;">지방교육세</span><span id="r-edu" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">414,000</span>
+              </div>
+              <div style="font-size:11.5px; font-weight:600; color:#9298A1; padding:12px 0 4px;">종합부동산세</div>
+              <div id="row-credit" style="display:none; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #18794E; font-weight:600;">세액공제 <span id="creditRate" style="color:#9298A1; font-weight:400;"></span></span><span id="r-credit" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #18794E;">0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;">종합부동산세</span><span id="r-jb" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">576,000</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;">농어촌특별세 <span style="color:#9298A1;">(20%)</span></span><span id="r-farm" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">115,200</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 13px 0 0;">
+                <span style="font-size: 14px; font-weight: 700; color: #15171C;">합계</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="total-sum">3,175,200</span>원</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <a href="https://www.hometax.go.kr" target="_blank" rel="noopener" style="width:100%; margin-top:10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#fff; color:#5A616B; border:1px solid #E4E6EA; border-radius:12px; padding:11px; font-size:13px; font-weight:600;">홈택스에서 종부세 확인 →</a>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">2026년 기준(공정시장가액비율 재산세 45%·종부세 60%) 예상액입니다. 공정시장가액비율은 해마다 바뀔 수 있어, 정확한 금액은 홈택스로 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 48px;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">2026년 종합부동산세 세율표</h2>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:18px; overflow-x:auto;">
+        <table class="rate-tbl">
+          <thead><tr><th>과세표준</th><th>2주택 이하</th><th>3주택 이상</th></tr></thead>
+          <tbody>
+            <tr><td>3억 이하</td><td>0.5%</td><td>0.5%</td></tr>
+            <tr><td>3억 ~ 6억</td><td>0.7%</td><td>0.7%</td></tr>
+            <tr><td>6억 ~ 12억</td><td>1.0%</td><td>1.0%</td></tr>
+            <tr><td>12억 ~ 25억</td><td>1.3%</td><td>2.0%</td></tr>
+            <tr><td>25억 ~ 50억</td><td>1.5%</td><td>3.0%</td></tr>
+            <tr><td>50억 ~ 94억</td><td>2.0%</td><td>4.0%</td></tr>
+            <tr><td>94억 초과</td><td>2.7%</td><td>5.0%</td></tr>
+          </tbody>
+        </table>
+        <p class="kw" style="font-size:12px; color:#9298A1; margin:10px 0 0;">과세표준 = (공시가격 합산 − 공제금액) × 공정시장가액비율 60%. 기본공제 9억, 1세대1주택 12억.</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">계산 흐름과 세액공제</h2>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li><b style="color:#31363F;">재산세</b> — 공시가격 × 공정시장가액비율(1주택 45%, 그 외 60%)에 누진세율을 적용하고, 지방교육세 20%가 더해집니다.</li>
+          <li><b style="color:#31363F;">종합부동산세</b> — (공시가 − 공제) × 60%에 세율을 적용한 뒤, 재산세와 겹치는 부분을 빼고 농어촌특별세 20%를 더합니다.</li>
+          <li><b style="color:#31363F;">고령자공제</b> — 60세 20% · 65세 30% · 70세 40%.</li>
+          <li><b style="color:#31363F;">장기보유공제</b> — 5년 20% · 10년 40% · 15년 50%.</li>
+          <li>두 공제는 <b style="color:#31363F;">합산 최대 80%</b>까지 종합부동산세에서 빼줍니다(1세대1주택 한정).</li>
+        </ul>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">납부 시기와 절세 포인트</h2>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li><b style="color:#31363F;">과세 기준일</b> — 매년 6월 1일 보유자가 그 해 보유세를 냅니다. 6월 1일 직전 매도가 유리합니다.</li>
+          <li><b style="color:#31363F;">납부 시기</b> — 재산세 7월·9월, 종합부동산세 12월.</li>
+          <li><b style="color:#31363F;">공동명의</b> — 부부 공동명의는 각자 9억(합 18억)까지 공제돼 종부세를 줄일 수 있습니다.</li>
+          <li><b style="color:#31363F;">공정시장가액비율</b> — 종부세 60%, 재산세 1주택 45%. 시행령으로 매년 바뀔 수 있습니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">종부세 기본공제는 얼마인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">기본 9억원, 1세대 1주택자는 12억원입니다. 공시가격 합산액에서 공제 후 공정시장가액비율 60%를 곱해 과세표준을 구합니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">고령자·장기보유 세액공제는?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">고령자 60세 20%·65세 30%·70세 40%, 장기보유 5년 20%·10년 40%·15년 50%이며 합산 최대 80%를 종합부동산세에서 공제합니다(1세대1주택 한정).</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">재산세·종부세는 언제 내나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">매년 6월 1일 보유자 기준으로 재산세는 7월·9월, 종합부동산세는 12월에 납부합니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 종합부동산세법·지방세법, 국세청 홈택스 · 적용 기준 2026년(공정시장가액비율 재산세 45%·종부세 60%) · 계산 결과는 참고용이며 실제 세액은 홈택스·세무 전문가를 통해 확인하세요.</p>
+  </div>
+</div>
+
+<script>
+var DEF = { priceManwon:150000, homes:'1', age:0, hold:0, copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var won0=function(x){ return Math.floor(x+1e-4); };
+var $=function(id){return document.getElementById(id);};
+function korWon(m){ if(!m||m<=0) return '0원'; var eok=Math.floor(m/10000), rest=m%10000, p=[]; if(eok>0)p.push(eok+'억'); if(rest>0)p.push(rest.toLocaleString('ko-KR')+'만'); return p.join(' ')+'원'; }
+function rtFair(isSingle,g){ if(!isSingle)return 0.60; if(g<=300000000)return 0.43; if(g<=600000000)return 0.44; return 0.45; }
+function propTax(base,special){
+  if(special){ if(base<=60000000)return [base*0.0005,0.0005]; if(base<=150000000)return [30000+(base-60000000)*0.001,0.001]; if(base<=300000000)return [120000+(base-150000000)*0.002,0.002]; return [420000+(base-300000000)*0.0035,0.0035]; }
+  if(base<=60000000)return [base*0.001,0.001]; if(base<=150000000)return [60000+(base-60000000)*0.0015,0.0015]; if(base<=300000000)return [195000+(base-150000000)*0.0025,0.0025]; return [570000+(base-300000000)*0.004,0.004];
+}
+var T2=[[300000000,0.005,0],[600000000,0.007,600000],[1200000000,0.010,2400000],[2500000000,0.013,6000000],[5000000000,0.015,11000000],[9400000000,0.020,36000000],[Infinity,0.027,102700000]];
+var T3=[[300000000,0.005,0],[600000000,0.007,600000],[1200000000,0.010,2400000],[2500000000,0.020,14400000],[5000000000,0.030,39400000],[9400000000,0.040,89400000],[Infinity,0.050,183400000]];
+function jongbu(base,heavy){ var T=heavy?T3:T2; for(var i=0;i<T.length;i++){ if(base<=T[i][0]) return won0(base*T[i][1]-T[i][2]); } return 0; }
+function compute(){
+  var g=(S.priceManwon||0)*10000;
+  var isSingle=(S.homes==='1'), heavy=(S.homes==='3');
+  var rtRatio=rtFair(isSingle,g);
+  var rtBase=won0(g*rtRatio);
+  var special=isSingle&&g<=900000000;
+  var pt=propTax(rtBase,special), prop=won0(pt[0]), marg=pt[1];
+  var edu=won0(prop*0.2);
+  var deduct=isSingle?1200000000:900000000;
+  var jbBase=won0(Math.max(0,g-deduct)*0.60);
+  var jbGross=jongbu(jbBase,heavy);
+  var overlap=won0(jbBase*rtRatio*marg);
+  var jbAfter=Math.max(0,jbGross-overlap);
+  var credit=0;
+  if(isSingle){ var a=0; if(S.age>=70)a=0.4; else if(S.age>=65)a=0.3; else if(S.age>=60)a=0.2; var l=0; if(S.hold>=15)l=0.5; else if(S.hold>=10)l=0.4; else if(S.hold>=5)l=0.2; credit=Math.min(0.8,a+l); }
+  var creditAmt=won0(jbAfter*credit);
+  var jb=jbAfter-creditAmt;
+  var farm=won0(jb*0.2);
+  return { prop:prop, edu:edu, jbGross:jbGross, overlap:overlap, credit:credit, creditAmt:creditAmt, jb:jb, farm:farm, total:prop+edu+jb+farm };
+}
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 6px; font-size:13px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function render(){
+  var c=compute(), isSingle=S.homes==='1';
+  document.querySelectorAll('[data-homes]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.homes===S.homes); });
+  $('block-credit').style.display=isSingle?'flex':'none';
+  $('homesNote').textContent=isSingle?'1세대1주택: 12억 공제 · 세액공제 가능':(S.homes==='3'?'3주택 이상: 9억 공제 · 종부세 중과세율':'2주택: 9억 공제');
+  $('priceLabel').textContent=korWon(S.priceManwon);
+  $('total-big').textContent=comma(c.total); $('total-sum').textContent=comma(c.total);
+  $('r-prop').textContent=comma(c.prop); $('r-edu').textContent=comma(c.edu);
+  $('row-credit').style.display=c.creditAmt>0?'flex':'none'; $('r-credit').textContent='− '+comma(c.creditAmt); $('creditRate').textContent='('+Math.round(c.credit*100)+'%)';
+  $('r-jb').textContent=comma(c.jb); $('r-farm').textContent=comma(c.farm);
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+document.querySelectorAll('[data-homes]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.homes=b.dataset.homes; S.copied=false; render(); }); });
+document.querySelectorAll('[data-chip]').forEach(function(b){ b.addEventListener('click',function(){ S.priceManwon=parseInt(b.dataset.chip,10); $('price').value=S.priceManwon.toLocaleString('ko-KR'); S.copied=false; render(); }); });
+$('price').addEventListener('input',function(e){ var d=(e.target.value||'').replace(/[^0-9]/g,''); S.priceManwon=d?parseInt(d,10):0; e.target.value=d?parseInt(d,10).toLocaleString('ko-KR'):''; S.copied=false; render(); });
+$('age').addEventListener('input',function(e){ var d=(e.target.value||'').replace(/[^0-9]/g,''); S.age=d?parseInt(d,10):0; e.target.value=d; S.copied=false; render(); });
+$('hold').addEventListener('input',function(e){ var d=(e.target.value||'').replace(/[^0-9]/g,''); S.hold=d?parseInt(d,10):0; e.target.value=d; S.copied=false; render(); });
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('price').value='150,000'; $('age').value='0'; $('hold').value='0'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='보유세 계산 결과 · 공시가 '+korWon(S.priceManwon)+' / 총 '+comma(c.total)+'원 (재산세 '+comma(c.prop+c.edu)+' + 종부세 '+comma(c.jb+c.farm)+') · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
