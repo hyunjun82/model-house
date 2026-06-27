@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>취득세 계산기 — 집계산 | 2026년 세율 자동 계산</title>
+<meta name="description" content="주택 매매·분양 취득세, 지방교육세, 농어촌특별세를 2026년 최신 세율로 즉시 계산합니다. 가격과 조건만 선택하면 끝. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/acquisition-tax/">
+<meta property="og:title" content="취득세 계산기 — 집계산">
+<meta property="og:description" content="주택 매매·분양 취득세를 2026년 세율로 즉시 계산. 가입 없이 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/acquisition-tax/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"취득세 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/acquisition-tax/","inLanguage":"ko-KR","description":"주택 매매·분양 취득세, 지방교육세, 농어촌특별세를 2026년 최신 세율로 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-01-01" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"취득세 계산기","item":"https://model-house.net/calc/acquisition-tax/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"취득세는 언제까지 내나요?","acceptedAnswer":{"@type":"Answer","text":"취득일(잔금 지급일 또는 등기일 중 빠른 날)로부터 60일 이내에 신고·납부해야 합니다."}},
+ {"@type":"Question","name":"생애최초 주택 구입 감면은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"생애최초로 12억원 이하 주택을 구입하면 취득세를 최대 200만원까지 감면받을 수 있습니다."}},
+ {"@type":"Question","name":"다주택자는 취득세가 중과되나요?","acceptedAnswer":{"@type":"Answer","text":"조정대상지역 2주택은 8%, 3주택 이상은 8~12%의 중과세율이 적용될 수 있습니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">취득세</span>
+    </nav>
+
+    <div style="margin-bottom: 32px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">취득세 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 540px;">주택을 사거나 분양받을 때 내는 세금을 2026년 세율로 즉시 계산합니다. 가격과 조건만 선택하세요.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">취득 유형</label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-type="buy">매매·분양</button><button data-type="gift">증여</button><button data-type="inherit">상속</button><button data-type="new">신축</button>
+            </div>
+          </div>
+
+          <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: flex; align-items: baseline; justify-content: space-between; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">
+              <span>주택 가격</span><span id="priceLabel" style="font-size: 13px; font-weight: 600; color: #6155F5;">8억 5,000만원</span>
+            </label>
+            <div style="position: relative;">
+              <input id="price" type="text" inputmode="numeric" value="85,000" class="tnum" style="width: 100%; padding: 14px 56px 14px 16px; border: 1.5px solid #E4E6EA; border-radius: 12px; font-size: 20px; font-weight: 700; color: #15171C; background: #fff; text-align: right; outline: none; letter-spacing: -0.02em;">
+              <span style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 600; color: #9298A1;">만원</span>
+            </div>
+            <div style="display: flex; gap: 6px; margin-top: 10px;">
+              <button data-chip="30000" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">3억</button>
+              <button data-chip="60000" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">6억</button>
+              <button data-chip="90000" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">9억</button>
+              <button data-chip="150000" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">15억</button>
+            </div>
+          </div>
+
+          <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">전용면적 <span style="font-weight: 400; color: #9298A1;">· 농어촌특별세 기준</span></label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-area="under">85㎡ 이하</button><button data-area="over">85㎡ 초과</button>
+            </div>
+          </div>
+
+          <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">취득 후 보유 주택 수</label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-homes="1">1주택</button><button data-homes="2">2주택</button><button data-homes="3">3주택+</button>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
+              <div><div style="font-size: 14px; font-weight: 600; color: #15171C;">조정대상지역</div><div style="font-size: 12.5px; color: #9298A1; margin-top: 2px;">다주택 중과세율 적용 여부</div></div>
+              <button id="tog-adj"><span id="knob-adj"></span></button>
+            </div>
+            <div id="first-wrap" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 0 0;">
+              <div><div style="font-size: 14px; font-weight: 600; color: #15171C;">생애최초 주택 구입</div><div style="font-size: 12.5px; color: #9298A1; margin-top: 2px;">12억 이하 · 최대 200만원 감면</div></div>
+              <button id="tog-first"><span id="knob-first"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">예상 총 취득세</div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="total-big" class="tnum" style="font-size: clamp(34px, 5vw, 44px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">24,939,000</span>
+              <span style="font-size: 17px; font-weight: 700; color: #15171C;">원</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 7px; margin-top: 12px;">
+              <span style="font-size: 12px; font-weight: 600; color: #6155F5; background: #EFEDFD; padding: 3px 9px; border-radius: 999px;">실효세율 <span id="eff">2.93%</span></span>
+              <span style="font-size: 12.5px; color: #9298A1;">세율 <span id="acqRate">2.67%</span></span>
+            </div>
+            <div style="margin-top: 24px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">취득세</span><span id="acqBase" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">22,669,500</span>
+              </div>
+              <div id="disc-row" style="display: none; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #18794E; font-weight: 600;">생애최초 감면</span><span id="disc" class="tnum" style="font-size: 14px; font-weight: 600; color: #18794E;">− 0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">지방교육세</span><span id="edu" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">2,269,500</span>
+              </div>
+              <div id="farm-row" style="display: none; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">농어촌특별세</span><span id="farm" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0 0;">
+                <span style="font-size: 14px; font-weight: 700; color: #15171C;">합계</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="total-sum">24,939,000</span>원</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">2026년 세율 기준 예상 금액입니다. 정확한 금액은 위택스·세무 전문가를 통해 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 48px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">취득세는 언제까지 내나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">취득일(잔금 지급일 또는 등기일 중 빠른 날)로부터 60일 이내에 신고·납부해야 합니다. 분양은 잔금일 기준입니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">생애최초 감면은 얼마인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">생애최초로 12억원 이하 주택을 구입하면 취득세를 최대 200만원까지 감면받을 수 있습니다. 위에서 ‘생애최초’를 켜면 자동 반영됩니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">다주택자는 세금이 중과되나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">조정대상지역 2주택은 8%, 3주택 이상은 8~12%의 중과세율이 적용될 수 있습니다. 주택 수와 조정대상지역 여부를 선택하면 반영됩니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD;">© 2026 집계산 by model-house.net · 데이터 출처 국세청 홈택스 · 행정안전부 위택스 · 적용 기준일 2026-01-01 · 계산 결과는 참고용입니다.</p>
+  </div>
+</div>
+
+<script>
+var S = { type:'buy', priceManwon:85000, over85:false, homes:'1', adjusted:false, firstTime:false, copied:false };
+var comma = function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+function korWon(m){ if(!m||m<=0) return '0원'; var eok=Math.floor(m/10000), rest=m%10000, p=[]; if(eok>0)p.push(eok+'억'); if(rest>0)p.push(rest.toLocaleString('ko-KR')+'만'); return p.join(' ')+'원'; }
+function pct(r){ var s=(r*100).toFixed(2); s=s.replace(/0+$/,'').replace(/\.$/,''); return s+'%'; }
+function slide(won){ if(won<=600000000)return 0.01; if(won>=900000000)return 0.03; var r=(won*2/300000000-3)/100; return Math.round(r*100000)/100000; }
+function compute(){
+  var won=(S.priceManwon||0)*10000, rate, eduRate, farmRate;
+  if(S.type==='buy'){
+    var std=slide(won);
+    if(S.homes==='1')rate=std; else if(S.homes==='2')rate=S.adjusted?0.08:std; else rate=S.adjusted?0.12:0.08;
+    var heavy=(rate===0.08||rate===0.12);
+    if(heavy){ eduRate=0.004; farmRate=S.over85?(rate===0.12?0.010:0.006):0; }
+    else { eduRate=Math.round(rate*0.1*100000)/100000; farmRate=S.over85?0.002:0; }
+  } else if(S.type==='gift'){
+    if(S.adjusted&&won>=300000000){ rate=0.12; eduRate=0.004; farmRate=S.over85?0.010:0; }
+    else { rate=0.035; eduRate=0.003; farmRate=S.over85?0.002:0; }
+  } else { rate=0.028; eduRate=0.0016; farmRate=S.over85?0.002:0; }
+  var acqBase=Math.floor(won*rate);
+  var firstOK=S.firstTime&&S.type==='buy'&&won<=1200000000;
+  var discount=firstOK?Math.min(2000000,acqBase):0;
+  var acq=acqBase-discount, edu=Math.floor(won*eduRate), farm=Math.floor(won*farmRate);
+  var total=acq+edu+farm, eff=won>0?total/won*100:0;
+  return { won:won, rate:rate, acqBase:acqBase, discount:discount, edu:edu, farm:farm, total:total, eff:eff };
+}
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 6px; font-size:13px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function trackStyle(on,dis){ return 'width:44px; height:26px; border-radius:999px; position:relative; cursor:'+(dis?'not-allowed':'pointer')+'; transition:all .2s ease; border:none; flex:none; padding:0; background:'+(on?'#6155F5':'#D7DADF')+';'; }
+function knobStyle(on){ return 'position:absolute; top:3px; left:'+(on?'21px':'3px')+'; width:20px; height:20px; border-radius:50%; background:#fff; transition:all .2s ease; box-shadow:0 1px 2px rgba(0,0,0,.2); display:block;'; }
+var $=function(id){return document.getElementById(id);};
+function render(){
+  var c=compute(), firstApplicable=S.type==='buy';
+  document.querySelectorAll('[data-type]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.type===S.type); });
+  document.querySelectorAll('[data-area]').forEach(function(b){ b.style.cssText=segStyle((b.dataset.area==='over')===S.over85); });
+  document.querySelectorAll('[data-homes]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.homes===S.homes); });
+  $('tog-adj').style.cssText=trackStyle(S.adjusted,false); $('knob-adj').style.cssText=knobStyle(S.adjusted);
+  $('tog-first').style.cssText=trackStyle(S.firstTime&&firstApplicable,!firstApplicable); $('knob-first').style.cssText=knobStyle(S.firstTime&&firstApplicable);
+  $('first-wrap').style.opacity=firstApplicable?'1':'0.45';
+  $('priceLabel').textContent=korWon(S.priceManwon);
+  $('total-big').textContent=comma(c.total); $('total-sum').textContent=comma(c.total);
+  $('eff').textContent=c.eff.toFixed(2)+'%'; $('acqRate').textContent=pct(c.rate);
+  $('acqBase').textContent=comma(c.acqBase); $('edu').textContent=comma(c.edu);
+  $('disc').textContent='− '+comma(c.discount); $('disc-row').style.display=c.discount>0?'flex':'none';
+  $('farm').textContent=comma(c.farm); $('farm-row').style.display=c.farm>0?'flex':'none';
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+document.querySelectorAll('[data-type]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.type=b.dataset.type; if(S.type!=='buy')S.firstTime=false; S.copied=false; render(); }); });
+document.querySelectorAll('[data-area]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.over85=(b.dataset.area==='over'); S.copied=false; render(); }); });
+document.querySelectorAll('[data-homes]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.homes=b.dataset.homes; S.copied=false; render(); }); });
+document.querySelectorAll('[data-chip]').forEach(function(b){ b.addEventListener('click',function(){ S.priceManwon=parseInt(b.dataset.chip,10); $('price').value=S.priceManwon.toLocaleString('ko-KR'); S.copied=false; render(); }); });
+$('price').addEventListener('input',function(e){ var d=(e.target.value||'').replace(/[^0-9]/g,''); S.priceManwon=d?parseInt(d,10):0; e.target.value=d?parseInt(d,10).toLocaleString('ko-KR'):''; S.copied=false; render(); });
+$('tog-adj').addEventListener('click',function(){ S.adjusted=!S.adjusted; S.copied=false; render(); });
+$('tog-first').addEventListener('click',function(){ if(S.type==='buy'){ S.firstTime=!S.firstTime; S.copied=false; render(); } });
+$('reset').addEventListener('click',function(){ S={type:'buy',priceManwon:85000,over85:false,homes:'1',adjusted:false,firstTime:false,copied:false}; $('price').value='85,000'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='취득세 계산 결과 · 주택가격 '+korWon(S.priceManwon)+' / 총 취득세 '+comma(c.total)+'원 (실효세율 '+c.eff.toFixed(2)+'%) · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
