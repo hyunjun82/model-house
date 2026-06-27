@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
   // 부동산 계산기 섹션
-  const CALC = ["", "acquisition-tax", "transfer-tax", "property-holding-tax", "gift-tax"];
+  const CALC = ["", "acquisition-tax", "transfer-tax", "property-holding-tax", "gift-tax", "dsr"];
   for (const c of CALC) {
     urls.push({ url: `${BASE}/calc/${c ? c + "/" : ""}`, lastModified: now, changeFrequency: "monthly", priority: 0.7 });
   }
