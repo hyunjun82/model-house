@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전월세 전환 계산기 — 집계산 | 전세↔월세 전환율 자동 계산</title>
+<meta name="description" content="전세를 월세로, 월세를 전세로 전환율 기준으로 즉시 계산합니다. 2026년 법정 전월세전환율 상한(기준금리 2.5%+2% = 4.5%)까지 안내. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/jeonse-monthly/">
+<meta property="og:title" content="전월세 전환 계산기 — 집계산">
+<meta property="og:description" content="전세↔월세를 전환율 기준으로 즉시 계산. 법정 상한 4.5% 안내. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/jeonse-monthly/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:18px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"전월세 전환 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/jeonse-monthly/","inLanguage":"ko-KR","description":"전세를 월세로, 월세를 전세로 전환율 기준으로 자동 계산하고 법정 상한을 안내합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-27" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"전월세 전환 계산기","item":"https://model-house.net/calc/jeonse-monthly/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"전월세 전환율 법정 상한은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"주택임대차보호법상 한국은행 기준금리에 2%를 더한 비율과 10% 중 낮은 값이 상한입니다. 기준금리 2.5% 기준으로 4.5%입니다."}},
+ {"@type":"Question","name":"전세를 월세로 어떻게 환산하나요?","acceptedAnswer":{"@type":"Answer","text":"월세 = (전세보증금 − 전환 후 보증금) × 전환율 ÷ 12 로 계산합니다."}},
+ {"@type":"Question","name":"월세를 전세로는 어떻게 환산하나요?","acceptedAnswer":{"@type":"Answer","text":"전세보증금 = 월세 × 12 ÷ 전환율 + 보증금 으로 계산합니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">전월세 전환</span>
+    </nav>
+
+    <div style="margin-bottom: 32px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">전월세 전환 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 560px;">전세를 월세로, 월세를 전세로 전환율 기준으로 즉시 계산합니다. 2026년 법정 전월세전환율 상한(기준금리 2.5% + 2% = 4.5%)도 함께 안내합니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 18px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">전환 방향</label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-mode="j2m">전세 → 월세</button><button data-mode="m2j">월세 → 전세</button>
+            </div>
+          </div>
+
+          <!-- 전세→월세 -->
+          <div id="grp-j2m">
+            <div style="padding: 18px 0 0;">
+              <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>전세보증금</span><span id="jLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">5억원</span></label>
+              <div style="position:relative;"><input id="jeonse" type="text" inputmode="numeric" value="50,000" class="fld tnum"><span class="unit">만원</span></div>
+            </div>
+            <div style="padding: 16px 0 18px; border-bottom: 1px solid #F0F1F3;">
+              <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">전환 후 보증금 <span style="font-weight:400; color:#9298A1;">(월세로 돌릴 때 남길 보증금)</span></label>
+              <div style="position:relative;"><input id="keep" type="text" inputmode="numeric" value="10,000" class="fld tnum"><span class="unit">만원</span></div>
+            </div>
+          </div>
+
+          <!-- 월세→전세 -->
+          <div id="grp-m2j" style="display:none;">
+            <div style="display:flex; gap:12px; padding: 18px 0 18px; border-bottom: 1px solid #F0F1F3;">
+              <div style="flex:1;">
+                <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">보증금</label>
+                <div style="position:relative;"><input id="deposit" type="text" inputmode="numeric" value="10,000" class="fld tnum"><span class="unit">만원</span></div>
+              </div>
+              <div style="flex:1;">
+                <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">월세</label>
+                <div style="position:relative;"><input id="monthly" type="text" inputmode="numeric" value="150" class="fld tnum"><span class="unit">만원</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>전환율</span><span style="font-size:12px; color:#9298A1; font-weight:500;">법정 상한 4.5%</span></label>
+            <div style="position:relative;"><input id="rate" type="text" inputmode="decimal" value="4.5" class="fld tnum"><span class="unit">%</span></div>
+            <div style="display: flex; gap: 6px; margin-top: 10px;">
+              <button data-rrate="4.5" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">법정 4.5%</button>
+              <button data-rrate="5.5" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">시세 5.5%</button>
+              <button data-rrate="6" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">6%</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div id="outTitle" style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">환산 월세</div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="big" class="tnum" style="font-size: clamp(32px, 4.8vw, 44px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">150</span>
+              <span id="bigUnit" style="font-size: 17px; font-weight: 700; color: #15171C;">만원/월</span>
+            </div>
+            <div id="capWarn" style="display:none; font-size:12px; font-weight:600; color:#B42318; background:#FDECEA; padding:6px 10px; border-radius:8px; margin-top:12px;">전환율이 법정 상한 4.5%를 초과합니다</div>
+            <div style="margin-top: 22px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div id="row1" style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;" id="row1k">전세보증금</span><span id="row1v" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">5억원</span>
+              </div>
+              <div id="row2" style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;" id="row2k">전환 후 보증금</span><span id="row2v" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">1억원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;">적용 전환율</span><span id="row3v" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">4.5%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0 0;">
+                <span style="font-size: 14px; font-weight: 700; color: #15171C;" id="sumK">환산 월세</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="sumV">150만</span>원</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">법정 상한은 계약 갱신·전환 시 적용 기준입니다(신규 계약은 당사자 합의). 실제 적용은 임대차 계약과 관련 법령으로 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 48px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">전월세 전환 공식</h2>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.9; color:#5A616B;">
+          <li><b style="color:#31363F;">전세 → 월세</b> : 월세 = (전세보증금 − 전환 후 보증금) × 전환율 ÷ 12</li>
+          <li><b style="color:#31363F;">월세 → 전세</b> : 전세보증금 = 월세 × 12 ÷ 전환율 + 보증금</li>
+        </ul>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">법정 전월세전환율 상한</h2>
+        <p class="kw" style="margin:0; font-size:14px; line-height:1.75; color:#5A616B;">주택임대차보호법상 전환율 상한은 <b style="color:#31363F;">「한국은행 기준금리 + 2%」와 「연 10%」 중 낮은 값</b>입니다. 2026년 6월 기준금리 2.5%를 적용하면 <b style="color:#6155F5;">4.5%</b>가 상한입니다. 이 상한은 임대료를 전세에서 월세로 전환하거나 계약을 갱신할 때 적용됩니다.</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">전환율 법정 상한은 얼마인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">한국은행 기준금리 + 2%와 10% 중 낮은 값입니다. 기준금리 2.5% 기준 4.5%입니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">신규 계약에도 상한이 적용되나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">법정 상한은 기존 보증금의 월세 전환·계약 갱신 시 적용됩니다. 완전 신규 계약의 보증금·월세는 당사자 합의로 정합니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 주택임대차보호법 제7조의2·시행령 제9조, 한국은행 기준금리 2.5% · 계산 결과는 참고용입니다.</p>
+  </div>
+</div>
+
+<script>
+var DEF = { mode:'j2m', jeonse:50000, keep:10000, deposit:10000, monthly:150, rate:4.5, copied:false };
+var S = Object.assign({}, DEF);
+var CAP=4.5;
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0원'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won)+''; return p.join(' ')+'원'; }
+function korMan(manwon){ return korWon(manwon*10000); }
+function compute(){
+  var rate=S.rate||0;
+  if(S.mode==='j2m'){
+    var base=((S.jeonse||0)-(S.keep||0))*10000; if(base<0)base=0;
+    var monthlyWon=base*(rate/100)/12;
+    return { out:monthlyWon, monthlyMan:monthlyWon/10000 };
+  } else {
+    var jeonseWon = rate>0 ? ((S.monthly||0)*10000*12/(rate/100) + (S.deposit||0)*10000) : 0;
+    return { out:jeonseWon };
+  }
+}
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 6px; font-size:13px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function render(){
+  var c=compute(), j2m=S.mode==='j2m';
+  document.querySelectorAll('[data-mode]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.mode===S.mode); });
+  $('grp-j2m').style.display=j2m?'':'none'; $('grp-m2j').style.display=j2m?'none':'';
+  $('jLabel').textContent=korMan(S.jeonse);
+  $('capWarn').style.display=(S.rate>CAP)?'block':'none';
+  $('row3v').textContent=(S.rate||0)+'%';
+  if(j2m){
+    $('outTitle').textContent='환산 월세'; $('sumK').textContent='환산 월세'; $('bigUnit').textContent='만원/월';
+    $('big').textContent=comma(c.monthlyMan);
+    $('sumV').textContent=comma(c.monthlyMan)+'만';
+    $('row1k').textContent='전세보증금'; $('row1v').textContent=korMan(S.jeonse);
+    $('row2k').textContent='전환 후 보증금'; $('row2v').textContent=korMan(S.keep);
+  } else {
+    $('outTitle').textContent='환산 전세보증금'; $('sumK').textContent='환산 전세금'; $('bigUnit').textContent='원';
+    $('big').textContent=korWon(c.out).replace('원','');
+    $('sumV').textContent=korWon(c.out).replace('원','');
+    $('row1k').textContent='보증금'; $('row1v').textContent=korMan(S.deposit);
+    $('row2k').textContent='월세'; $('row2v').textContent=comma(S.monthly)+'만원';
+  }
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key,dec){ var el=$(id); if(!el)return; el.addEventListener('input',function(e){ var raw=(e.target.value||'').replace(dec?/[^0-9.]/g:/[^0-9]/g,''); S[key]=raw?parseFloat(raw):0; if(dec){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } S.copied=false; render(); }); }
+document.querySelectorAll('[data-mode]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.mode=b.dataset.mode; S.copied=false; render(); }); });
+document.querySelectorAll('[data-rrate]').forEach(function(b){ b.addEventListener('click',function(){ S.rate=parseFloat(b.dataset.rrate); $('rate').value=S.rate; S.copied=false; render(); }); });
+bindNum('jeonse','jeonse',false); bindNum('keep','keep',false); bindNum('deposit','deposit',false); bindNum('monthly','monthly',false); bindNum('rate','rate',true);
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('jeonse').value='50,000'; $('keep').value='10,000'; $('deposit').value='10,000'; $('monthly').value='150'; $('rate').value='4.5'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t=S.mode==='j2m' ? ('전월세 전환 · 전세 '+korMan(S.jeonse)+' → 보증금 '+korMan(S.keep)+' + 월세 '+comma(c.monthlyMan)+'만원 (전환율 '+S.rate+'%) · 집계산') : ('전월세 전환 · 보증금 '+korMan(S.deposit)+' + 월세 '+comma(S.monthly)+'만원 → 전세 '+korWon(c.out)+' (전환율 '+S.rate+'%) · 집계산'); try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
