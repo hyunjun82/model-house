@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>취득세 계산기 — 집계산 | 2026년 세율 자동 계산</title>
-<meta name="description" content="주택 매매·분양 취득세, 지방교육세, 농어촌특별세를 2026년 최신 세율로 즉시 계산합니다. 가격과 조건만 선택하면 끝. 가입 없이 무료.">
+<title>취득세 계산기 — 집계산 | 2026년 세율 자동 계산 (주택·오피스텔·토지·농지)</title>
+<meta name="description" content="주택·오피스텔·토지·건물·농지 취득세를 2026년 최신 세율로 즉시 계산합니다. 매매·증여·상속·신축, 다주택 중과, 생애최초 감면, 농어촌특별세·지방교육세까지 한 번에. 가입 없이 무료.">
 <link rel="canonical" href="https://model-house.net/calc/acquisition-tax/">
 <meta property="og:title" content="취득세 계산기 — 집계산">
-<meta property="og:description" content="주택 매매·분양 취득세를 2026년 세율로 즉시 계산. 가입 없이 무료.">
+<meta property="og:description" content="주택·오피스텔·토지·농지 취득세를 2026년 세율로 즉시 계산. 가입 없이 무료.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://model-house.net/calc/acquisition-tax/">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -20,10 +20,14 @@
   .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
   .kw { word-break: keep-all; }
   ::selection { background: #DEDEFA; }
-  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } .rate-tbl{ font-size:12px; } .rate-tbl th,.rate-tbl td{ padding:7px 6px; } }
 </style>
 <script type="application/ld+json">
-{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"취득세 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/acquisition-tax/","inLanguage":"ko-KR","description":"주택 매매·분양 취득세, 지방교육세, 농어촌특별세를 2026년 최신 세율로 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-01-01" }
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"취득세 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/acquisition-tax/","inLanguage":"ko-KR","description":"주택·오피스텔·토지·건물·농지 취득세, 지방교육세, 농어촌특별세를 2026년 최신 세율로 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-27" }
 </script>
 <script type="application/ld+json">
 { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -33,9 +37,11 @@
 </script>
 <script type="application/ld+json">
 { "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
- {"@type":"Question","name":"취득세는 언제까지 내나요?","acceptedAnswer":{"@type":"Answer","text":"취득일(잔금 지급일 또는 등기일 중 빠른 날)로부터 60일 이내에 신고·납부해야 합니다."}},
+ {"@type":"Question","name":"취득세는 언제까지 내나요?","acceptedAnswer":{"@type":"Answer","text":"취득일(잔금 지급일 또는 등기일 중 빠른 날)로부터 60일 이내에 신고·납부해야 합니다. 상속은 6개월 이내입니다."}},
  {"@type":"Question","name":"생애최초 주택 구입 감면은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"생애최초로 12억원 이하 주택을 구입하면 취득세를 최대 200만원까지 감면받을 수 있습니다."}},
- {"@type":"Question","name":"다주택자는 취득세가 중과되나요?","acceptedAnswer":{"@type":"Answer","text":"조정대상지역 2주택은 8%, 3주택 이상은 8~12%의 중과세율이 적용될 수 있습니다."}}]}
+ {"@type":"Question","name":"오피스텔 취득세는 몇 퍼센트인가요?","acceptedAnswer":{"@type":"Answer","text":"오피스텔은 주거용이든 업무용이든 취득세 4%, 지방교육세 0.4%, 농어촌특별세 0.2%로 총 4.6%가 적용됩니다."}},
+ {"@type":"Question","name":"1가구 1주택 상속 취득세 특례가 있나요?","acceptedAnswer":{"@type":"Answer","text":"무주택 가구가 주택 1채를 상속받으면 일반 상속세율 2.8% 대신 0.8% 특례세율이 적용됩니다."}},
+ {"@type":"Question","name":"다주택자는 취득세가 중과되나요?","acceptedAnswer":{"@type":"Answer","text":"조정대상지역 2주택은 8%, 3주택 이상은 12%의 중과세율이 적용됩니다. 비조정지역은 3주택 8%, 4주택 이상 12%입니다."}}]}
 </script>
 </head>
 <body>
@@ -60,7 +66,7 @@
 
     <div style="margin-bottom: 32px;">
       <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">취득세 계산기</h1>
-      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 540px;">주택을 사거나 분양받을 때 내는 세금을 2026년 세율로 즉시 계산합니다. 가격과 조건만 선택하세요.</p>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 560px;">주택·오피스텔·토지·농지를 사거나 분양·증여·상속받을 때 내는 세금을 2026년 세율로 즉시 계산합니다. 다주택 중과, 생애최초 감면, 농어촌특별세·지방교육세까지 자동 반영됩니다.</p>
     </div>
 
     <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
@@ -74,15 +80,22 @@
           </div>
 
           <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">취득물건 종류</label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-asset="house">주택</button><button data-asset="officetel">오피스텔</button><button data-asset="building">토지·건물</button><button data-asset="farm">농지</button>
+            </div>
+          </div>
+
+          <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
             <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">취득 유형</label>
             <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
-              <button data-type="buy">매매·분양</button><button data-type="gift">증여</button><button data-type="inherit">상속</button><button data-type="new">신축</button>
+              <button data-type="buy">매매·분양</button><button data-type="gift">증여</button><button data-type="inherit">상속</button><button data-type="new" id="btn-new">신축·원시</button>
             </div>
           </div>
 
           <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
             <label style="display: flex; align-items: baseline; justify-content: space-between; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">
-              <span>주택 가격</span><span id="priceLabel" style="font-size: 13px; font-weight: 600; color: #6155F5;">8억 5,000만원</span>
+              <span id="priceTitle">주택 가격</span><span id="priceLabel" style="font-size: 13px; font-weight: 600; color: #6155F5;">8억 5,000만원</span>
             </label>
             <div style="position: relative;">
               <input id="price" type="text" inputmode="numeric" value="85,000" class="tnum" style="width: 100%; padding: 14px 56px 14px 16px; border: 1.5px solid #E4E6EA; border-radius: 12px; font-size: 20px; font-weight: 700; color: #15171C; background: #fff; text-align: right; outline: none; letter-spacing: -0.02em;">
@@ -96,21 +109,28 @@
             </div>
           </div>
 
-          <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
+          <div id="block-area" style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
             <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">전용면적 <span style="font-weight: 400; color: #9298A1;">· 농어촌특별세 기준</span></label>
             <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
               <button data-area="under">85㎡ 이하</button><button data-area="over">85㎡ 초과</button>
             </div>
           </div>
 
-          <div style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
+          <div id="block-homes" style="padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
             <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">취득 후 보유 주택 수</label>
             <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
               <button data-homes="1">1주택</button><button data-homes="2">2주택</button><button data-homes="3">3주택+</button>
             </div>
           </div>
 
-          <div>
+          <div id="block-farmself" style="padding: 20px 0; border-bottom: 1px solid #F0F1F3; display:none;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div><div style="font-size: 14px; font-weight: 600; color: #15171C;">2년 이상 자경 농지</div><div style="font-size: 12.5px; color: #9298A1; margin-top: 2px;">자경 감면 시 1.5% 적용</div></div>
+              <button id="tog-self"><span id="knob-self"></span></button>
+            </div>
+          </div>
+
+          <div id="block-toggles">
             <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid #F0F1F3;">
               <div><div style="font-size: 14px; font-weight: 600; color: #15171C;">조정대상지역</div><div style="font-size: 12.5px; color: #9298A1; margin-top: 2px;">다주택 중과세율 적용 여부</div></div>
               <button id="tog-adj"><span id="knob-adj"></span></button>
@@ -155,55 +175,131 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               <span id="copyLabel">결과 복사</span>
             </button>
+            <a href="https://www.wetax.go.kr" target="_blank" rel="noopener" style="width:100%; margin-top:10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#fff; color:#5A616B; border:1px solid #E4E6EA; border-radius:12px; padding:11px; font-size:13px; font-weight:600;">위택스에서 실제 신고·납부 →</a>
             <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">2026년 세율 기준 예상 금액입니다. 정확한 금액은 위택스·세무 전문가를 통해 확인하세요.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <section style="margin-top: 48px; max-width: 640px;">
-      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
-      <div style="display: grid; gap: 8px;">
-        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">취득세는 언제까지 내나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">취득일(잔금 지급일 또는 등기일 중 빠른 날)로부터 60일 이내에 신고·납부해야 합니다. 분양은 잔금일 기준입니다.</p></details>
-        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">생애최초 감면은 얼마인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">생애최초로 12억원 이하 주택을 구입하면 취득세를 최대 200만원까지 감면받을 수 있습니다. 위에서 ‘생애최초’를 켜면 자동 반영됩니다.</p></details>
-        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">다주택자는 세금이 중과되나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">조정대상지역 2주택은 8%, 3주택 이상은 8~12%의 중과세율이 적용될 수 있습니다. 주택 수와 조정대상지역 여부를 선택하면 반영됩니다.</p></details>
+    <section style="margin-top: 48px;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">2026년 취득세율표</h2>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:18px; margin-bottom:14px;">
+        <div style="font-size:13.5px; font-weight:700; color:#31363F; margin-bottom:10px;">주택</div>
+        <div style="overflow-x:auto;">
+        <table class="rate-tbl">
+          <thead><tr><th>구분</th><th>취득세</th><th>지방교육세</th><th>농어촌특별세<br><span style="font-weight:400;color:#9298A1;">(85㎡ 초과)</span></th></tr></thead>
+          <tbody>
+            <tr><td>6억 이하</td><td>1%</td><td>0.1%</td><td>0.2%</td></tr>
+            <tr><td>6억 초과 ~ 9억 이하</td><td>(가액×2/3억−3)×1/100</td><td>취득세의 1/10</td><td>0.2%</td></tr>
+            <tr><td>9억 초과</td><td>3%</td><td>0.3%</td><td>0.2%</td></tr>
+            <tr><td>조정 2주택 / 비조정 3주택</td><td>8%</td><td>0.4%</td><td>0.6%</td></tr>
+            <tr><td>조정 3주택 / 비조정 4주택+</td><td>12%</td><td>0.4%</td><td>1%</td></tr>
+            <tr><td>1가구 1주택 상속</td><td>0.8%</td><td>0.16%</td><td>0.2%</td></tr>
+            <tr><td>상속(그 외) / 신축·원시</td><td>2.8%</td><td>0.16%</td><td>0.2%</td></tr>
+            <tr><td>증여</td><td>3.5% (조정 3억↑ 12%)</td><td>0.3%</td><td>0.2%</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:18px;">
+        <div style="font-size:13.5px; font-weight:700; color:#31363F; margin-bottom:10px;">주택 외 (오피스텔·토지·건물·농지)</div>
+        <div style="overflow-x:auto;">
+        <table class="rate-tbl">
+          <thead><tr><th>구분</th><th>취득세</th><th>지방교육세</th><th>농어촌특별세</th></tr></thead>
+          <tbody>
+            <tr><td>오피스텔·토지·건물 매매</td><td>4%</td><td>0.4%</td><td>0.2%</td></tr>
+            <tr><td>증여(무상취득)</td><td>3.5%</td><td>0.3%</td><td>0.2%</td></tr>
+            <tr><td>상속 / 신축·원시</td><td>2.8%</td><td>0.16%</td><td>0.2%</td></tr>
+            <tr><td>농지 매매(신규)</td><td>3%</td><td>0.2%</td><td>0.2%</td></tr>
+            <tr><td>농지 매매(2년이상 자경)</td><td>1.5%</td><td>0.1%</td><td>−</td></tr>
+            <tr><td>농지 상속</td><td>2.3%</td><td>0.06%</td><td>0.2%</td></tr>
+          </tbody>
+        </table>
+        </div>
       </div>
     </section>
 
-    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD;">© 2026 집계산 by model-house.net · 데이터 출처 국세청 홈택스 · 행정안전부 위택스 · 적용 기준일 2026-01-01 · 계산 결과는 참고용입니다.</p>
+    <section style="margin-top: 40px; display:grid; grid-template-columns:1fr; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">취득세 절세 팁</h2>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li><b style="color:#31363F;">생애최초 감면</b> — 12억원 이하 주택을 처음 사면 취득세를 최대 200만원 감면받습니다.</li>
+          <li><b style="color:#31363F;">1가구 1주택 상속 특례</b> — 무주택 가구가 1채를 상속받으면 2.8%가 아닌 0.8%만 냅니다.</li>
+          <li><b style="color:#31363F;">6억·9억 경계 주의</b> — 주택은 6억·9억을 넘는 순간 세율 구간이 바뀝니다. 경계 근처라면 신고가액을 꼼꼼히 확인하세요.</li>
+          <li><b style="color:#31363F;">85㎡ 기준</b> — 전용면적 85㎡를 넘으면 농어촌특별세(0.2%)가 추가됩니다.</li>
+          <li><b style="color:#31363F;">농지 자경 감면</b> — 2년 이상 자경한 농지는 매매 시 3%가 아닌 1.5%가 적용됩니다.</li>
+        </ul>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">신고·납부 방법과 기한</h2>
+        <p class="kw" style="margin:0 0 10px; font-size:14px; line-height:1.75; color:#5A616B;"><b style="color:#31363F;">기한</b> — 취득일(잔금 지급일과 등기일 중 빠른 날)로부터 <b style="color:#31363F;">60일 이내</b>. 상속은 상속개시일이 속한 달의 말일부터 <b style="color:#31363F;">6개월 이내</b>입니다. 기한을 넘기면 신고불성실·납부지연 가산세가 붙습니다.</p>
+        <p class="kw" style="margin:0; font-size:14px; line-height:1.75; color:#5A616B;"><b style="color:#31363F;">방법</b> — 온라인은 <a href="https://www.wetax.go.kr" target="_blank" rel="noopener" style="color:#6155F5; font-weight:600;">위택스(wetax.go.kr)</a>, 오프라인은 부동산 소재지 관할 시·군·구청 세무과에서 신고·납부합니다. 보통 법무사가 등기와 함께 대행합니다.</p>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">필요 서류</h2>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li><b style="color:#31363F;">매매</b> — 매매계약서, 부동산거래계약 신고필증, 신분증</li>
+          <li><b style="color:#31363F;">증여</b> — 증여계약서, 증여자·수증자 신분 서류, 가족관계증명서</li>
+          <li><b style="color:#31363F;">상속</b> — 사망자 기본·가족관계증명서, 상속인 서류, (협의 시) 상속재산분할협의서</li>
+          <li><b style="color:#31363F;">공통</b> — 취득세 신고서, 등기신청 관련 서류</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">취득세는 언제까지 내나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">취득일(잔금 지급일 또는 등기일 중 빠른 날)로부터 60일 이내에 신고·납부해야 합니다. 상속은 6개월 이내, 분양은 잔금일 기준입니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">오피스텔 취득세는 몇 %인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">오피스텔은 주거용·업무용 구분 없이 취득세 4%, 지방교육세 0.4%, 농어촌특별세 0.2%로 총 4.6%가 적용됩니다. 주택 수에 따른 중과는 없습니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">생애최초 감면은 얼마인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">생애최초로 12억원 이하 주택을 구입하면 취득세를 최대 200만원까지 감면받습니다. 위에서 ‘생애최초’를 켜면 자동 반영됩니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">다주택자는 세금이 중과되나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">조정대상지역 2주택은 8%, 3주택 이상은 12%입니다. 비조정지역은 3주택 8%, 4주택 이상 12%가 적용됩니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 지방세법 제11조·제151조, 행정안전부 위택스 · 적용 기준일 2026-01-01 · 계산 결과는 참고용이며 실제 납부세액은 위택스·세무 전문가를 통해 확인하세요.</p>
   </div>
 </div>
 
 <script>
-var S = { type:'buy', priceManwon:85000, over85:false, homes:'1', adjusted:false, firstTime:false, copied:false };
+var DEF = { asset:'house', type:'buy', priceManwon:85000, over85:false, homes:'1', adjusted:false, firstTime:false, farmSelf:false, copied:false };
+var S = Object.assign({}, DEF);
 var comma = function(n){ return Math.round(n).toLocaleString('ko-KR'); };
 function korWon(m){ if(!m||m<=0) return '0원'; var eok=Math.floor(m/10000), rest=m%10000, p=[]; if(eok>0)p.push(eok+'억'); if(rest>0)p.push(rest.toLocaleString('ko-KR')+'만'); return p.join(' ')+'원'; }
 function pct(r){ var s=(r*100).toFixed(2); s=s.replace(/0+$/,'').replace(/\.$/,''); return s+'%'; }
 function slide(won){ if(won<=600000000)return 0.01; if(won>=900000000)return 0.03; var r=(won*2/300000000-3)/100; return Math.round(r*10000)/10000; }
+function won0(x){ return Math.floor(x + 1e-4); } // 원단위 절사(부동소수점 오차 보정)
 function compute(){
-  var won=(S.priceManwon||0)*10000, rate, eduRate, farmRate, heavy=false;
-  if(S.type==='buy'){
-    var std=slide(won);
-    if(S.homes==='1')rate=std; else if(S.homes==='2')rate=S.adjusted?0.08:std; else rate=S.adjusted?0.12:0.08;
-    heavy=(rate===0.08||rate===0.12);
-    if(heavy){ eduRate=0.004; farmRate=S.over85?(rate===0.12?0.010:0.006):0; }
-    else { eduRate=Math.round(rate*0.1*100000)/100000; farmRate=S.over85?0.002:0; }
-  } else if(S.type==='gift'){
-    if(S.adjusted&&won>=300000000){ rate=0.12; eduRate=0.004; farmRate=S.over85?0.010:0; }
-    else { rate=0.035; eduRate=0.003; farmRate=S.over85?0.002:0; }
-  } else if(S.type==='inherit'){
-    // 1가구 1주택 상속 특례 0.8%, 그 외 2.8% (지방교육세는 표준 0.16%)
-    rate=(S.homes==='1')?0.008:0.028; eduRate=0.0016; farmRate=S.over85?0.002:0;
-  } else { // 신축(원시취득)
-    rate=0.028; eduRate=0.0016; farmRate=S.over85?0.002:0;
+  var won=(S.priceManwon||0)*10000, rate=0, eduRate=0, farmRate=0, heavy=false;
+  var asset=S.asset, t=S.type;
+  if(asset==='house'){
+    if(t==='buy'){
+      var std=slide(won);
+      if(S.homes==='1')rate=std; else if(S.homes==='2')rate=S.adjusted?0.08:std; else rate=S.adjusted?0.12:0.08;
+      heavy=(rate===0.08||rate===0.12);
+      if(heavy){ eduRate=0.004; farmRate=S.over85?(rate===0.12?0.010:0.006):0; }
+      else { farmRate=S.over85?0.002:0; }
+    } else if(t==='gift'){
+      if(S.adjusted&&won>=300000000){ rate=0.12; eduRate=0.004; farmRate=S.over85?0.010:0; }
+      else { rate=0.035; eduRate=0.003; farmRate=S.over85?0.002:0; }
+    } else if(t==='inherit'){
+      rate=(S.homes==='1')?0.008:0.028; eduRate=0.0016; farmRate=S.over85?0.002:0;
+    } else { rate=0.028; eduRate=0.0016; farmRate=S.over85?0.002:0; }
+  } else if(asset==='officetel'||asset==='building'){
+    if(t==='gift'){ rate=0.035; eduRate=0.003; farmRate=0.002; }
+    else if(t==='inherit'||t==='new'){ rate=0.028; eduRate=0.0016; farmRate=0.002; }
+    else { rate=0.04; eduRate=0.004; farmRate=0.002; } // 매매
+  } else { // 농지
+    if(t==='gift'){ rate=0.035; eduRate=0.003; farmRate=0.002; }
+    else if(t==='inherit'){ rate=0.023; eduRate=0.0006; farmRate=0.002; }
+    else { if(S.farmSelf){ rate=0.015; eduRate=0.001; farmRate=0; } else { rate=0.03; eduRate=0.002; farmRate=0.002; } } // 매매
   }
-  var acqBase=Math.floor(won*rate);
-  var firstOK=S.firstTime&&S.type==='buy'&&won<=1200000000;
+  var acqBase=won0(won*rate);
+  var firstOK=S.firstTime&&asset==='house'&&t==='buy'&&!heavy&&won<=1200000000;
   var discount=firstOK?Math.min(2000000,acqBase):0;
   var acq=acqBase-discount;
-  // 주택 매매 일반세율: 지방교육세는 (감면 후) 취득세액의 10% → 생애최초 감면이 교육세에도 반영됨
-  var edu=(S.type==='buy'&&!heavy)?Math.floor(acq*0.1):Math.floor(won*eduRate);
-  var farm=Math.floor(won*farmRate);
+  var edu=(asset==='house'&&t==='buy'&&!heavy)?won0(acq*0.1):won0(won*eduRate);
+  var farm=won0(won*farmRate);
   var total=acq+edu+farm, eff=won>0?total/won*100:0;
   return { won:won, rate:rate, acqBase:acqBase, discount:discount, edu:edu, farm:farm, total:total, eff:eff };
 }
@@ -211,13 +307,25 @@ function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9p
 function trackStyle(on,dis){ return 'width:44px; height:26px; border-radius:999px; position:relative; cursor:'+(dis?'not-allowed':'pointer')+'; transition:all .2s ease; border:none; flex:none; padding:0; background:'+(on?'#6155F5':'#D7DADF')+';'; }
 function knobStyle(on){ return 'position:absolute; top:3px; left:'+(on?'21px':'3px')+'; width:20px; height:20px; border-radius:50%; background:#fff; transition:all .2s ease; box-shadow:0 1px 2px rgba(0,0,0,.2); display:block;'; }
 var $=function(id){return document.getElementById(id);};
+function show(id,on){ var e=$(id); if(e)e.style.display=on?'':'none'; }
 function render(){
-  var c=compute(), firstApplicable=S.type==='buy';
+  var c=compute(), isHouse=S.asset==='house', isFarm=S.asset==='farm';
+  var firstApplicable=isHouse&&S.type==='buy';
+  document.querySelectorAll('[data-asset]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.asset===S.asset); });
   document.querySelectorAll('[data-type]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.type===S.type); });
   document.querySelectorAll('[data-area]').forEach(function(b){ b.style.cssText=segStyle((b.dataset.area==='over')===S.over85); });
   document.querySelectorAll('[data-homes]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.homes===S.homes); });
+  // 신축·원시: 농지에서는 숨김
+  $('btn-new').style.display=isFarm?'none':'';
+  // 블록 가시성
+  show('block-area', isHouse);
+  show('block-homes', isHouse);
+  show('block-toggles', isHouse);
+  show('block-farmself', isFarm&&S.type==='buy');
+  $('priceTitle').textContent=isHouse?'주택 가격':(isFarm?'농지 가격':'취득 가액');
   $('tog-adj').style.cssText=trackStyle(S.adjusted,false); $('knob-adj').style.cssText=knobStyle(S.adjusted);
   $('tog-first').style.cssText=trackStyle(S.firstTime&&firstApplicable,!firstApplicable); $('knob-first').style.cssText=knobStyle(S.firstTime&&firstApplicable);
+  $('tog-self').style.cssText=trackStyle(S.farmSelf,false); $('knob-self').style.cssText=knobStyle(S.farmSelf);
   $('first-wrap').style.opacity=firstApplicable?'1':'0.45';
   $('priceLabel').textContent=korWon(S.priceManwon);
   $('total-big').textContent=comma(c.total); $('total-sum').textContent=comma(c.total);
@@ -227,15 +335,17 @@ function render(){
   $('farm').textContent=comma(c.farm); $('farm-row').style.display=c.farm>0?'flex':'none';
   $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
 }
+document.querySelectorAll('[data-asset]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.asset=b.dataset.asset; if(S.asset==='farm'&&S.type==='new')S.type='buy'; if(S.asset!=='house')S.firstTime=false; S.copied=false; render(); }); });
 document.querySelectorAll('[data-type]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.type=b.dataset.type; if(S.type!=='buy')S.firstTime=false; S.copied=false; render(); }); });
 document.querySelectorAll('[data-area]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.over85=(b.dataset.area==='over'); S.copied=false; render(); }); });
 document.querySelectorAll('[data-homes]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.homes=b.dataset.homes; S.copied=false; render(); }); });
 document.querySelectorAll('[data-chip]').forEach(function(b){ b.addEventListener('click',function(){ S.priceManwon=parseInt(b.dataset.chip,10); $('price').value=S.priceManwon.toLocaleString('ko-KR'); S.copied=false; render(); }); });
 $('price').addEventListener('input',function(e){ var d=(e.target.value||'').replace(/[^0-9]/g,''); S.priceManwon=d?parseInt(d,10):0; e.target.value=d?parseInt(d,10).toLocaleString('ko-KR'):''; S.copied=false; render(); });
 $('tog-adj').addEventListener('click',function(){ S.adjusted=!S.adjusted; S.copied=false; render(); });
-$('tog-first').addEventListener('click',function(){ if(S.type==='buy'){ S.firstTime=!S.firstTime; S.copied=false; render(); } });
-$('reset').addEventListener('click',function(){ S={type:'buy',priceManwon:85000,over85:false,homes:'1',adjusted:false,firstTime:false,copied:false}; $('price').value='85,000'; render(); });
-$('copy').addEventListener('click',function(){ var c=compute(); var t='취득세 계산 결과 · 주택가격 '+korWon(S.priceManwon)+' / 총 취득세 '+comma(c.total)+'원 (실효세율 '+c.eff.toFixed(2)+'%) · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+$('tog-first').addEventListener('click',function(){ if(S.asset==='house'&&S.type==='buy'){ S.firstTime=!S.firstTime; S.copied=false; render(); } });
+$('tog-self').addEventListener('click',function(){ S.farmSelf=!S.farmSelf; S.copied=false; render(); });
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('price').value='85,000'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='취득세 계산 결과 · '+korWon(S.priceManwon)+' / 총 취득세 '+comma(c.total)+'원 (실효세율 '+c.eff.toFixed(2)+'%) · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
 render();
 </script>
 </body>
