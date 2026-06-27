@@ -181,21 +181,29 @@ function korWon(m){ if(!m||m<=0) return '0원'; var eok=Math.floor(m/10000), res
 function pct(r){ var s=(r*100).toFixed(2); s=s.replace(/0+$/,'').replace(/\.$/,''); return s+'%'; }
 function slide(won){ if(won<=600000000)return 0.01; if(won>=900000000)return 0.03; var r=(won*2/300000000-3)/100; return Math.round(r*10000)/10000; }
 function compute(){
-  var won=(S.priceManwon||0)*10000, rate, eduRate, farmRate;
+  var won=(S.priceManwon||0)*10000, rate, eduRate, farmRate, heavy=false;
   if(S.type==='buy'){
     var std=slide(won);
     if(S.homes==='1')rate=std; else if(S.homes==='2')rate=S.adjusted?0.08:std; else rate=S.adjusted?0.12:0.08;
-    var heavy=(rate===0.08||rate===0.12);
+    heavy=(rate===0.08||rate===0.12);
     if(heavy){ eduRate=0.004; farmRate=S.over85?(rate===0.12?0.010:0.006):0; }
     else { eduRate=Math.round(rate*0.1*100000)/100000; farmRate=S.over85?0.002:0; }
   } else if(S.type==='gift'){
     if(S.adjusted&&won>=300000000){ rate=0.12; eduRate=0.004; farmRate=S.over85?0.010:0; }
     else { rate=0.035; eduRate=0.003; farmRate=S.over85?0.002:0; }
-  } else { rate=0.028; eduRate=0.0016; farmRate=S.over85?0.002:0; }
+  } else if(S.type==='inherit'){
+    // 1가구 1주택 상속 특례 0.8%, 그 외 2.8% (지방교육세는 표준 0.16%)
+    rate=(S.homes==='1')?0.008:0.028; eduRate=0.0016; farmRate=S.over85?0.002:0;
+  } else { // 신축(원시취득)
+    rate=0.028; eduRate=0.0016; farmRate=S.over85?0.002:0;
+  }
   var acqBase=Math.floor(won*rate);
   var firstOK=S.firstTime&&S.type==='buy'&&won<=1200000000;
   var discount=firstOK?Math.min(2000000,acqBase):0;
-  var acq=acqBase-discount, edu=Math.floor(won*eduRate), farm=Math.floor(won*farmRate);
+  var acq=acqBase-discount;
+  // 주택 매매 일반세율: 지방교육세는 (감면 후) 취득세액의 10% → 생애최초 감면이 교육세에도 반영됨
+  var edu=(S.type==='buy'&&!heavy)?Math.floor(acq*0.1):Math.floor(won*eduRate);
+  var farm=Math.floor(won*farmRate);
   var total=acq+edu+farm, eff=won>0?total/won*100:0;
   return { won:won, rate:rate, acqBase:acqBase, discount:discount, edu:edu, farm:farm, total:total, eff:eff };
 }
