@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부동산 계산기 — 집계산 | 취득세·양도세·종부세 무료 계산</title>
+<meta name="description" content="취득세·양도소득세·종합부동산세·재산세·전월세 전환·DSR 등 부동산 관련 모든 세금과 대출을 2026년 최신 세율로, 가입 없이 무료로 계산하세요.">
+<link rel="canonical" href="https://model-house.net/calc/">
+<meta property="og:title" content="부동산 계산기 — 집계산">
+<meta property="og:description" content="부동산 세금·대출, 가입 없이 무료로 한 곳에서 계산. 2026년 최신 세율.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .cgrid { grid-template-columns: 1fr 1fr; }
+  .hero { grid-template-columns: 1.05fr 0.95fr; }
+  .trust4 { grid-template-columns: repeat(4, 1fr); }
+  @media(max-width:860px){ .hero{ grid-template-columns:1fr !important; gap:36px !important; } }
+  @media(max-width:680px){ .cgrid{ grid-template-columns:1fr !important; } .trust4{ grid-template-columns:repeat(2,1fr) !important; row-gap:20px; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"집계산 — 부동산 계산기","alternateName":"집계산","url":"https://model-house.net/calc/","applicationCategory":"FinanceApplication","operatingSystem":"Web","description":"취득세·양도소득세·종합부동산세·재산세·전월세 전환·DSR 등 부동산 관련 모든 세금과 대출을 가입 없이 무료로 계산하는 계산기 플랫폼.","inLanguage":"ko-KR","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"featureList":["취득세 계산기","양도소득세 계산기","종합부동산세 계산기","재산세 계산기","전월세 전환 계산기","DSR 한도 계산기"] }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"WebSite","name":"집계산","url":"https://model-house.net/calc/" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"집계산은 정말 무료인가요?","acceptedAnswer":{"@type":"Answer","text":"네. 모든 계산기는 회원가입과 로그인 없이 100% 무료로 이용할 수 있습니다."}},
+ {"@type":"Question","name":"세율은 언제 기준인가요?","acceptedAnswer":{"@type":"Answer","text":"2026년 개정된 최신 세율과 공제 기준을 반영하며, 각 계산기 하단에 적용 기준일을 표기합니다."}},
+ {"@type":"Question","name":"계산 결과를 그대로 신고에 사용해도 되나요?","acceptedAnswer":{"@type":"Answer","text":"집계산의 결과는 참고용입니다. 실제 신고·납부는 홈택스·위택스 및 세무 전문가의 확인을 권장합니다."}},
+ {"@type":"Question","name":"어떤 계산기를 제공하나요?","acceptedAnswer":{"@type":"Answer","text":"취득세, 양도소득세, 종합부동산세, 재산세, 증여세, 전월세 전환, DSR 한도 등 부동산 관련 24종의 계산기를 제공합니다."}},
+ {"@type":"Question","name":"모바일에서도 쓸 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 모든 계산기는 모바일에 최적화되어 있습니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; gap: 28px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 28px; height: 28px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 15px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 18px; font-weight: 700; color: #15171C; letter-spacing: -0.03em; white-space: nowrap;">집계산</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 24px; font-size: 14.5px; font-weight: 500; color: #5A616B;">
+        <a href="#calculators" style="white-space: nowrap;">계산기</a>
+        <a href="#faq" style="white-space: nowrap;">FAQ</a>
+      </div>
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 14px;">
+        <span style="font-size: 13px; color: #9298A1; font-weight: 500; white-space: nowrap;">100% 무료</span>
+        <a href="#calculators" style="display: inline-flex; align-items: center; gap: 6px; background: #15171C; color: #fff; font-size: 14px; font-weight: 600; padding: 9px 16px; border-radius: 10px; white-space: nowrap;">계산 시작</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" style="max-width: 1120px; margin: 0 auto; padding: 84px 24px 64px; display: grid; gap: 56px; align-items: center;">
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #ECEEF1; color: #5A616B; font-size: 13px; font-weight: 500; padding: 6px 13px; border-radius: 999px; white-space: nowrap; margin-bottom: 24px;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #6155F5;"></span>부동산의 모든 숫자, 한 곳에서
+      </div>
+      <h1 class="kw" style="font-size: clamp(34px, 5vw, 56px); line-height: 1.08; font-weight: 700; color: #15171C; letter-spacing: -0.04em; margin: 0 0 22px;">취득세부터 양도세까지,<br><span style="color: #6155F5;">가장 쉬운</span> 부동산 계산</h1>
+      <p class="kw" style="font-size: 18px; line-height: 1.6; color: #5A616B; margin: 0 0 34px; max-width: 480px;">복잡한 세율표를 직접 찾을 필요 없습니다. 집을 사고, 갖고, 팔고, 빌릴 때 필요한 모든 계산을 가입 없이 무료로.</p>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;">
+        <a href="#calculators" style="display: inline-flex; align-items: center; gap: 8px; background: #6155F5; color: #fff; font-size: 15.5px; font-weight: 600; padding: 14px 24px; border-radius: 12px; white-space: nowrap;">전체 계산기 보기
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="/calc/acquisition-tax/" style="display: inline-flex; align-items: center; background: #fff; color: #15171C; font-size: 15.5px; font-weight: 600; padding: 14px 22px; border-radius: 12px; border: 1px solid #E4E6EA; white-space: nowrap;">취득세 계산기</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 18px; font-size: 13px; color: #9298A1; font-weight: 500;">
+        <span style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#18794E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 가입 없이 무료</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#18794E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 2026년 최신 세율</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#18794E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 모바일 최적화</span>
+      </div>
+    </div>
+    <div>
+      <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 16px 40px rgba(21,23,28,.07); overflow: hidden;">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #F0F1F3;">
+          <span style="font-size: 14px; font-weight: 700; color: #15171C; white-space: nowrap;">취득세 계산기</span>
+          <span style="font-size: 11px; font-weight: 600; color: #6155F5; background: #EFEDFD; padding: 4px 9px; border-radius: 999px;">실시간</span>
+        </div>
+        <div style="padding: 20px;">
+          <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #F0F1F3;"><span style="font-size: 13.5px; color: #9298A1;">취득 유형</span><span style="font-size: 13.5px; font-weight: 600; color: #15171C; white-space: nowrap;">매매 · 1주택</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #F0F1F3;"><span style="font-size: 13.5px; color: #9298A1;">주택 가격</span><span class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C; white-space: nowrap;">8억 5,000만원</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 10px 0;"><span style="font-size: 13.5px; color: #9298A1;">전용면적</span><span style="font-size: 13.5px; font-weight: 600; color: #15171C; white-space: nowrap;">84㎡ · 85㎡ 이하</span></div>
+          <div style="margin-top: 16px; background: #FBFBFC; border: 1px solid #F0F1F3; border-radius: 14px; padding: 20px;">
+            <div style="font-size: 12.5px; color: #5A616B; margin-bottom: 5px;">예상 총 취득세</div>
+            <div class="tnum" style="font-size: 32px; font-weight: 800; color: #6155F5; letter-spacing: -0.03em; line-height: 1;">24,939,000<span style="font-size: 16px; font-weight: 700; margin-left: 2px;">원</span></div>
+            <div style="display: flex; gap: 8px; margin-top: 14px;">
+              <div style="flex: 1; background: #fff; border: 1px solid #F0F1F3; border-radius: 10px; padding: 10px 12px;"><div class="tnum" style="font-size: 14px; font-weight: 700; color: #15171C;">22,669,500</div><div style="font-size: 11px; color: #9298A1; margin-top: 2px;">취득세 2.67%</div></div>
+              <div style="flex: 1; background: #fff; border: 1px solid #F0F1F3; border-radius: 10px; padding: 10px 12px;"><div class="tnum" style="font-size: 14px; font-weight: 700; color: #15171C;">2,266,950</div><div style="font-size: 11px; color: #9298A1; margin-top: 2px;">지방교육세</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid #ECEEF1; border-bottom: 1px solid #ECEEF1; background: #fff;">
+    <div class="trust4" style="max-width: 1120px; margin: 0 auto; padding: 28px 24px; display: grid; gap: 24px;">
+      <div style="text-align: center;"><div class="tnum" style="font-size: 28px; font-weight: 800; color: #15171C; letter-spacing: -0.02em;">24종</div><div style="font-size: 13px; color: #9298A1; margin-top: 3px;">부동산 계산기</div></div>
+      <div style="text-align: center;"><div class="tnum" style="font-size: 28px; font-weight: 800; color: #15171C; letter-spacing: -0.02em;">100%</div><div style="font-size: 13px; color: #9298A1; margin-top: 3px;">무료 · 가입 없음</div></div>
+      <div style="text-align: center;"><div class="tnum" style="font-size: 28px; font-weight: 800; color: #15171C; letter-spacing: -0.02em;">2026</div><div style="font-size: 13px; color: #9298A1; margin-top: 3px;">최신 세율 반영</div></div>
+      <div style="text-align: center;"><div class="tnum" style="font-size: 28px; font-weight: 800; color: #15171C; letter-spacing: -0.02em;">3초</div><div style="font-size: 13px; color: #9298A1; margin-top: 3px;">평균 계산 시간</div></div>
+    </div>
+  </section>
+
+  <section id="calculators" style="max-width: 1120px; margin: 0 auto; padding: 88px 24px 30px;">
+    <div style="max-width: 600px; margin: 0 auto 44px; text-align: center;">
+      <div style="font-size: 13px; font-weight: 600; color: #6155F5; letter-spacing: 0.02em; margin-bottom: 12px;">ALL CALCULATORS</div>
+      <h2 class="kw" style="font-size: clamp(26px, 3.4vw, 36px); font-weight: 700; color: #15171C; letter-spacing: -0.03em; margin: 0 0 12px;">필요한 계산, 흐름대로 정리했습니다</h2>
+      <p class="kw" style="font-size: 16px; line-height: 1.6; color: #9298A1; margin: 0;">집을 살 때 · 가지고 있을 때 · 팔 때 · 빌릴 때 단계별로 묶어, 검색 없이 바로 찾습니다.</p>
+    </div>
+    <div class="cgrid" style="display: grid; gap: 20px;">
+      <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+          <span style="position: relative; width: 52px; height: 52px; border-radius: 15px; background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.4), transparent 55%), linear-gradient(135deg, #7C6CF8, #5B4EE8); display: grid; place-items: center; box-shadow: 0 6px 14px rgba(91,78,232,.28); flex: none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4"></path><circle cx="9" cy="20" r="1.5"></circle><circle cx="17" cy="20" r="1.5"></circle></svg><span style="position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #FBE08A, #F6C152); box-shadow: 0 2px 5px rgba(246,193,82,.5);"></span></span>
+          <div><div style="font-size: 15.5px; font-weight: 700; color: #15171C;">집 살 때</div><div style="font-size: 12.5px; color: #9298A1;">취득 · 분양 단계</div></div>
+        </div>
+        <div style="display: grid; gap: 6px;">
+          <a href="/calc/acquisition-tax/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">취득세 계산기</span><span style="font-size: 10.5px; font-weight: 700; color: #6155F5; background: #EFEDFD; padding: 2px 7px; border-radius: 999px;">인기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">집 살 때 세금</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">중도금 대출 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">분양 중도금</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">생애최초 감면 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">최대 200만원</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">법무사 등기비용 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">이전 비용</span></a>
+        </div>
+      </div>
+
+      <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+          <span style="position: relative; width: 52px; height: 52px; border-radius: 15px; background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.4), transparent 55%), linear-gradient(135deg, #7C6CF8, #5B4EE8); display: grid; place-items: center; box-shadow: 0 6px 14px rgba(91,78,232,.28); flex: none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"></path><path d="M5 9v11h14V9"></path></svg><span style="position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #FBE08A, #F6C152); box-shadow: 0 2px 5px rgba(246,193,82,.5);"></span></span>
+          <div><div style="font-size: 15.5px; font-weight: 700; color: #15171C;">가지고 있을 때</div><div style="font-size: 12.5px; color: #9298A1;">보유 단계</div></div>
+        </div>
+        <div style="display: grid; gap: 6px;">
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">재산세 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">7월·9월 납부</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">종합부동산세 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">종부세 판정</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">보유세 통합 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">재산세+종부세</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">주담대 원리금 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">월 상환액</span></a>
+        </div>
+      </div>
+
+      <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+          <span style="position: relative; width: 52px; height: 52px; border-radius: 15px; background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.4), transparent 55%), linear-gradient(135deg, #7C6CF8, #5B4EE8); display: grid; place-items: center; box-shadow: 0 6px 14px rgba(91,78,232,.28); flex: none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="9 7 17 7 17 15"></polyline></svg><span style="position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #FBE08A, #F6C152); box-shadow: 0 2px 5px rgba(246,193,82,.5);"></span></span>
+          <div><div style="font-size: 15.5px; font-weight: 700; color: #15171C;">집 팔 때</div><div style="font-size: 12.5px; color: #9298A1;">양도 · 증여 단계</div></div>
+        </div>
+        <div style="display: grid; gap: 6px;">
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">양도소득세 계산기</span><span style="font-size: 10.5px; font-weight: 700; color: #6155F5; background: #EFEDFD; padding: 2px 7px; border-radius: 999px;">인기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">양도차익 세금</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">1주택 비과세 판정</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">요건 체크</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">장기보유특별공제</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">공제율</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">증여세 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">증여 재산</span></a>
+        </div>
+      </div>
+
+      <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+          <span style="position: relative; width: 52px; height: 52px; border-radius: 15px; background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.4), transparent 55%), linear-gradient(135deg, #7C6CF8, #5B4EE8); display: grid; place-items: center; box-shadow: 0 6px 14px rgba(91,78,232,.28); flex: none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg><span style="position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #FBE08A, #F6C152); box-shadow: 0 2px 5px rgba(246,193,82,.5);"></span></span>
+          <div><div style="font-size: 15.5px; font-weight: 700; color: #15171C;">빌릴 때 · 대출</div><div style="font-size: 12.5px; color: #9298A1;">전월세 · 대출</div></div>
+        </div>
+        <div style="display: grid; gap: 6px;">
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">전월세 전환율 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">전세↔월세</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">전세대출 한도 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">보증금 한도</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">DSR 한도 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">원리금 비율</span></a>
+          <a href="/calc/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">임대수익률 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">수익률</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1120px; margin: 0 auto; padding: 20px 24px 88px;">
+    <div style="background: #6155F5; border-radius: 24px; padding: 60px 48px; text-align: center;">
+      <h2 class="kw" style="font-size: clamp(26px, 3.4vw, 38px); font-weight: 700; color: #fff; letter-spacing: -0.03em; margin: 0 0 14px; line-height: 1.2;">지금 바로, 부동산 세금이 궁금하다면</h2>
+      <p style="font-size: 17px; color: rgba(255,255,255,0.62); margin: 0 0 30px;">가입도 결제도 없이 3초면 끝납니다.</p>
+      <a href="/calc/acquisition-tax/" style="display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #15171C; font-size: 16px; font-weight: 700; padding: 15px 30px; border-radius: 12px;">취득세 계산기 시작하기 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+    </div>
+  </section>
+
+  <section id="faq" style="max-width: 720px; margin: 0 auto; padding: 0 24px 88px;">
+    <div style="text-align: center; margin-bottom: 36px;">
+      <div style="font-size: 13px; font-weight: 600; color: #6155F5; margin-bottom: 12px;">FAQ</div>
+      <h2 style="font-size: clamp(26px, 3.2vw, 34px); font-weight: 700; color: #15171C; letter-spacing: -0.03em; margin: 0;">자주 묻는 질문</h2>
+    </div>
+    <div style="display: grid; gap: 8px;">
+      <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">집계산은 정말 무료인가요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">네. 모든 계산기는 회원가입과 로그인 없이 100% 무료로 이용할 수 있습니다. 계산 결과 저장과 공유까지 무료입니다.</p></details>
+      <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">세율은 언제 기준인가요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">2026년 개정된 최신 세율과 공제 기준을 반영합니다. 법 개정 시 빠르게 업데이트하며, 각 계산기 하단에 적용 기준일을 표기합니다.</p></details>
+      <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">계산 결과를 그대로 신고에 사용해도 되나요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">집계산의 결과는 예상 금액을 빠르게 확인하기 위한 참고용입니다. 실제 신고·납부는 홈택스·위택스 및 세무 전문가의 확인을 권장합니다.</p></details>
+      <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">어떤 계산기를 제공하나요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">취득세, 양도소득세, 종합부동산세, 재산세, 보유세, 증여세, 전월세 전환, DSR 한도, 임대수익률 등 부동산 관련 24종의 계산기를 제공합니다.</p></details>
+      <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">모바일에서도 쓸 수 있나요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">네. 모든 계산기는 모바일 화면에 최적화되어 있어 스마트폰에서도 같은 정확도로 빠르게 계산할 수 있습니다.</p></details>
+    </div>
+  </section>
+
+  <footer style="background: #fff; border-top: 1px solid #ECEEF1;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 48px 24px 36px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 14px;"><span style="width: 26px; height: 26px; border-radius: 7px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 13px;">집</span><span style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span></div>
+        <p class="kw" style="font-size: 13.5px; line-height: 1.6; color: #9298A1; margin: 0 0 8px; max-width: 280px;">부동산의 모든 숫자를 가장 쉽게. 취득부터 양도까지, 가입 없이 무료로 계산하세요.</p>
+        <a href="https://model-house.net/" style="font-size: 13px; color: #6155F5; font-weight: 600;">model-house.net</a>
+      </div>
+      <div>
+        <div style="font-size: 13px; font-weight: 700; color: #15171C; margin-bottom: 12px;">살 때 · 보유</div>
+        <div style="display: grid; gap: 9px; font-size: 13.5px; color: #9298A1;"><a href="/calc/acquisition-tax/">취득세 계산기</a><a href="/calc/">재산세 계산기</a><a href="/calc/">종합부동산세 계산기</a></div>
+      </div>
+      <div>
+        <div style="font-size: 13px; font-weight: 700; color: #15171C; margin-bottom: 12px;">팔 때 · 대출</div>
+        <div style="display: grid; gap: 9px; font-size: 13.5px; color: #9298A1;"><a href="/calc/">양도소득세 계산기</a><a href="/calc/">DSR 한도 계산기</a><a href="/calc/">전월세 전환 계산기</a></div>
+      </div>
+    </div>
+    <div style="border-top: 1px solid #ECEEF1;">
+      <div style="max-width: 1120px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <span style="font-size: 12px; color: #B0B5BD;">© 2026 집계산 by model-house.net · 계산 결과는 참고용입니다.</span>
+        <span style="font-size: 12px; color: #B0B5BD;">데이터 출처 국세청 홈택스 · 행정안전부 위택스 · 최종 업데이트 2026.01.01</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
