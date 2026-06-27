@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSR 계산기 — 집계산 | 2026년 스트레스 DSR·대출한도 자동 계산</title>
+<meta name="description" content="연소득과 대출 조건만 넣으면 DSR(총부채원리금상환비율)과 스트레스 DSR, 최대 대출 가능액을 2026년 규제 기준으로 즉시 계산합니다. 스트레스 금리 3단계·수도권 3.0% 반영. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/dsr/">
+<meta property="og:title" content="DSR 계산기 — 집계산">
+<meta property="og:description" content="스트레스 DSR과 최대 대출한도를 2026년 규제 기준으로 즉시 계산. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/dsr/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } .rate-tbl{ font-size:12px; } .rate-tbl th,.rate-tbl td{ padding:7px 6px; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"DSR 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/dsr/","inLanguage":"ko-KR","description":"DSR과 스트레스 DSR, 최대 대출 가능액을 2026년 규제 기준으로 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-27" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"DSR 계산기","item":"https://model-house.net/calc/dsr/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"DSR이란 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"DSR(총부채원리금상환비율)은 연간 모든 대출의 원리금 상환액을 연소득으로 나눈 비율입니다. 제1금융권은 40%, 제2금융권은 50% 이내로 규제합니다."}},
+ {"@type":"Question","name":"스트레스 DSR이 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"대출 한도를 산정할 때 실제 금리에 스트레스 금리를 더해 원리금을 계산하는 제도입니다. 2025년 7월 3단계가 시행되어 수도권·규제지역은 3.0%, 비수도권은 0.75%가 적용됩니다."}},
+ {"@type":"Question","name":"내 대출 한도는 어떻게 정해지나요?","acceptedAnswer":{"@type":"Answer","text":"연소득 × DSR 한도(40~50%)에서 기존 대출 원리금을 뺀 금액을, 스트레스 금리를 적용한 원리금으로 나눠 최대 대출 가능액을 산정합니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">DSR</span>
+    </nav>
+
+    <div style="margin-bottom: 32px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">DSR 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 580px;">연소득과 대출 조건을 넣으면 DSR(총부채원리금상환비율)과 스트레스 DSR, 최대 대출 가능액을 2026년 규제 기준으로 즉시 계산합니다. 스트레스 금리 3단계(수도권 3.0%)가 자동 반영됩니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 18px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: flex; align-items: baseline; justify-content: space-between; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;"><span>연소득 <span style="font-weight:400; color:#9298A1;">(세전)</span></span><span id="incLabel" style="font-size: 13px; font-weight: 600; color: #6155F5;">1억원</span></label>
+            <div style="position: relative;"><input id="income" type="text" inputmode="numeric" value="10,000" class="fld tnum"><span class="unit">만원</span></div>
+          </div>
+
+          <div style="display:flex; gap:12px; padding: 18px 0 0;">
+            <div style="flex:1;">
+              <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">신규 대출금액</label>
+              <div style="position:relative;"><input id="loan" type="text" inputmode="numeric" value="50,000" class="fld tnum"><span class="unit">만원</span></div>
+            </div>
+            <div style="flex:1;">
+              <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">대출 금리</label>
+              <div style="position:relative;"><input id="rate" type="text" inputmode="decimal" value="4" class="fld tnum"><span class="unit">%</span></div>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; padding: 16px 0 18px; border-bottom: 1px solid #F0F1F3;">
+            <div style="flex:1;">
+              <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">대출 기간</label>
+              <div style="position:relative;"><input id="years" type="text" inputmode="numeric" value="30" class="fld tnum"><span class="unit">년</span></div>
+            </div>
+            <div style="flex:1;">
+              <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">기존대출 연상환액</label>
+              <div style="position:relative;"><input id="exist" type="text" inputmode="numeric" value="0" class="fld tnum"><span class="unit">만원</span></div>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">상환 방식</label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-method="amort">원리금균등</button><button data-method="equalP">원금균등</button><button data-method="bullet">만기일시</button>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0; border-bottom: 1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">스트레스 금리 적용 지역</label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-stress="3.0">수도권·규제 (3.0%)</button><button data-stress="0.75">비수도권 (0.75%)</button><button data-stress="0">미적용</button>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">금융권 (DSR 한도)</label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-limit="40">제1금융권 (40%)</button><button data-limit="50">제2금융권 (50%)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">스트레스 DSR</div>
+            <div style="display: flex; align-items: baseline; gap: 4px;">
+              <span id="dsr-big" class="tnum" style="font-size: clamp(34px, 5vw, 44px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">39.9%</span>
+              <span id="passBadge" style="font-size: 12px; font-weight: 700; color: #18794E; background: #E6F4EA; padding: 3px 9px; border-radius: 999px;">한도 내</span>
+            </div>
+            <div style="font-size: 12.5px; color: #9298A1; margin-top: 8px;">실제금리 DSR <span id="dsrReal">28.6%</span> · 한도 <span id="limitLabel">40%</span></div>
+            <div style="margin-top: 22px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;">신규 연 원리금</span><span id="r-pay" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">28,644,912</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;">스트레스 적용 연 원리금 <span style="color:#9298A1;">(<span id="stressRate">+3.0%</span>)</span></span><span id="r-paystress" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">39,918,144</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13px; color: #5A616B;">기존대출 연상환액</span><span id="r-exist" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 13px 0 0;">
+                <span style="font-size: 14px; font-weight: 700; color: #6155F5;">최대 대출 가능액</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #6155F5;"><span id="maxLoan">5억 102만</span>원</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">2026년 스트레스 DSR 3단계 기준 예상치입니다. 실제 한도는 은행별 가산·우대금리, 방공제 등에 따라 달라지므로 거래 은행에서 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 48px;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">2026년 DSR·스트레스 금리 기준</h2>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:18px; margin-bottom:14px; overflow-x:auto;">
+        <table class="rate-tbl">
+          <thead><tr><th>구분</th><th>내용</th></tr></thead>
+          <tbody>
+            <tr><td>DSR 한도</td><td>제1금융권 40% · 제2금융권 50%</td></tr>
+            <tr><td>스트레스 금리 (수도권·규제지역)</td><td>3.0%</td></tr>
+            <tr><td>스트레스 금리 (비수도권)</td><td>0.75%</td></tr>
+            <tr><td>적용비율 (3단계, 2025.7~)</td><td>100% · 전 업권 모든 가계대출</td></tr>
+          </tbody>
+        </table>
+        <p class="kw" style="font-size:12px; color:#9298A1; margin:10px 0 0;">DSR = (연간 모든 대출 원리금 ÷ 연소득) × 100. 한도 산정 시 실제 금리에 스트레스 금리를 더해 계산합니다.</p>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">대출 한도 늘리는 팁</h2>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li><b style="color:#31363F;">기간을 늘리기</b> — 만기를 길게 하면 연 원리금이 줄어 DSR이 낮아집니다(최장 만기 확인).</li>
+          <li><b style="color:#31363F;">기존 대출 정리</b> — 신용대출·카드론을 줄이면 DSR 여력이 커집니다.</li>
+          <li><b style="color:#31363F;">소득 증빙 강화</b> — 인정소득·추정소득을 활용하면 연소득 산정이 올라갈 수 있습니다.</li>
+          <li><b style="color:#31363F;">고정금리·일부 상품</b> — 스트레스 금리 적용비율이 낮은 상품(예: 일부 고정형)은 한도가 더 나올 수 있습니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">DSR이란 무엇인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">DSR(총부채원리금상환비율)은 연간 모든 대출의 원리금 상환액을 연소득으로 나눈 비율입니다. 제1금융권 40%, 제2금융권 50% 이내로 규제합니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">스트레스 DSR이 뭔가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">한도를 산정할 때 실제 금리에 스트레스 금리를 더해 원리금을 계산하는 제도입니다. 2025년 7월 3단계가 시행돼 수도권·규제지역 3.0%, 비수도권 0.75%가 적용됩니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">대출 한도는 어떻게 정해지나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">연소득 × DSR 한도(40~50%)에서 기존 대출 원리금을 뺀 금액을, 스트레스 금리를 적용한 원리금으로 나눠 최대 대출 가능액을 산정합니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 금융위원회 가계대출 관리방안·스트레스 DSR 3단계(2025.7) · 계산 결과는 참고용이며 실제 한도는 은행별 기준에 따라 달라집니다.</p>
+  </div>
+</div>
+
+<script>
+var DEF = { income:10000, loan:50000, rate:4, years:30, exist:0, method:'amort', stress:3.0, limit:40, copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0'; var eok=Math.floor(won/100000000), man=Math.floor((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won); return p.join(' '); }
+function korWonMan(manwon){ var won=manwon*10000; return korWon(won); }
+function monthlyPay(P, annualPct, years){ var r=annualPct/100/12, n=years*12; if(n<=0)return 0; if(r===0)return P/n; var f=Math.pow(1+r,n); return P*r*f/(f-1); }
+function annualPay(P, annualPct, years, method){
+  if(P<=0||years<=0) return 0;
+  if(method==='amort'){ return Math.round(monthlyPay(P,annualPct,years))*12; }
+  if(method==='equalP'){ return Math.round(P/years) + Math.round(P*annualPct/100); }
+  return Math.round(P*annualPct/100); // 만기일시 이자만
+}
+function compute(){
+  var income=(S.income||0)*10000, loan=(S.loan||0)*10000, exist=(S.exist||0)*10000;
+  var payReal=annualPay(loan,S.rate,S.years,S.method);
+  var payStress=annualPay(loan,S.rate+S.stress,S.years,S.method);
+  var dsrReal=income>0?(payReal+exist)/income*100:0;
+  var dsrStress=income>0?(payStress+exist)/income*100:0;
+  // 최대 대출 한도 (스트레스 기준)
+  var maxLoan=0;
+  var factor=annualPay(1000000000,S.rate+S.stress,S.years,S.method)/1000000000; // 연원리금 per 1원
+  if(factor>0){ maxLoan=(income*S.limit/100 - exist)/factor; if(maxLoan<0)maxLoan=0; }
+  return { payReal:payReal, payStress:payStress, exist:exist, dsrReal:dsrReal, dsrStress:dsrStress, maxLoan:maxLoan, pass:dsrStress<=S.limit };
+}
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 5px; font-size:12.5px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function render(){
+  var c=compute();
+  document.querySelectorAll('[data-method]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.method===S.method); });
+  document.querySelectorAll('[data-stress]').forEach(function(b){ b.style.cssText=segStyle(parseFloat(b.dataset.stress)===S.stress); });
+  document.querySelectorAll('[data-limit]').forEach(function(b){ b.style.cssText=segStyle(parseInt(b.dataset.limit,10)===S.limit); });
+  $('incLabel').textContent=korWonMan(S.income)+'원';
+  $('dsr-big').textContent=c.dsrStress.toFixed(1)+'%';
+  $('dsrReal').textContent=c.dsrReal.toFixed(1)+'%';
+  $('limitLabel').textContent=S.limit+'%';
+  $('stressRate').textContent='+'+S.stress+'%';
+  var pb=$('passBadge');
+  if(c.pass){ pb.textContent='한도 내'; pb.style.color='#18794E'; pb.style.background='#E6F4EA'; }
+  else { pb.textContent='한도 초과'; pb.style.color='#B42318'; pb.style.background='#FDECEA'; }
+  $('r-pay').textContent=comma(c.payReal); $('r-paystress').textContent=comma(c.payStress); $('r-exist').textContent=comma(c.exist);
+  $('maxLoan').textContent=korWon(c.maxLoan);
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key,dec){ $(id).addEventListener('input',function(e){ var raw=(e.target.value||'').replace(dec?/[^0-9.]/g:/[^0-9]/g,''); S[key]=raw?parseFloat(raw):0; if(dec||key==='years'){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } S.copied=false; render(); }); }
+document.querySelectorAll('[data-method]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.method=b.dataset.method; S.copied=false; render(); }); });
+document.querySelectorAll('[data-stress]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.stress=parseFloat(b.dataset.stress); S.copied=false; render(); }); });
+document.querySelectorAll('[data-limit]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.limit=parseInt(b.dataset.limit,10); S.copied=false; render(); }); });
+bindNum('income','income',false); bindNum('loan','loan',false); bindNum('rate','rate',true); bindNum('years','years',false); bindNum('exist','exist',false);
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('income').value='10,000'; $('loan').value='50,000'; $('rate').value='4'; $('years').value='30'; $('exist').value='0'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='DSR 계산 · 연소득 '+korWonMan(S.income)+'원 / 스트레스 DSR '+c.dsrStress.toFixed(1)+'% / 최대 대출 '+korWon(c.maxLoan)+'원 · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
