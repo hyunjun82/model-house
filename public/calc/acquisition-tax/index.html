@@ -127,16 +127,16 @@
             <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
             <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">예상 총 취득세</div>
             <div style="display: flex; align-items: baseline; gap: 3px;">
-              <span id="total-big" class="tnum" style="font-size: clamp(34px, 5vw, 44px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">24,939,000</span>
+              <span id="total-big" class="tnum" style="font-size: clamp(34px, 5vw, 44px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">24,964,500</span>
               <span style="font-size: 17px; font-weight: 700; color: #15171C;">원</span>
             </div>
             <div style="display: flex; align-items: center; gap: 7px; margin-top: 12px;">
-              <span style="font-size: 12px; font-weight: 600; color: #6155F5; background: #EFEDFD; padding: 3px 9px; border-radius: 999px;">실효세율 <span id="eff">2.93%</span></span>
+              <span style="font-size: 12px; font-weight: 600; color: #6155F5; background: #EFEDFD; padding: 3px 9px; border-radius: 999px;">실효세율 <span id="eff">2.94%</span></span>
               <span style="font-size: 12.5px; color: #9298A1;">세율 <span id="acqRate">2.67%</span></span>
             </div>
             <div style="margin-top: 24px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
               <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
-                <span style="font-size: 13.5px; color: #5A616B;">취득세</span><span id="acqBase" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">22,669,500</span>
+                <span style="font-size: 13.5px; color: #5A616B;">취득세</span><span id="acqBase" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">22,695,000</span>
               </div>
               <div id="disc-row" style="display: none; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
                 <span style="font-size: 13.5px; color: #18794E; font-weight: 600;">생애최초 감면</span><span id="disc" class="tnum" style="font-size: 14px; font-weight: 600; color: #18794E;">− 0</span>
@@ -148,7 +148,7 @@
                 <span style="font-size: 13.5px; color: #5A616B;">농어촌특별세</span><span id="farm" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">0</span>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0 0;">
-                <span style="font-size: 14px; font-weight: 700; color: #15171C;">합계</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="total-sum">24,939,000</span>원</span>
+                <span style="font-size: 14px; font-weight: 700; color: #15171C;">합계</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="total-sum">24,964,500</span>원</span>
               </div>
             </div>
             <button id="copy" style="width: 100%; margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
@@ -179,7 +179,7 @@ var S = { type:'buy', priceManwon:85000, over85:false, homes:'1', adjusted:false
 var comma = function(n){ return Math.round(n).toLocaleString('ko-KR'); };
 function korWon(m){ if(!m||m<=0) return '0원'; var eok=Math.floor(m/10000), rest=m%10000, p=[]; if(eok>0)p.push(eok+'억'); if(rest>0)p.push(rest.toLocaleString('ko-KR')+'만'); return p.join(' ')+'원'; }
 function pct(r){ var s=(r*100).toFixed(2); s=s.replace(/0+$/,'').replace(/\.$/,''); return s+'%'; }
-function slide(won){ if(won<=600000000)return 0.01; if(won>=900000000)return 0.03; var r=(won*2/300000000-3)/100; return Math.round(r*100000)/100000; }
+function slide(won){ if(won<=600000000)return 0.01; if(won>=900000000)return 0.03; var r=(won*2/300000000-3)/100; return Math.round(r*10000)/10000; }
 function compute(){
   var won=(S.priceManwon||0)*10000, rate, eduRate, farmRate;
   if(S.type==='buy'){
