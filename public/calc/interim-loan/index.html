@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>중도금대출 계산기 — 집계산 | 분양 계약금·중도금·잔금 자동 계산</title>
+<meta name="description" content="분양가로 계약금·중도금·잔금과 중도금대출 가능액을 회차별로 계산합니다. 통상 계약금 10%·중도금 60%·잔금 30%, 규제지역 LTV 한도 반영. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/interim-loan/">
+<meta property="og:title" content="중도금대출 계산기 — 집계산">
+<meta property="og:description" content="분양 계약금·중도금·잔금과 중도금대출 가능액을 회차별로 계산. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/interim-loan/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"중도금대출 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/interim-loan/","inLanguage":"ko-KR","description":"분양가로 계약금·중도금·잔금과 중도금대출 가능액을 회차별로 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-28" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"중도금대출 계산기","item":"https://model-house.net/calc/interim-loan/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"분양 대금은 어떻게 나뉘나요?","acceptedAnswer":{"@type":"Answer","text":"통상 계약금 10%, 중도금 60%, 잔금 30%로 나눕니다. 중도금은 보통 6회에 걸쳐 10%씩 납부합니다."}},
+ {"@type":"Question","name":"중도금대출은 얼마까지 되나요?","acceptedAnswer":{"@type":"Answer","text":"보통 중도금 전액(분양가의 60%)을 대출받지만, 규제지역은 LTV 한도(예: 40%)까지만 가능해 나머지는 자기자금으로 내야 합니다."}},
+ {"@type":"Question","name":"중도금대출 이자는 누가 내나요?","acceptedAnswer":{"@type":"Answer","text":"무이자·이자후불제·이자선납 등 사업장마다 다릅니다. 이자후불제는 입주 잔금 때 그동안의 이자를 한꺼번에 정산합니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">중도금대출</span>
+    </nav>
+
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">중도금대출 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 600px;">분양가로 계약금·중도금·잔금과 회차별 중도금, 중도금대출 가능액을 한 번에 계산합니다. 통상 계약금 10%·중도금 60%·잔금 30%, 규제지역 LTV 한도를 반영합니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 16px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>분양가</span><span id="priceLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">6억원</span></label>
+            <div style="position:relative;"><input id="price" type="text" inputmode="numeric" value="60,000" class="fld tnum"><span class="unit">만원</span></div>
+          </div>
+
+          <div style="display:flex; gap:12px; padding: 18px 0 0;">
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">계약금 비율</label><div style="position:relative;"><input id="down" type="text" inputmode="decimal" value="10" class="fld tnum"><span class="unit">%</span></div></div>
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">중도금 비율</label><div style="position:relative;"><input id="mid" type="text" inputmode="decimal" value="60" class="fld tnum"><span class="unit">%</span></div></div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">중도금 납부 회차</label>
+            <div style="position:relative;"><input id="rounds" type="text" inputmode="numeric" value="6" class="fld tnum"><span class="unit">회</span></div>
+            <p style="font-size:12px; color:#9298A1; margin:8px 0 0;">보통 6회(2개월 간격)로 10%씩 납부합니다. 잔금은 자동 계산됩니다.</p>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px; padding: 18px 0 0; border-top:1px solid #F0F1F3; margin-top:18px; padding-top:18px;">
+            <button id="ltvBtn" style="position:relative; width:44px; height:26px; border-radius:13px; border:none; background:#D8DAE0; cursor:pointer; transition:background .15s; flex-shrink:0;"><span id="ltvDot" style="position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:left .15s; box-shadow:0 1px 2px rgba(0,0,0,.2);"></span></button>
+            <div style="flex:1;"><div style="font-size:13.5px; font-weight:600; color:#31363F;">규제지역 LTV 한도 적용</div><div style="font-size:12px; color:#9298A1;">분양가 × LTV까지만 대출</div></div>
+          </div>
+          <div id="ltvRow" style="display:none; padding: 14px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">LTV 한도</label>
+            <div style="position:relative;"><input id="ltv" type="text" inputmode="decimal" value="40" class="fld tnum"><span class="unit">%</span></div>
+            <p style="font-size:12px; color:#9298A1; margin:8px 0 0;">규제지역 신규 분양은 LTV 40% 수준으로 제한될 수 있습니다(사업장·시점별 상이).</p>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">중도금대출 가능액</div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="big" class="tnum" style="font-size: clamp(30px, 4.4vw, 42px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">3억 6,000만</span>
+              <span style="font-size: 17px; font-weight: 700; color: #15171C;">원</span>
+            </div>
+            <div id="ltvBadge" style="display:none; font-size:12px; font-weight:600; color:#9A6700; background:#FFF4D6; padding:6px 10px; border-radius:8px; margin-top:12px;">LTV 한도 적용 — 차액 자기부담</div>
+            <div style="margin-top: 22px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">계약금</span><span id="r-down" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">6,000만원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">중도금 총액</span><span id="r-mid" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">3억 6,000만원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">회차별 중도금</span><span id="r-each" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">6,000만원 × 6</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">중도금 자기부담</span><span id="r-self" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">0원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0 0;">
+                <span style="font-size: 14px; font-weight: 700; color: #15171C;">잔금</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="r-bal">180,000,000</span>원</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <a href="/calc/mortgage-loan/" style="width:100%; margin-top:10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#fff; color:#5A616B; border:1px solid #E4E6EA; border-radius:12px; padding:11px; font-size:13px; font-weight:600;">주택담보대출(잔금) 계산기 →</a>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">실제 대출 비율·이자방식(무이자·후불제)은 사업장·은행별로 다릅니다. 입주자모집공고를 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 44px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">분양 대금 구조</h2>
+        <p class="kw" style="margin:0 0 8px; font-size:14px; line-height:1.75; color:#31363F; font-weight:600;">분양가 = 계약금(10%) + 중도금(60%) + 잔금(30%)</p>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li>중도금은 보통 <b style="color:#31363F;">6회</b>에 걸쳐 분양가의 10%씩 납부합니다.</li>
+          <li>중도금대출 = min( 중도금 총액, 분양가 × LTV ). 비규제지역은 통상 중도금 전액, <b style="color:#31363F;">규제지역</b>은 LTV(예: 40%)까지만 가능합니다.</li>
+          <li>잔금은 입주 시 자기자금 또는 <b style="color:#31363F;">잔금대출(주택담보대출)</b>로 충당합니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">규제지역이면 중도금대출이 줄어드나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">규제지역 신규 분양은 LTV가 40% 수준으로 제한될 수 있어, 중도금 60% 중 일부만 대출되고 나머지는 자기자금으로 내야 할 수 있습니다. 사업장·시점별로 달라 입주자모집공고를 확인하세요.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">무이자·이자후불제가 뭔가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">무이자는 시행사가 이자를 부담하고, 이자후불제는 입주(잔금) 때 그동안의 이자를 한꺼번에 정산합니다. 이자선납은 매 회차마다 이자를 먼저 냅니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 분양 대금 구조는 사업장별로 다르며, 규제지역 LTV·집단대출 규제는 금융위 대책(6·27, 10·16 등) 및 입주자모집공고를 확인하세요.</p>
+  </div>
+</div>
+
+<script>
+var DEF = { price:60000, down:10, mid:60, rounds:6, useLtv:false, ltv:40, copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var won0=function(x){ return Math.floor(x+1e-4); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0원'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won); return p.join(' ')+'원'; }
+function korWonShort(won){ if(!won||won<=0) return '0'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); return p.join(' '); }
+function compute(){
+  var price=(S.price||0)*10000;
+  var down=won0(price*(S.down||0)/100);
+  var mid=won0(price*(S.mid||0)/100);
+  var rounds=Math.max(1, Math.round(S.rounds||1));
+  var each=won0(mid/rounds);
+  var loan=mid;
+  var capped=false;
+  if(S.useLtv){ var cap=won0(price*(S.ltv||0)/100); if(cap<mid){ loan=cap; capped=true; } }
+  var self=Math.max(0, mid-loan);
+  var bal=Math.max(0, price-down-mid);
+  return { price:price, down:down, mid:mid, rounds:rounds, each:each, loan:loan, capped:capped, self:self, bal:bal };
+}
+function render(){
+  $('priceLabel').textContent=korWon((S.price||0)*10000);
+  var c=compute();
+  $('big').textContent=korWonShort(c.loan);
+  $('ltvBadge').style.display=c.capped?'block':'none';
+  $('r-down').textContent=korWon(c.down);
+  $('r-mid').textContent=korWon(c.mid);
+  $('r-each').textContent=korWon(c.each)+' × '+c.rounds;
+  $('r-self').textContent=korWon(c.self);
+  $('r-bal').textContent=comma(c.bal);
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key,dec){ var el=$(id); if(!el)return; el.addEventListener('input',function(e){ var raw=(e.target.value||'').replace(dec?/[^0-9.]/g:/[^0-9]/g,''); S[key]=raw?parseFloat(raw):0; if(dec||key==='rounds'){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } S.copied=false; render(); }); }
+$('ltvBtn').addEventListener('click',function(){ S.useLtv=!S.useLtv; var dot=$('ltvDot'); this.style.background=S.useLtv?'#6155F5':'#D8DAE0'; dot.style.left=S.useLtv?'21px':'3px'; $('ltvRow').style.display=S.useLtv?'block':'none'; S.copied=false; render(); });
+bindNum('price','price',false); bindNum('down','down',true); bindNum('mid','mid',true); bindNum('rounds','rounds',false); bindNum('ltv','ltv',true);
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('price').value='60,000'; $('down').value='10'; $('mid').value='60'; $('rounds').value='6'; $('ltv').value='40'; $('ltvBtn').style.background='#D8DAE0'; $('ltvDot').style.left='3px'; $('ltvRow').style.display='none'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='중도금대출 '+korWon(c.loan)+' · 분양가 '+korWon(c.price)+' (계약금 '+korWon(c.down)+'/중도금 '+korWon(c.mid)+'/잔금 '+korWon(c.bal)+') · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
