@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주택담보대출 계산기 — 집계산 | 이자·월상환액·한도(LTV·DSR) 한 번에</title>
+<meta name="description" content="주택담보대출 이자·월상환액과 대출 한도(가능금액)를 한 번에 계산합니다. 원리금균등·원금균등 총이자, LTV·DSR·6억 한도, 생애최초까지 2026년 규제 기준 자동 반영. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/mortgage-loan/">
+<meta property="og:title" content="주택담보대출 계산기 — 집계산">
+<meta property="og:description" content="주담대 이자·월상환액·한도(LTV·DSR)를 2026년 규제 기준으로 한 번에. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/mortgage-loan/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } .rate-tbl{ font-size:12px; } .rate-tbl th,.rate-tbl td{ padding:7px 6px; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"주택담보대출 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/mortgage-loan/","inLanguage":"ko-KR","description":"주택담보대출 이자·월상환액과 대출 한도(LTV·DSR·6억)를 2026년 규제 기준으로 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-27" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"주택담보대출 계산기","item":"https://model-house.net/calc/mortgage-loan/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"주택담보대출은 몇 퍼센트까지 받나요?","acceptedAnswer":{"@type":"Answer","text":"LTV 기준으로 비규제지역 무주택 70%, 생애최초 80%, 규제지역은 무주택 50%·생애최초 70%입니다. 수도권·규제지역은 최대 6억원 한도가 있으며 DSR(40%)도 함께 적용됩니다."}},
+ {"@type":"Question","name":"월 상환액은 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"원리금균등은 매달 같은 금액을, 원금균등은 매달 같은 원금에 이자를 더해 갚습니다. 대출금·금리·기간을 넣으면 월 상환액과 총이자를 계산합니다."}},
+ {"@type":"Question","name":"생애최초 주택담보대출 한도는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"생애최초는 비규제지역 LTV 80%, 수도권·규제지역 70%(전입의무 6개월)까지 가능합니다. 단 수도권·규제지역은 6억 한도와 DSR 40%가 함께 적용됩니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">주택담보대출</span>
+    </nav>
+
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">주택담보대출 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 600px;">주택담보대출의 <b>월 상환액·이자</b>와 <b>대출 한도(가능금액)</b>를 한 번에 계산합니다. 원리금균등·원금균등 총이자, LTV·DSR·6억 한도, 생애최초까지 2026년 규제 기준으로 자동 반영됩니다.</p>
+    </div>
+
+    <div style="display:flex; gap:6px; background:#ECEDF1; padding:5px; border-radius:13px; max-width:380px; margin-bottom:18px;">
+      <button data-tab="pay" style="flex:1; border:none; border-radius:9px; padding:11px; font-size:14px; font-weight:700; cursor:pointer;">월상환·이자</button>
+      <button data-tab="limit" style="flex:1; border:none; border-radius:9px; padding:11px; font-size:14px; font-weight:700; cursor:pointer;">대출 한도</button>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 30px 32px 32px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span id="inTitle" style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">상환 조건</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <!-- ===== 월상환 탭 ===== -->
+          <div id="grp-pay">
+            <div style="padding: 14px 0 0;">
+              <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>대출금액</span><span id="loanLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">3억원</span></label>
+              <div style="position:relative;"><input id="loan" type="text" inputmode="numeric" value="30,000" class="fld tnum"><span class="unit">만원</span></div>
+            </div>
+            <div style="display:flex; gap:12px; padding: 14px 0 16px; border-bottom:1px solid #F0F1F3;">
+              <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">연 금리</label><div style="position:relative;"><input id="rate" type="text" inputmode="decimal" value="4" class="fld tnum"><span class="unit">%</span></div></div>
+              <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">기간</label><div style="position:relative;"><input id="years" type="text" inputmode="numeric" value="30" class="fld tnum"><span class="unit">년</span></div></div>
+            </div>
+            <div style="padding: 16px 0 0;">
+              <label style="display:block; font-size:13.5px; font-weight:600; color:#31363F; margin-bottom:10px;">상환 방식</label>
+              <div style="display:flex; gap:4px; background:#F1F2F4; padding:4px; border-radius:12px;">
+                <button data-method="amort">원리금균등</button><button data-method="equalP">원금균등</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 한도 탭 ===== -->
+          <div id="grp-limit" style="display:none;">
+            <div style="padding: 14px 0 0;">
+              <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>주택 가격(시세)</span><span id="priceLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">8억원</span></label>
+              <div style="position:relative;"><input id="price" type="text" inputmode="numeric" value="80,000" class="fld tnum"><span class="unit">만원</span></div>
+            </div>
+            <div style="padding: 16px 0;">
+              <label style="display:block; font-size:13.5px; font-weight:600; color:#31363F; margin-bottom:10px;">지역</label>
+              <div style="display:flex; gap:4px; background:#F1F2F4; padding:4px; border-radius:12px;">
+                <button data-region="reg">수도권·규제지역</button><button data-region="non">비규제지역</button>
+              </div>
+            </div>
+            <div style="padding: 0 0 16px; border-bottom:1px solid #F0F1F3;">
+              <label style="display:block; font-size:13.5px; font-weight:600; color:#31363F; margin-bottom:10px;">차주 유형</label>
+              <div style="display:flex; gap:4px; background:#F1F2F4; padding:4px; border-radius:12px;">
+                <button data-borrower="first">생애최초</button><button data-borrower="none">무주택·처분조건부</button><button data-borrower="multi">다주택 추가</button>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; padding: 16px 0 0;">
+              <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">연소득</label><div style="position:relative;"><input id="income" type="text" inputmode="numeric" value="7,000" class="fld tnum"><span class="unit">만원</span></div></div>
+              <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">기존대출 연상환</label><div style="position:relative;"><input id="exist" type="text" inputmode="numeric" value="0" class="fld tnum"><span class="unit">만원</span></div></div>
+            </div>
+            <div style="display:flex; gap:12px; padding: 14px 0 0;">
+              <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">대출 금리</label><div style="position:relative;"><input id="lrate" type="text" inputmode="decimal" value="4" class="fld tnum"><span class="unit">%</span></div></div>
+              <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">대출 기간</label><div style="position:relative;"><input id="lyears" type="text" inputmode="numeric" value="30" class="fld tnum"><span class="unit">년</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 30px 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div id="bigTitle" style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">월 상환액</div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="big" class="tnum" style="font-size: clamp(30px, 4.6vw, 42px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">1,432,246</span>
+              <span id="bigUnit" style="font-size: 17px; font-weight: 700; color: #15171C;">원</span>
+            </div>
+            <div id="subLine" style="font-size: 12.5px; color: #9298A1; margin-top: 10px;"></div>
+            <div id="rows" style="margin-top: 20px; border-top: 1px solid #ECEEF1; padding-top: 6px;"></div>
+            <button id="copy" style="width: 100%; margin-top: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">2026년 규제 기준 예상치입니다. 실제 한도·금리는 은행 심사(방공제·우대금리 등)에 따라 달라지니 거래 은행으로 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 44px;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">주택담보대출 한도(LTV)와 규제 — 몇 프로까지?</h2>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:18px; overflow-x:auto;">
+        <table class="rate-tbl">
+          <thead><tr><th>차주 유형</th><th>비규제지역</th><th>수도권·규제지역</th></tr></thead>
+          <tbody>
+            <tr><td>생애최초</td><td>LTV 80%</td><td>LTV 70% (전입의무)</td></tr>
+            <tr><td>무주택 / 처분조건부 1주택</td><td>LTV 70%</td><td>LTV 50%</td></tr>
+            <tr><td>다주택 추가구입(미처분)</td><td>LTV 60%</td><td>불가 (LTV 0%)</td></tr>
+          </tbody>
+        </table>
+        <p class="kw" style="font-size:12px; color:#9298A1; margin:10px 0 0;">수도권·규제지역 주택구입 주담대는 <b>최대 6억원 한도</b>가 적용되며, 실제 대출은 LTV·6억·DSR(제1금융권 40%) 중 가장 작은 금액까지 가능합니다. (2026년 6·27 대책 기준)</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">월 상환액·이자 — 상환방식 차이</h2>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li><b style="color:#31363F;">원리금균등</b> — 매달 같은 금액을 갚습니다. 매달 부담이 일정해 가장 많이 씁니다.</li>
+          <li><b style="color:#31363F;">원금균등</b> — 매달 원금은 같고 이자는 줄어듭니다. 초기 부담이 크지만 <b>총이자가 가장 적습니다.</b></li>
+          <li><b style="color:#31363F;">총이자</b>는 금리·기간이 길수록 커집니다. 기간을 줄이면 이자를 아끼고, 늘리면 월 부담이 줄어 DSR 한도가 늘어납니다.</li>
+        </ul>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">대출 가능금액은 어떻게 정해지나?</h2>
+        <p class="kw" style="margin:0; font-size:14px; line-height:1.75; color:#5A616B;">실제 받을 수 있는 금액은 <b style="color:#31363F;">① LTV 한도(주택가격 × 비율)</b>, <b style="color:#31363F;">② 수도권·규제지역 6억 한도</b>, <b style="color:#31363F;">③ DSR 한도(연소득 × 40% − 기존 대출)</b> 중 <b>가장 작은 값</b>입니다. 소득이 낮으면 LTV가 충분해도 DSR에서 막히고, 집값이 높으면 LTV·6억에서 막힙니다. 생애최초·무주택일수록 LTV가 유리합니다.</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">주택담보대출은 몇 퍼센트까지 받나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">비규제 무주택 70%·생애최초 80%, 규제지역 무주택 50%·생애최초 70%입니다. 수도권·규제지역은 6억 한도와 DSR 40%가 함께 적용됩니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">생애최초 한도가 더 큰가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">네. 생애최초는 비규제 80%, 규제지역 70%로 일반 무주택보다 LTV가 높습니다. 다만 수도권·규제지역은 전입의무 6개월과 6억·DSR 한도가 함께 적용됩니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">원리금균등과 원금균등 중 뭐가 유리한가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">총이자는 원금균등이 적고, 초기 부담은 원리금균등이 적습니다. 매달 일정한 부담을 원하면 원리금균등, 이자를 아끼려면 원금균등이 유리합니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 금융위원회 가계대출 관리방안(6·27 대책)·스트레스 DSR 3단계 · 계산 결과는 참고용이며 실제 한도·금리는 은행 심사로 결정됩니다.</p>
+  </div>
+</div>
+
+<script>
+var DEF = { tab:'pay', loan:30000, rate:4, years:30, method:'amort', price:80000, region:'reg', borrower:'first', income:7000, exist:0, lrate:4, lyears:30, copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var won0=function(x){ return Math.floor(x+1e-4); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0원'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won); return p.join(' ')+'원'; }
+function korMan(manwon){ return korWon(manwon*10000); }
+function monthlyPay(P, annualPct, years){ var r=annualPct/100/12, n=years*12; if(n<=0)return 0; if(r===0)return P/n; var f=Math.pow(1+r,n); return P*r*f/(f-1); }
+function annualAmort(P, annualPct, years){ return Math.round(monthlyPay(P,annualPct,years))*12; }
+function computePay(){
+  var P=(S.loan||0)*10000, r=(S.rate||0)/100/12, n=(S.years||0)*12;
+  if(P<=0||n<=0) return { first:0, last:0, totalInt:0, totalPay:0, method:S.method };
+  if(S.method==='amort'){
+    var m=Math.round(monthlyPay(P,S.rate,S.years));
+    var totalPay=m*n, totalInt=totalPay-P;
+    return { first:m, last:m, totalInt:totalInt, totalPay:totalPay, method:'amort' };
+  } else {
+    var prin=P/n;
+    var first=Math.round(prin + P*r);
+    var last=Math.round(prin + prin*r);
+    var totalInt=Math.round(P*r*(n+1)/2);
+    return { first:first, last:last, totalInt:totalInt, totalPay:P+totalInt, method:'equalP' };
+  }
+}
+function ltvPct(){
+  if(S.region==='reg'){ if(S.borrower==='first')return 0.70; if(S.borrower==='none')return 0.50; return 0; }
+  else { if(S.borrower==='first')return 0.80; if(S.borrower==='none')return 0.70; return 0.60; }
+}
+function computeLimit(){
+  var price=(S.price||0)*10000, income=(S.income||0)*10000, exist=(S.exist||0)*10000;
+  var pct=ltvPct();
+  var ltvLimit=pct*price;
+  var capApplied=false;
+  if(S.region==='reg' && ltvLimit>600000000){ ltvLimit=600000000; capApplied=true; }
+  var stress=(S.region==='reg')?3.0:0.75;
+  var factor=annualAmort(1000000000,(S.lrate||0)+stress,S.lyears||0)/1000000000;
+  var dsrLimit= factor>0 ? (income*0.40 - exist)/factor : 0; if(dsrLimit<0)dsrLimit=0;
+  var maxLoan=Math.min(ltvLimit, dsrLimit); if(pct===0)maxLoan=0; if(maxLoan<0)maxLoan=0;
+  var bind = pct===0?'불가' : (maxLoan===dsrLimit && dsrLimit<ltvLimit ? 'DSR' : (capApplied && ltvLimit<=dsrLimit ? '6억한도' : 'LTV'));
+  return { pct:pct, ltvLimit:ltvLimit, dsrLimit:dsrLimit, maxLoan:maxLoan, capApplied:capApplied, bind:bind };
+}
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 5px; font-size:12.5px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function tabStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:11px; font-size:14px; font-weight:700; cursor:pointer; transition:all .15s ease;'; return on? b+' background:#fff; color:#15171C; box-shadow:0 1px 3px rgba(21,23,28,.12);' : b+' background:transparent; color:#7A828E;'; }
+function row(k,v,strong){ return '<div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #F0F1F3;"><span style="font-size:13px; color:'+(strong?'#15171C':'#5A616B')+'; font-weight:'+(strong?'700':'400')+';">'+k+'</span><span class="tnum" style="font-size:'+(strong?'15px':'13.5px')+'; font-weight:'+(strong?'800':'600')+'; color:#15171C;">'+v+'</span></div>'; }
+function render(){
+  document.querySelectorAll('[data-tab]').forEach(function(b){ b.style.cssText=tabStyle(b.dataset.tab===S.tab); });
+  $('grp-pay').style.display=S.tab==='pay'?'':'none'; $('grp-limit').style.display=S.tab==='limit'?'':'none';
+  $('inTitle').textContent=S.tab==='pay'?'상환 조건':'한도 조건';
+  document.querySelectorAll('[data-method]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.method===S.method); });
+  document.querySelectorAll('[data-region]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.region===S.region); });
+  document.querySelectorAll('[data-borrower]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.borrower===S.borrower); });
+  $('loanLabel').textContent=korMan(S.loan); $('priceLabel').textContent=korMan(S.price);
+  if(S.tab==='pay'){
+    var c=computePay();
+    $('bigTitle').textContent=(c.method==='amort')?'월 상환액 (매달 동일)':'월 상환액 (첫 달)';
+    $('big').textContent=comma(c.first); $('bigUnit').textContent='원';
+    $('subLine').textContent=(c.method==='equalP')?('마지막 달 '+comma(c.last)+'원으로 점차 감소'):'';
+    $('rows').innerHTML = row('대출 원금', korMan(S.loan)) + (c.method==='equalP'?row('월 상환 범위', comma(c.last)+'~'+comma(c.first)+'원'):'') + row('총 이자', comma(c.totalInt)+'원') + row('총 상환액', comma(c.totalPay)+'원', true);
+  } else {
+    var L=computeLimit();
+    $('bigTitle').textContent='최대 대출 가능액';
+    $('big').textContent=korWon(L.maxLoan).replace('원',''); $('bigUnit').textContent='원';
+    var bindTxt = L.pct===0?'이 조건은 주택구입 주담대 불가(LTV 0%)' : ('적용 한도: '+(L.bind==='DSR'?'DSR(소득)':(L.bind==='6억한도'?'6억 한도':'LTV'))+' 기준');
+    $('subLine').textContent=bindTxt;
+    $('rows').innerHTML = row('LTV '+Math.round(L.pct*100)+'% 한도', korWon(L.pct*((S.price||0)*10000))) + (L.capApplied?row('수도권·규제 6억 한도', '6억원'):'') + row('DSR 40% 한도', korWon(L.dsrLimit)) + row('최대 가능액', korWon(L.maxLoan), true);
+  }
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key,dec){ var el=$(id); if(!el)return; el.addEventListener('input',function(e){ var raw=(e.target.value||'').replace(dec?/[^0-9.]/g:/[^0-9]/g,''); S[key]=raw?parseFloat(raw):0; if(dec||key==='years'||key==='lyears'){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } S.copied=false; render(); }); }
+document.querySelectorAll('[data-tab]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.tab=b.dataset.tab; S.copied=false; render(); }); });
+document.querySelectorAll('[data-method]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.method=b.dataset.method; S.copied=false; render(); }); });
+document.querySelectorAll('[data-region]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.region=b.dataset.region; S.copied=false; render(); }); });
+document.querySelectorAll('[data-borrower]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.borrower=b.dataset.borrower; S.copied=false; render(); }); });
+bindNum('loan','loan',false); bindNum('rate','rate',true); bindNum('years','years',false);
+bindNum('price','price',false); bindNum('income','income',false); bindNum('exist','exist',false); bindNum('lrate','lrate',true); bindNum('lyears','lyears',false);
+$('reset').addEventListener('click',function(){ var tab=S.tab; S=Object.assign({},DEF); S.tab=tab; $('loan').value='30,000'; $('rate').value='4'; $('years').value='30'; $('price').value='80,000'; $('income').value='7,000'; $('exist').value='0'; $('lrate').value='4'; $('lyears').value='30'; render(); });
+$('copy').addEventListener('click',function(){ var t; if(S.tab==='pay'){ var c=computePay(); t='주택담보대출 · 대출 '+korMan(S.loan)+' '+S.rate+'% '+S.years+'년 / 월상환 '+comma(c.first)+'원, 총이자 '+comma(c.totalInt)+'원 · 집계산'; } else { var L=computeLimit(); t='주택담보대출 한도 · 주택 '+korMan(S.price)+' / 최대 '+korWon(L.maxLoan)+' (LTV '+Math.round(L.pct*100)+'%) · 집계산'; } try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
