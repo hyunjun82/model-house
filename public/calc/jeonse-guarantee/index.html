@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전세보증보험 계산기 — 집계산 | 보증료·가입여부(HUG·HF·SGI)</title>
+<meta name="description" content="전세보증금·주택가격으로 전세보증보험 가입 가능 여부(부채비율)와 HUG·HF·SGI 보증료를 즉시 계산합니다. 공식 보증료율, 보증금 한도 반영. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/jeonse-guarantee/">
+<meta property="og:title" content="전세보증보험 계산기 — 집계산">
+<meta property="og:description" content="전세보증보험 가입여부·HUG/HF/SGI 보증료를 즉시 계산. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/jeonse-guarantee/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  .seg { display:flex; gap:4px; background:#F1F2F4; border-radius:11px; padding:4px; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"전세보증보험 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/jeonse-guarantee/","inLanguage":"ko-KR","description":"전세보증금·주택가격으로 전세보증보험 가입여부와 HUG·HF·SGI 보증료를 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-28" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"전세보증보험 계산기","item":"https://model-house.net/calc/jeonse-guarantee/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"전세보증보험 보증료는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"보증료 = 전세보증금 × 보증료율 × (보증기간 ÷ 1년)으로 계산합니다. 보증료율은 기관·주택유형·부채비율에 따라 달라집니다."}},
+ {"@type":"Question","name":"가입 가능 여부는 무엇으로 판단하나요?","acceptedAnswer":{"@type":"Answer","text":"부채비율 = (선순위채권 + 전세보증금) ÷ 주택가격이 100% 이내(담보가치 이내)여야 하며, 보증금이 한도(수도권 7억·비수도권 5억) 이하여야 합니다."}},
+ {"@type":"Question","name":"HUG·HF·SGI 중 어디가 저렴한가요?","acceptedAnswer":{"@type":"Answer","text":"보증료율은 HF가 가장 낮고(0.02~0.04%), HUG(0.115~0.154%), SGI(0.183% 이상) 순입니다. 다만 HF는 HF 전세대출 이용자만 가입할 수 있습니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">전세보증보험</span>
+    </nav>
+
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">전세보증보험 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 600px;">전세보증금·주택가격으로 전세보증보험 가입 가능 여부(부채비율)와 HUG·HF·SGI 보증료를 즉시 계산합니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 16px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>전세보증금</span><span id="depLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">3억원</span></label>
+            <div style="position:relative;"><input id="deposit" type="text" inputmode="numeric" value="30,000" class="fld tnum"><span class="unit">만원</span></div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>주택가격(매매시세)</span><span id="priceLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">4억원</span></label>
+            <div style="position:relative;"><input id="price" type="text" inputmode="numeric" value="40,000" class="fld tnum"><span class="unit">만원</span></div>
+          </div>
+
+          <div style="display:flex; gap:12px; padding: 18px 0 0;">
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">선순위채권</label><div style="position:relative;"><input id="senior" type="text" inputmode="numeric" value="0" class="fld tnum"><span class="unit">만원</span></div></div>
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">보증기간</label><div style="position:relative;"><input id="months" type="text" inputmode="numeric" value="24" class="fld tnum"><span class="unit">개월</span></div></div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">주택 유형</label>
+            <div class="seg" id="segType">
+              <button data-type="apt" style="flex:1;">아파트</button>
+              <button data-type="house" style="flex:1;">단독·다가구</button>
+              <button data-type="etc" style="flex:1;">기타</button>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">지역 (보증금 한도)</label>
+            <div class="seg" id="segArea">
+              <button data-area="metro" style="flex:1;">수도권 7억</button>
+              <button data-area="other" style="flex:1;">비수도권 5억</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">가입 판정</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">부채비율</div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="big" class="tnum" style="font-size: clamp(32px, 4.8vw, 44px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">75.00</span>
+              <span style="font-size: 19px; font-weight: 700; color: #15171C;">%</span>
+            </div>
+            <div id="judgeBadge" style="font-size:12px; font-weight:600; padding:6px 10px; border-radius:8px; margin-top:12px; display:inline-block;">가입 가능 (담보 이내)</div>
+            <div style="margin-top: 20px; border-top: 1px solid #ECEEF1; padding-top: 12px;">
+              <div style="font-size: 12px; font-weight: 600; color: #9298A1; margin-bottom: 8px;">기관별 총보증료 (보증기간 전체)</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">HF (0.04%)</span><span id="r-hf" class="tnum" style="font-size: 14px; font-weight: 700; color: #15171C;">240,000원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">HUG <span id="hugRate" style="color:#9298A1;">(0.115%)</span></span><span id="r-hug" class="tnum" style="font-size: 14px; font-weight: 700; color: #15171C;">690,000원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 9px 0;">
+                <span style="font-size: 13.5px; color: #5A616B;">SGI <span id="sgiRate" style="color:#9298A1;">(0.183%)</span></span><span id="r-sgi" class="tnum" style="font-size: 14px; font-weight: 700; color: #15171C;">1,098,000원</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <a href="/calc/jeonse-loan/" style="width:100%; margin-top:10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#fff; color:#5A616B; border:1px solid #E4E6EA; border-radius:12px; padding:11px; font-size:13px; font-weight:600;">전세대출 한도 계산기 →</a>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">보증료율은 부채비율·보증금 구간·우대에 따라 달라집니다. 실제 가입·금액은 보증기관 심사로 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 44px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">전세보증보험 계산 공식</h2>
+        <p class="kw" style="margin:0 0 8px; font-size:14px; line-height:1.75; color:#31363F; font-weight:600;">보증료 = 전세보증금 × 보증료율 × (보증기간 ÷ 1년) / 부채비율 = (선순위채권 + 보증금) ÷ 주택가격</p>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li>가입은 보통 <b style="color:#31363F;">부채비율 100% 이내</b>(담보가치 이내), 보증금이 한도(수도권 7억·비수도권 5억) 이하일 때 가능합니다.</li>
+          <li>HUG 일부 상품은 부채비율 90% 이내, 공시가격 기준 등 더 엄격한 조건이 적용됩니다.</li>
+          <li><b style="color:#31363F;">HF</b>는 보증료가 가장 낮지만 HF 전세자금대출 이용자만 가입할 수 있습니다.</li>
+        </ul>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">기관별 보증료율 (개인·대표값)</h2>
+        <table class="rate-tbl"><thead><tr><th>기관</th><th>아파트</th><th>단독·다가구</th><th>기타</th></tr></thead><tbody>
+          <tr><td>HF(전세지킴)</td><td>0.02~0.04%</td><td>0.02~0.04%</td><td>0.02~0.04%</td></tr>
+          <tr><td>HUG</td><td>0.115%</td><td>0.139%</td><td>0.128%</td></tr>
+          <tr><td>SGI</td><td>0.183%</td><td>0.208%</td><td>0.208%</td></tr>
+        </tbody></table>
+        <p class="kw" style="font-size:12.5px; color:#9298A1; margin:12px 0 0;">근거 HUG·HF·SGI 공식 보증료율. 부채비율 80% 초과 등 구간에 따라 요율이 올라갈 수 있습니다.</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">보증료는 누가 내나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">임차인이 가입하는 전세보증금반환보증은 보통 임차인이 보증료를 부담합니다. 청년·신혼·저소득 등은 지자체 보증료 지원을 받을 수 있습니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">부채비율이 100%를 넘으면요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">선순위채권과 보증금 합이 주택가격을 넘으면 담보가 부족해 가입이 거절될 수 있습니다. 선순위 대출 상환 또는 보증금 조정이 필요합니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 HUG·HF·SGI 공식 보증료율 · 보증료·가입 여부는 부채비율·구간·우대에 따라 달라지며 실제는 보증기관 심사로 확인하세요.</p>
+  </div>
+</div>
+
+<script>
+var RATE = { hf:{apt:0.04,house:0.04,etc:0.04}, hug:{apt:0.115,house:0.139,etc:0.128}, sgi:{apt:0.183,house:0.208,etc:0.208} };
+var DEF = { deposit:30000, price:40000, senior:0, months:24, type:'apt', area:'metro', copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0원'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won); return p.join(' ')+'원'; }
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 6px; font-size:13px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function fee(rate){ var dep=(S.deposit||0)*10000; return Math.round(dep*rate/100*((S.months||0)/12)); }
+function compute(){
+  var dep=(S.deposit||0)*10000, price=(S.price||0)*10000, senior=(S.senior||0)*10000;
+  var ratio= price>0 ? (dep+senior)/price*100 : 0;
+  var cap = S.area==='metro'?700000000:500000000;
+  var withinCap = dep<=cap;
+  var withinRatio = ratio<=100 && price>0;
+  var ok = withinCap && withinRatio;
+  return { ratio:ratio, ok:ok, withinCap:withinCap, withinRatio:withinRatio,
+    hf:fee(RATE.hf[S.type]), hug:fee(RATE.hug[S.type]), sgi:fee(RATE.sgi[S.type]) };
+}
+function render(){
+  document.querySelectorAll('[data-type]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.type===S.type); });
+  document.querySelectorAll('[data-area]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.area===S.area); });
+  $('depLabel').textContent=korWon((S.deposit||0)*10000);
+  $('priceLabel').textContent=korWon((S.price||0)*10000);
+  $('hugRate').textContent='('+RATE.hug[S.type]+'%)';
+  $('sgiRate').textContent='('+RATE.sgi[S.type]+'%)';
+  var c=compute();
+  $('big').textContent=c.ratio.toFixed(2);
+  var jb=$('judgeBadge');
+  if(c.ok){ jb.textContent='가입 가능 (담보 이내)'; jb.style.color='#18794E'; jb.style.background='#E6F4EA'; }
+  else if(!c.withinCap){ jb.textContent='보증금이 한도 초과 — 가입 제한'; jb.style.color='#B42318'; jb.style.background='#FEE4E2'; }
+  else { jb.textContent='부채비율 100% 초과 — 가입 어려움'; jb.style.color='#B42318'; jb.style.background='#FEE4E2'; }
+  $('r-hf').textContent=comma(c.hf)+'원';
+  $('r-hug').textContent=comma(c.hug)+'원';
+  $('r-sgi').textContent=comma(c.sgi)+'원';
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key){ var el=$(id); if(!el)return; el.addEventListener('input',function(e){ var raw=(e.target.value||'').replace(/[^0-9]/g,''); S[key]=raw?parseInt(raw,10):0; if(key==='months'){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } S.copied=false; render(); }); }
+document.querySelectorAll('[data-type]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.type=b.dataset.type; S.copied=false; render(); }); });
+document.querySelectorAll('[data-area]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.area=b.dataset.area; S.copied=false; render(); }); });
+bindNum('deposit','deposit'); bindNum('price','price'); bindNum('senior','senior'); bindNum('months','months');
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('deposit').value='30,000'; $('price').value='40,000'; $('senior').value='0'; $('months').value='24'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='전세보증보험 · 부채비율 '+c.ratio.toFixed(2)+'% / 보증료(HUG) '+comma(c.hug)+'원 · 보증금 '+korWon((S.deposit||0)*10000)+' · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
