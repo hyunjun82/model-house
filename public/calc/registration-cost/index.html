@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>법무사 등기비용 계산기 — 집계산 | 취득세·채권·법무사 보수 한 번에</title>
+<meta name="description" content="부동산 소유권이전 등기비용을 한 번에 계산합니다. 취득세, 국민주택채권 할인료, 인지세·증지, 법무사 보수까지 2026년 기준 자동 반영. 셀프등기 비교까지. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/registration-cost/">
+<meta property="og:title" content="법무사 등기비용 계산기 — 집계산">
+<meta property="og:description" content="등기비용(취득세+채권+인지·증지+법무사 보수)을 2026년 기준 한 번에. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/registration-cost/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"법무사 등기비용 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/registration-cost/","inLanguage":"ko-KR","description":"소유권이전 등기비용(취득세·국민주택채권·인지세·증지·법무사 보수)을 2026년 기준 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-27" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"법무사 등기비용 계산기","item":"https://model-house.net/calc/registration-cost/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"부동산 등기비용은 무엇으로 구성되나요?","acceptedAnswer":{"@type":"Answer","text":"취득세(지방교육세·농특세 포함), 국민주택채권 할인료, 인지세·등기 수입증지, 법무사 보수로 구성됩니다. 이 중 취득세·인지세·증지는 법정 금액, 채권 할인율과 법무사 보수는 변동·협의 사항입니다."}},
+ {"@type":"Question","name":"셀프등기를 하면 얼마나 아끼나요?","acceptedAnswer":{"@type":"Answer","text":"법무사 보수(보통 50만~100만원대)를 아낄 수 있습니다. 취득세·채권·인지·증지는 셀프등기여도 동일하게 부담합니다."}},
+ {"@type":"Question","name":"국민주택채권 할인료는 왜 매번 다른가요?","acceptedAnswer":{"@type":"Answer","text":"채권 매입액은 시가표준액×매입률로 고정이지만, 즉시 매도 시 적용되는 할인율이 매일 변동하기 때문입니다. 주택도시기금에서 당일 할인율을 확인하세요."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">법무사 등기비용</span>
+    </nav>
+
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">법무사 등기비용 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 600px;">부동산 소유권이전에 드는 전체 비용을 한 번에 계산합니다. 취득세, 국민주택채권 할인료, 인지세·증지, 법무사 보수까지 2026년 기준으로 반영하고 셀프등기와도 비교합니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 30px 32px 32px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="display:flex; gap:12px; padding: 14px 0 0;">
+            <div style="flex:1;"><label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>거래금액</span><span id="priceLabel" style="font-size:12px; color:#6155F5; font-weight:600;">8억</span></label><div style="position:relative;"><input id="price" type="text" inputmode="numeric" value="80,000" class="fld tnum"><span class="unit">만원</span></div></div>
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">시가표준액(공시가)</label><div style="position:relative;"><input id="gongsi" type="text" inputmode="numeric" value="60,000" class="fld tnum"><span class="unit">만원</span></div></div>
+          </div>
+
+          <div style="padding: 16px 0; border-bottom:1px solid #F0F1F3; border-top:1px solid #F0F1F3; margin-top:18px;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">지역 <span style="font-weight:400; color:#9298A1;">· 채권 매입률 기준</span></label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-region="seoul">서울</button><button data-region="metro">광역시</button><button data-region="etc">그 외 지역</button>
+            </div>
+          </div>
+
+          <div style="padding: 16px 0; border-bottom:1px solid #F0F1F3;">
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #31363F; margin-bottom: 10px;">취득 후 주택 수 <span style="font-weight:400; color:#9298A1;">· 취득세</span></label>
+            <div style="display: flex; gap: 4px; background: #F1F2F4; padding: 4px; border-radius: 12px;">
+              <button data-homes="1">1주택</button><button data-homes="2">2주택</button><button data-homes="3">3주택+</button>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding: 16px 0 0;">
+            <div style="font-size:14px; font-weight:600; color:#15171C;">85㎡ 초과 <span style="font-size:12px; color:#9298A1; font-weight:400;">농특세</span></div>
+            <button id="tog-over"><span id="knob-over"></span></button>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding: 16px 0;">
+            <div style="font-size:14px; font-weight:600; color:#15171C;">조정대상지역 <span style="font-size:12px; color:#9298A1; font-weight:400;">중과</span></div>
+            <button id="tog-adj"><span id="knob-adj"></span></button>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding: 0 0 16px; border-bottom:1px solid #F0F1F3;">
+            <div style="font-size:14px; font-weight:600; color:#15171C;">생애최초 <span style="font-size:12px; color:#9298A1; font-weight:400;">최대 200만 감면</span></div>
+            <button id="tog-first"><span id="knob-first"></span></button>
+          </div>
+
+          <div style="display:flex; gap:12px; padding: 18px 0 0;">
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">채권 할인율 <span style="color:#9298A1; font-weight:400;">(변동)</span></label><div style="position:relative;"><input id="disc" type="text" inputmode="decimal" value="14.9" class="fld tnum"><span class="unit">%</span></div></div>
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">법무사 보수 <span style="color:#9298A1; font-weight:400;">(협의)</span></label><div style="position:relative;"><input id="lawyer" type="text" inputmode="numeric" value="670,000" class="fld tnum"><span class="unit">원</span></div></div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding: 18px 0 0;">
+            <div><div style="font-size:14px; font-weight:600; color:#15171C;">셀프등기 (법무사 미이용)</div><div style="font-size:12.5px; color:#9298A1; margin-top:2px;">법무사 보수·부대비용 0원</div></div>
+            <button id="tog-self"><span id="knob-self"></span></button>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 30px 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">총 등기비용</div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="total-big" class="tnum" style="font-size: clamp(30px, 4.6vw, 42px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">24,477,400</span>
+              <span style="font-size: 17px; font-weight: 700; color: #15171C;">원</span>
+            </div>
+            <div id="rows" style="margin-top: 20px; border-top: 1px solid #ECEEF1; padding-top: 6px;"></div>
+            <button id="copy" style="width: 100%; margin-top: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <a href="/calc/acquisition-tax/" style="width:100%; margin-top:10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#fff; color:#5A616B; border:1px solid #E4E6EA; border-radius:12px; padding:11px; font-size:13px; font-weight:600;">취득세만 자세히 계산 →</a>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">취득세·인지세·증지는 법정 금액으로 정확합니다. 채권 할인율(매일 변동)과 법무사 보수(자율 협의)는 입력값을 바꿔 비교하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 44px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">등기비용 구성</h2>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.85; color:#5A616B;">
+          <li><b style="color:#31363F;">취득세</b>(지방교육세·농특세 포함) — 거래금액 기준, 법정. 가장 큰 비중.</li>
+          <li><b style="color:#31363F;">국민주택채권 할인료</b> — 매입액(시가표준액×지역별 매입률)에 당일 할인율을 곱한 실부담액.</li>
+          <li><b style="color:#31363F;">인지세·등기 수입증지</b> — 법정 정액(1억 이하 주택은 인지세 면제).</li>
+          <li><b style="color:#31363F;">법무사 보수</b> — 자율(협의). 셀프등기 시 0원.</li>
+        </ul>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:18px; overflow-x:auto;">
+        <div style="font-size:13.5px; font-weight:700; color:#31363F; margin-bottom:10px;">인지세 (계약서 기재금액)</div>
+        <table class="rate-tbl">
+          <thead><tr><th>금액</th><th>인지세</th></tr></thead>
+          <tbody>
+            <tr><td>1억원 이하 주택</td><td>면제</td></tr>
+            <tr><td>1천만 ~ 3천만원</td><td>2만원</td></tr>
+            <tr><td>3천만 ~ 5천만원</td><td>4만원</td></tr>
+            <tr><td>5천만 ~ 1억원</td><td>7만원</td></tr>
+            <tr><td>1억 ~ 10억원</td><td>15만원</td></tr>
+            <tr><td>10억원 초과</td><td>35만원</td></tr>
+          </tbody>
+        </table>
+        <p class="kw" style="font-size:12px; color:#9298A1; margin:10px 0 0;">등기 수입증지(등기신청수수료)는 부동산 1건당 서면 15,000원입니다.</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">셀프등기하면 얼마 아끼나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">법무사 보수(보통 50만~100만원대)를 아낄 수 있습니다. 취득세·채권·인지·증지는 셀프등기여도 동일합니다. 위에서 셀프등기를 켜면 법무사 비용이 빠진 금액이 나옵니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">채권 할인율은 어디서 확인하나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">국민주택채권 할인율은 매일 바뀝니다. 주택도시기금 홈페이지나 은행에서 당일 할인율을 확인해 입력하면 정확해집니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 지방세법(취득세)·주택도시기금법(국민주택채권)·인지세법 · 채권 할인율·법무사 보수는 변동·협의 사항으로 실제와 차이가 날 수 있습니다.</p>
+  </div>
+</div>
+
+<script>
+var DEF = { price:80000, gongsi:60000, region:'seoul', homes:'1', over85:false, adjusted:false, first:false, disc:14.9, lawyer:670000, self:false, lawyerEdited:false, copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var won0=function(x){ return Math.floor(x+1e-4); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0원'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won); return p.join(' ')+'원'; }
+function slide(won){ if(won<=600000000)return 0.01; if(won>=900000000)return 0.03; var r=(won*2/300000000-3)/100; return Math.round(r*10000)/10000; }
+// 채권 매입률 (시가표준액 구간) [상한, 특·광, 그외]
+var BOND=[[50000000,0.013,0.013],[100000000,0.019,0.014],[160000000,0.021,0.016],[260000000,0.023,0.018],[600000000,0.026,0.021],[Infinity,0.031,0.026]];
+function bondRate(g){ for(var i=0;i<BOND.length;i++){ if(g<BOND[i][0]) return (S.region==='etc')?BOND[i][2]:BOND[i][1]; } return (S.region==='etc')?0.026:0.031; }
+function stampTax(price, isHouse){ // 인지세
+  if(isHouse && price<=100000000) return 0;
+  if(price<=10000000) return 0;
+  if(price<=30000000) return 20000;
+  if(price<=50000000) return 40000;
+  if(price<=100000000) return 70000;
+  if(price<=1000000000) return 150000;
+  return 350000;
+}
+function lawyerDefault(g){ if(g<=500000000) return won0(g*0.0012); return 600000+won0((g-500000000)*0.0007); }
+function compute(){
+  var price=(S.price||0)*10000, g=(S.gongsi||0)*10000;
+  // 취득세 (매매 주택)
+  var std=slide(price), rate, eduRate, heavy=false, farmRate;
+  if(S.homes==='1')rate=std; else if(S.homes==='2')rate=S.adjusted?0.08:std; else rate=S.adjusted?0.12:0.08;
+  heavy=(rate===0.08||rate===0.12);
+  if(heavy){ eduRate=0.004; farmRate=S.over85?(rate===0.12?0.010:0.006):0; } else { farmRate=S.over85?0.002:0; }
+  var acqBase=won0(price*rate);
+  var firstOK=S.first&&!heavy&&price<=1200000000;
+  var discount=firstOK?Math.min(2000000,acqBase):0;
+  var acq=acqBase-discount;
+  var edu=(!heavy)?won0(acq*0.1):won0(price*eduRate);
+  var farm=won0(price*farmRate);
+  var acqTotal=acq+edu+farm;
+  // 채권
+  var bRate=bondRate(g);
+  var bondBuy = g>=20000000 ? Math.ceil(g*bRate/5000)*5000 : 0;
+  var bondDisc = won0(bondBuy*(S.disc||0)/100);
+  // 인지·증지
+  var stamp=stampTax(price,true);
+  var jeungji=15000;
+  // 법무사
+  var lawyer = S.self?0:(S.lawyer||0);
+  var lawyerVat = S.self?0:won0(lawyer*0.1);
+  var lawyerExtra = S.self?0:300000;
+  var lawyerTotal = lawyer+lawyerVat+lawyerExtra;
+  var total = acqTotal + bondDisc + stamp + jeungji + lawyerTotal;
+  return { acqTotal:acqTotal, bondBuy:bondBuy, bondDisc:bondDisc, stamp:stamp, jeungji:jeungji, lawyer:lawyer, lawyerVat:lawyerVat, lawyerExtra:lawyerExtra, lawyerTotal:lawyerTotal, total:total, bRate:bRate };
+}
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 6px; font-size:13px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function trackStyle(on){ return 'width:44px; height:26px; border-radius:999px; position:relative; cursor:pointer; transition:all .2s ease; border:none; flex:none; padding:0; background:'+(on?'#6155F5':'#D7DADF')+';'; }
+function knobStyle(on){ return 'position:absolute; top:3px; left:'+(on?'21px':'3px')+'; width:20px; height:20px; border-radius:50%; background:#fff; transition:all .2s ease; box-shadow:0 1px 2px rgba(0,0,0,.2); display:block;'; }
+function rowHtml(k,v,strong,green){ return '<div style="display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid #F0F1F3;"><span style="font-size:13px; color:'+(green?'#18794E':(strong?'#15171C':'#5A616B'))+'; font-weight:'+(strong?'700':(green?'600':'400'))+';">'+k+'</span><span class="tnum" style="font-size:'+(strong?'15px':'13.5px')+'; font-weight:'+(strong?'800':'600')+'; color:'+(green?'#18794E':'#15171C')+';">'+v+'</span></div>'; }
+function render(){
+  var c=compute();
+  document.querySelectorAll('[data-region]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.region===S.region); });
+  document.querySelectorAll('[data-homes]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.homes===S.homes); });
+  $('tog-over').style.cssText=trackStyle(S.over85); $('knob-over').style.cssText=knobStyle(S.over85);
+  $('tog-adj').style.cssText=trackStyle(S.adjusted); $('knob-adj').style.cssText=knobStyle(S.adjusted);
+  $('tog-first').style.cssText=trackStyle(S.first); $('knob-first').style.cssText=knobStyle(S.first);
+  $('tog-self').style.cssText=trackStyle(S.self); $('knob-self').style.cssText=knobStyle(S.self);
+  $('priceLabel').textContent=korWon(S.price*10000).replace('원','');
+  $('total-big').textContent=comma(c.total);
+  var html='';
+  html+=rowHtml('취득세 합계', comma(c.acqTotal)+'원');
+  html+=rowHtml('국민주택채권 할인료', comma(c.bondDisc)+'원');
+  html+=rowHtml('인지세', comma(c.stamp)+'원');
+  html+=rowHtml('등기 수입증지', comma(c.jeungji)+'원');
+  if(!S.self){ html+=rowHtml('법무사 보수(+부가세·부대)', comma(c.lawyerTotal)+'원'); }
+  else { html+=rowHtml('법무사 보수', '0원 (셀프등기)', false, true); }
+  html+=rowHtml('총 등기비용', comma(c.total)+'원', true);
+  $('rows').innerHTML=html;
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key,dec){ var el=$(id); if(!el)return; el.addEventListener('input',function(e){ var raw=(e.target.value||'').replace(dec?/[^0-9.]/g:/[^0-9]/g,''); S[key]=raw?parseFloat(raw):0; if(key==='lawyer')S.lawyerEdited=true; if(dec){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } if(key==='gongsi'&&!S.lawyerEdited){ S.lawyer=lawyerDefault((S.gongsi||0)*10000); $('lawyer').value=comma(S.lawyer); } S.copied=false; render(); }); }
+document.querySelectorAll('[data-region]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.region=b.dataset.region; S.copied=false; render(); }); });
+document.querySelectorAll('[data-homes]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.homes=b.dataset.homes; S.copied=false; render(); }); });
+bindNum('price','price',false); bindNum('gongsi','gongsi',false); bindNum('disc','disc',true); bindNum('lawyer','lawyer',false);
+$('tog-over').addEventListener('click',function(){ S.over85=!S.over85; S.copied=false; render(); });
+$('tog-adj').addEventListener('click',function(){ S.adjusted=!S.adjusted; S.copied=false; render(); });
+$('tog-first').addEventListener('click',function(){ S.first=!S.first; S.copied=false; render(); });
+$('tog-self').addEventListener('click',function(){ S.self=!S.self; S.copied=false; render(); });
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('price').value='80,000'; $('gongsi').value='60,000'; $('disc').value='14.9'; $('lawyer').value='670,000'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='등기비용 · 거래 '+korWon(S.price*10000)+' / 총 '+comma(c.total)+'원 (취득세 '+comma(c.acqTotal)+'+채권 '+comma(c.bondDisc)+'+법무사 '+comma(c.lawyerTotal)+') · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
