@@ -27,18 +27,18 @@
 </style>
 <script type="application/ld+json">
 { "@context":"https://schema.org","@type":"SoftwareApplication","name":"집계산 — 부동산 계산기","alternateName":"집계산","url":"https://model-house.net/calc/","applicationCategory":"FinanceApplication","operatingSystem":"Web","description":"취득세·양도소득세·종합부동산세·재산세·전월세 전환·DSR 등 부동산 관련 모든 세금과 대출을 가입 없이 무료로 계산하는 계산기 플랫폼.","inLanguage":"ko-KR","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"featureList":["취득세 계산기","양도소득세 계산기","종합부동산세 계산기","재산세 계산기","전월세 전환 계산기","DSR 한도 계산기"] }
-</script>
+<\/script>
 <script type="application/ld+json">
 { "@context":"https://schema.org","@type":"WebSite","name":"집계산","url":"https://model-house.net/calc/" }
-</script>
+<\/script>
 <script type="application/ld+json">
 { "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
  {"@type":"Question","name":"집계산은 정말 무료인가요?","acceptedAnswer":{"@type":"Answer","text":"네. 모든 계산기는 회원가입과 로그인 없이 100% 무료로 이용할 수 있습니다."}},
  {"@type":"Question","name":"세율은 언제 기준인가요?","acceptedAnswer":{"@type":"Answer","text":"2026년 개정된 최신 세율과 공제 기준을 반영하며, 각 계산기 하단에 적용 기준일을 표기합니다."}},
  {"@type":"Question","name":"계산 결과를 그대로 신고에 사용해도 되나요?","acceptedAnswer":{"@type":"Answer","text":"집계산의 결과는 참고용입니다. 실제 신고·납부는 홈택스·위택스 및 세무 전문가의 확인을 권장합니다."}},
- {"@type":"Question","name":"어떤 계산기를 제공하나요?","acceptedAnswer":{"@type":"Answer","text":"취득세, 양도소득세, 종합부동산세, 재산세, 증여세, 전월세 전환, DSR 한도 등 부동산 관련 24종의 계산기를 제공합니다."}},
+ {"@type":"Question","name":"어떤 계산기를 제공하나요?","acceptedAnswer":{"@type":"Answer","text":"취득세, 양도소득세, 종합부동산세, 재산세, 증여세, 상속세, 전월세 전환, DSR 한도 등 부동산 관련 24종의 계산기를 제공합니다."}},
  {"@type":"Question","name":"모바일에서도 쓸 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 모든 계산기는 모바일에 최적화되어 있습니다."}}]}
-</script>
+<\/script>
 </head>
 <body>
 <div style="min-height: 100vh;">
@@ -170,6 +170,7 @@
           <a href="/calc/transfer-tax/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">1주택 비과세 판정</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">요건 체크</span></a>
           <a href="/calc/transfer-tax/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">장기보유특별공제</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">공제율</span></a>
           <a href="/calc/gift-tax/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">증여세 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">증여 재산</span></a>
+          <a href="/calc/inheritance-tax/" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px;"><span style="font-size: 14.5px; font-weight: 600; color: #15171C;">상속세 계산기</span><span style="margin-left: auto; font-size: 12.5px; color: #9298A1;">상속 재산</span></a>
         </div>
       </div>
 
@@ -208,7 +209,7 @@
       <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">집계산은 정말 무료인가요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">네. 모든 계산기는 회원가입과 로그인 없이 100% 무료로 이용할 수 있습니다. 계산 결과 저장과 공유까지 무료입니다.</p></details>
       <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">세율은 언제 기준인가요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">2026년 개정된 최신 세율과 공제 기준을 반영합니다. 법 개정 시 빠르게 업데이트하며, 각 계산기 하단에 적용 기준일을 표기합니다.</p></details>
       <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">계산 결과를 그대로 신고에 사용해도 되나요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">집계산의 결과는 예상 금액을 빠르게 확인하기 위한 참고용입니다. 실제 신고·납부는 홈택스·위택스 및 세무 전문가의 확인을 권장합니다.</p></details>
-      <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">어떤 계산기를 제공하나요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">취득세, 양도소득세, 종합부동산세, 재산세, 보유세, 증여세, 전월세 전환, DSR 한도, 임대수익률 등 부동산 관련 24종의 계산기를 제공합니다.</p></details>
+      <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">어떤 계산기를 제공하나요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">취득세, 양도소득세, 종합부동산세, 재산세, 보유세, 증여세, 상속세, 전월세 전환, DSR 한도, 임대수익률 등 부동산 관련 24종의 계산기를 제공합니다.</p></details>
       <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 20px;"><summary style="list-style: none; cursor: pointer; padding: 17px 0; font-size: 16px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">모바일에서도 쓸 수 있나요?<span style="color: #C2C6CD; font-size: 21px;">+</span></summary><p class="kw" style="font-size: 15px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 17px;">네. 모든 계산기는 모바일 화면에 최적화되어 있어 스마트폰에서도 같은 정확도로 빠르게 계산할 수 있습니다.</p></details>
     </div>
   </section>
@@ -226,7 +227,7 @@
       </div>
       <div>
         <div style="font-size: 13px; font-weight: 700; color: #15171C; margin-bottom: 12px;">팔 때 · 대출</div>
-        <div style="display: grid; gap: 9px; font-size: 13.5px; color: #9298A1;"><a href="/calc/transfer-tax/">양도소득세 계산기</a><a href="/calc/dsr/">DSR 한도 계산기</a><a href="/calc/jeonse-monthly/">전월세 전환 계산기</a></div>
+        <div style="display: grid; gap: 9px; font-size: 13.5px; color: #9298A1;"><a href="/calc/transfer-tax/">양도소득세 계산기</a><a href="/calc/inheritance-tax/">상속세 계산기</a><a href="/calc/dsr/">DSR 한도 계산기</a><a href="/calc/jeonse-monthly/">전월세 전환 계산기</a></div>
       </div>
     </div>
     <div style="border-top: 1px solid #ECEEF1;">
