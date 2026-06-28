@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>평수 계산기 — 집계산 | 평 ↔ ㎡ 면적 환산</title>
+<meta name="description" content="평과 제곱미터(㎡)를 즉시 양방향 환산합니다. 1평 = 3.305785㎡ 정확값 적용, 분양면적·전용면적 평형표 제공. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/area/">
+<meta property="og:title" content="평수 계산기 — 집계산">
+<meta property="og:description" content="평 ↔ ㎡ 면적을 즉시 양방향 환산. 평형표 제공. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/area/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  .seg { display:flex; gap:4px; background:#F1F2F4; border-radius:11px; padding:4px; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"평수 계산기 — 집계산","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","url":"https://model-house.net/calc/area/","inLanguage":"ko-KR","description":"평과 제곱미터(㎡)를 양방향으로 자동 환산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-28" }
+<\/script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"평수 계산기","item":"https://model-house.net/calc/area/"}]}
+<\/script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"1평은 몇 제곱미터인가요?","acceptedAnswer":{"@type":"Answer","text":"1평은 정확히 3.305785㎡입니다. 반대로 1㎡는 약 0.3025평입니다."}},
+ {"@type":"Question","name":"84㎡는 몇 평인가요?","acceptedAnswer":{"@type":"Answer","text":"전용면적 84㎡는 약 25.4평입니다. 흔히 말하는 '34평형'은 공급면적 기준으로, 전용 84㎡ 아파트를 가리킵니다."}},
+ {"@type":"Question","name":"분양면적과 전용면적은 어떻게 다른가요?","acceptedAnswer":{"@type":"Answer","text":"전용면적은 실제 거주 공간, 공급(분양)면적은 전용면적에 주거공용면적(복도·계단 등)을 더한 면적입니다. '평형'은 보통 공급면적 기준입니다."}}]}
+<\/script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">평수 환산</span>
+    </nav>
+
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">평수 계산기 (평 ↔ ㎡)</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 600px;">평과 제곱미터(㎡)를 즉시 양방향으로 환산합니다. 1평 = 3.305785㎡ 정확값을 적용합니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">면적 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 16px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">입력 단위</label>
+            <div class="seg" id="segDir">
+              <button data-dir="p2m" style="flex:1;">평 → ㎡</button>
+              <button data-dir="m2p" style="flex:1;">㎡ → 평</button>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span id="inLabel">면적 (평)</span></label>
+            <div style="position:relative;"><input id="val" type="text" inputmode="decimal" value="34" class="fld tnum"><span class="unit" id="inUnit">평</span></div>
+            <div style="display:flex; gap:6px; margin-top:10px; flex-wrap:wrap;" id="chips"></div>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">환산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;"><span id="outTitle">제곱미터</span></div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="big" class="tnum" style="font-size: clamp(32px, 5vw, 46px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">112.40</span>
+              <span style="font-size: 18px; font-weight: 700; color: #15171C;" id="bigUnit">㎡</span>
+            </div>
+            <div style="margin-top: 22px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">평</span><span id="r-py" class="tnum" style="font-size: 15px; font-weight: 700; color: #15171C;">34평</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                <span style="font-size: 13.5px; color: #5A616B;">제곱미터(㎡)</span><span id="r-m2" class="tnum" style="font-size: 15px; font-weight: 700; color: #15171C;">112.40㎡</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">1평 = 3.305785㎡ (= 400/121). 부동산 '평형'은 보통 공급(분양)면적 기준입니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 44px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">자주 쓰는 평형표</h2>
+        <table class="rate-tbl"><thead><tr><th>평형(공급)</th><th>전용면적(㎡)</th><th>공급면적(㎡)</th></tr></thead><tbody>
+          <tr><td>24평형</td><td>59㎡</td><td>약 79㎡</td></tr>
+          <tr><td>32평형</td><td>74㎡</td><td>약 106㎡</td></tr>
+          <tr><td>34평형</td><td>84㎡</td><td>약 112㎡</td></tr>
+          <tr><td>43평형</td><td>114㎡</td><td>약 142㎡</td></tr>
+          <tr><td>49평형</td><td>134㎡</td><td>약 162㎡</td></tr>
+        </tbody></table>
+        <p class="kw" style="font-size:12.5px; color:#9298A1; margin:12px 0 0;">전용 84㎡가 '34평형'으로 불리는 이유는 공용면적을 포함한 공급면적이 약 112㎡(34평)이기 때문입니다.</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">1평은 몇 ㎡인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">1평은 정확히 3.305785㎡(400/121)입니다. 반대로 1㎡는 약 0.3025평입니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">전용 84㎡는 몇 평인가요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">전용 84㎡는 약 25.4평입니다. 다만 흔히 부르는 '34평형'은 공용면적을 포함한 공급면적(약 112㎡) 기준입니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 1평 = 3.305785㎡ 정확값 적용 · 평형표의 공급면적은 단지별로 다를 수 있습니다.</p>
+  </div>
+</div>
+
+<script>
+var PYEONG = 3.3057851239669422;
+var DEF = { dir:'p2m', val:34, copied:false };
+var S = Object.assign({}, DEF);
+var $=function(id){return document.getElementById(id);};
+var fmt=function(n){ return (Math.round(n*100)/100).toLocaleString('ko-KR',{minimumFractionDigits:2, maximumFractionDigits:2}); };
+var fmtPy=function(n){ var r=Math.round(n*100)/100; return r.toLocaleString('ko-KR',{maximumFractionDigits:2}); };
+function compute(){
+  var v=S.val||0, py, m2;
+  if(S.dir==='p2m'){ py=v; m2=v*PYEONG; } else { m2=v; py=v/PYEONG; }
+  return { py:py, m2:m2 };
+}
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 6px; font-size:13px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function renderChips(){
+  var chips = S.dir==='p2m' ? [24,32,34,43,49] : [59,74,84,114,134];
+  var unit = S.dir==='p2m'?'평':'㎡';
+  $('chips').innerHTML = chips.map(function(c){ return '<button data-chip="'+c+'" style="background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:7px 11px; font-size:12.5px; font-weight:600; color:#5A616B; cursor:pointer;">'+c+unit+'</button>'; }).join('');
+  $('chips').querySelectorAll('[data-chip]').forEach(function(b){ b.addEventListener('click',function(){ S.val=parseFloat(b.dataset.chip); $('val').value=S.val; S.copied=false; render(); }); });
+}
+function render(){
+  document.querySelectorAll('[data-dir]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.dir===S.dir); });
+  $('inLabel').textContent = S.dir==='p2m'?'면적 (평)':'면적 (㎡)';
+  $('inUnit').textContent = S.dir==='p2m'?'평':'㎡';
+  $('outTitle').textContent = S.dir==='p2m'?'제곱미터':'평';
+  $('bigUnit').textContent = S.dir==='p2m'?'㎡':'평';
+  var c=compute();
+  $('big').textContent = S.dir==='p2m'? fmt(c.m2) : fmtPy(c.py);
+  $('r-py').textContent = fmtPy(c.py)+'평';
+  $('r-m2').textContent = fmt(c.m2)+'㎡';
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+$('val').addEventListener('input',function(e){ var raw=(e.target.value||'').replace(/[^0-9.]/g,''); S.val=raw?parseFloat(raw):0; e.target.value=raw; S.copied=false; render(); });
+document.querySelectorAll('[data-dir]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.dir=b.dataset.dir; S.copied=false; renderChips(); render(); }); });
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('val').value='34'; renderChips(); render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t=fmtPy(c.py)+'평 = '+fmt(c.m2)+'㎡ · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+renderChips(); render();
+<\/script>
+</body>
+</html>
