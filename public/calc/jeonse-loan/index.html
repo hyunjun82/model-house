@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전세대출 한도 계산기 — 집계산 | 전세자금대출 한도·이자 계산</title>
+<meta name="description" content="전세보증금과 지역·보증기관으로 전세자금대출 한도와 월 이자를 즉시 계산합니다. 6·27 대책 보증비율(수도권 80%·비수도권 90%), HF·HUG·SGI 한도 반영. 무료.">
+<link rel="canonical" href="https://model-house.net/calc/jeonse-loan/">
+<meta property="og:title" content="전세대출 한도 계산기 — 집계산">
+<meta property="og:description" content="전세자금대출 한도·월 이자를 즉시 계산. 6·27 대책 보증비율 반영. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/jeonse-loan/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  .seg { display:flex; gap:4px; background:#F1F2F4; border-radius:11px; padding:4px; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"전세대출 한도 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/jeonse-loan/","inLanguage":"ko-KR","description":"전세보증금·지역·보증기관으로 전세자금대출 한도와 월 이자를 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-28" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"전세대출 한도 계산기","item":"https://model-house.net/calc/jeonse-loan/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"전세대출은 보증금의 몇 %까지 받나요?","acceptedAnswer":{"@type":"Answer","text":"6·27 대책 이후 수도권·규제지역은 보증금의 80%, 비수도권은 90%까지가 일반적입니다. 보증기관별 최대 한도(HF·HUG 약 4억, SGI 5억 이상) 안에서 적용됩니다."}},
+ {"@type":"Question","name":"6·27 대책으로 무엇이 바뀌었나요?","acceptedAnswer":{"@type":"Answer","text":"2025년 7월부터 수도권·규제지역 전세대출 보증비율이 90%에서 80%로 축소됐습니다. 보증금 3억 기준 한도가 2.7억에서 2.4억으로 줄었습니다."}},
+ {"@type":"Question","name":"전세대출 이자는 어떻게 내나요?","acceptedAnswer":{"@type":"Answer","text":"대부분 원금은 만기에 상환하고 매월 이자만 납부합니다. 월 이자 = 대출금 × 연 금리 ÷ 12 로 계산합니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">전세대출 한도</span>
+    </nav>
+
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">전세대출 한도 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 600px;">전세보증금과 지역·보증기관으로 받을 수 있는 전세자금대출 한도와 월 이자를 즉시 계산합니다. 6·27 대책 보증비율(수도권 80%·비수도권 90%)을 반영합니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 16px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>전세보증금</span><span id="depLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">3억원</span></label>
+            <div style="position:relative;"><input id="deposit" type="text" inputmode="numeric" value="30,000" class="fld tnum"><span class="unit">만원</span></div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">지역 (보증비율)</label>
+            <div class="seg" id="segArea">
+              <button data-area="capital" style="flex:1;">수도권·규제 80%</button>
+              <button data-area="other" style="flex:1;">비수도권 90%</button>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">보증기관 (최대 한도)</label>
+            <div class="seg" id="segOrg">
+              <button data-org="hf" style="flex:1;">HF 4억</button>
+              <button data-org="hug" style="flex:1;">HUG 4억</button>
+              <button data-org="sgi" style="flex:1;">SGI 5억</button>
+            </div>
+            <p style="font-size:12px; color:#9298A1; margin:8px 0 0;">SGI는 아파트의 경우 사실상 한도가 없습니다. 청년·신혼·버팀목 등 정책상품은 별도 한도가 적용됩니다.</p>
+          </div>
+
+          <div style="padding: 18px 0 0; border-top:1px solid #F0F1F3; margin-top:18px; padding-top:18px;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">대출 금리 (연)</label>
+            <div style="position:relative;"><input id="rate" type="text" inputmode="decimal" value="4" class="fld tnum"><span class="unit">%</span></div>
+            <p style="font-size:12px; color:#9298A1; margin:8px 0 0;">전세대출은 보통 매월 <b style="color:#5A616B;">이자만</b> 내고 원금은 만기(계약 종료)에 상환합니다.</p>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">대출 가능액(최대)</div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="big" class="tnum" style="font-size: clamp(30px, 4.4vw, 42px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">2억 4,000만</span>
+              <span style="font-size: 17px; font-weight: 700; color: #15171C;">원</span>
+            </div>
+            <div id="capBadge" style="display:none; font-size:12px; font-weight:600; color:#9A6700; background:#FFF4D6; padding:6px 10px; border-radius:8px; margin-top:12px;">기관 최대 한도 적용</div>
+            <div style="margin-top: 22px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">보증비율 적용</span><span id="r-ratio" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">보증금 × 80%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">자기부담금(차액)</span><span id="r-self" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">6,000만원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">월 이자(이자만 납부)</span><span id="r-month" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">800,000원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0 0;">
+                <span style="font-size: 14px; font-weight: 700; color: #15171C;">대출 가능액</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="r-total">240,000,000</span>원</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <a href="/calc/jeonse-monthly/" style="width:100%; margin-top:10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#fff; color:#5A616B; border:1px solid #E4E6EA; border-radius:12px; padding:11px; font-size:13px; font-weight:600;">전월세 전환 계산기 →</a>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">실제 한도는 소득·신용·시세·보증기관 심사에 따라 달라집니다. 참고용으로만 사용하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 44px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">전세대출 한도 계산 공식</h2>
+        <p class="kw" style="margin:0 0 8px; font-size:14px; line-height:1.75; color:#31363F; font-weight:600;">대출 가능액 = min( 전세보증금 × 보증비율, 보증기관 최대 한도 )</p>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li><b style="color:#31363F;">6·27 대책</b>(2025년 7월 시행)으로 수도권·규제지역 보증비율이 90% → <b style="color:#31363F;">80%</b>로 축소됐습니다. 비수도권은 90%입니다.</li>
+          <li>보증기관별 최대 한도는 HF·HUG 약 4억, SGI 5억 이상(아파트 사실상 무제한)입니다.</li>
+          <li>월 이자 = 대출금 × 연 금리 ÷ 12 (원금은 만기 일시상환).</li>
+        </ul>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">보증기관 비교 (HF·HUG·SGI)</h2>
+        <table class="rate-tbl"><thead><tr><th>구분</th><th>HF(주금공)</th><th>HUG</th><th>SGI</th></tr></thead><tbody>
+          <tr><td>최대 한도</td><td>약 4억</td><td>약 4억</td><td>5억↑(아파트 무제한)</td></tr>
+          <tr><td>보증료율(연)</td><td>0.04~0.18%</td><td>0.11~0.21%</td><td>0.18~0.21%</td></tr>
+          <tr><td>특징</td><td>보증료 저렴</td><td>반환보증 연계</td><td>고액·비아파트</td></tr>
+        </tbody></table>
+        <p class="kw" style="font-size:12.5px; color:#9298A1; margin:12px 0 0;">보증비율 80%/90%는 6·27 대책 기준이며, 정책상품(버팀목·청년·신혼)은 별도 한도·금리가 적용됩니다.</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">보증금 3억이면 얼마까지 되나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">수도권은 80%인 2.4억, 비수도권은 90%인 2.7억이 일반적입니다. 소득·신용·보증기관 심사에 따라 줄어들 수 있습니다.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">전세대출도 DSR에 들어가나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">전세자금대출 원금은 DSR 산정에서 제외되며, 이자만 일부 반영됩니다. 다만 보증기관 한도와 소득 요건은 별도로 적용됩니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 금융위원회 6·27 가계부채 관리방안(2025) · HF·HUG·SGI 보증한도 · 실제 한도는 보증기관·은행 심사로 확인하세요.</p>
+  </div>
+</div>
+
+<script>
+var ORG={hf:40000, hug:40000, sgi:50000};
+var DEF = { deposit:30000, area:'capital', org:'hf', rate:4, copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0원'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won); return p.join(' ')+'원'; }
+function korWonShort(won){ if(!won||won<=0) return '0'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); return p.join(' '); }
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 6px; font-size:13px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function compute(){
+  var dep=(S.deposit||0)*10000;
+  var ratio=S.area==='capital'?0.80:0.90;
+  var byRatio=Math.floor(dep*ratio);
+  var cap=(ORG[S.org]||0)*10000;
+  var loan=Math.min(byRatio, cap);
+  var capped=(byRatio>cap);
+  var self=Math.max(0, dep-loan);
+  var month=Math.round(loan*(S.rate||0)/100/12);
+  return { dep:dep, ratio:ratio, byRatio:byRatio, cap:cap, loan:loan, capped:capped, self:self, month:month };
+}
+function render(){
+  document.querySelectorAll('[data-area]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.area===S.area); });
+  document.querySelectorAll('[data-org]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.org===S.org); });
+  $('depLabel').textContent=korWon((S.deposit||0)*10000);
+  var c=compute();
+  $('big').textContent=korWonShort(c.loan);
+  $('capBadge').style.display=c.capped?'block':'none';
+  $('r-ratio').textContent='보증금 × '+(c.ratio*100)+'%';
+  $('r-self').textContent=korWon(c.self);
+  $('r-month').textContent=comma(c.month)+'원';
+  $('r-total').textContent=comma(c.loan);
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key,dec){ var el=$(id); if(!el)return; el.addEventListener('input',function(e){ var raw=(e.target.value||'').replace(dec?/[^0-9.]/g:/[^0-9]/g,''); S[key]=raw?parseFloat(raw):0; if(dec){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } S.copied=false; render(); }); }
+document.querySelectorAll('[data-area]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.area=b.dataset.area; S.copied=false; render(); }); });
+document.querySelectorAll('[data-org]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.org=b.dataset.org; S.copied=false; render(); }); });
+bindNum('deposit','deposit',false); bindNum('rate','rate',true);
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('deposit').value='30,000'; $('rate').value='4'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='전세대출 한도 '+korWon(c.loan)+' · 보증금 '+korWon(c.dep)+' × '+(c.ratio*100)+'% / 월이자 '+comma(c.month)+'원 · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
