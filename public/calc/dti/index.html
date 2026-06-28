@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DTI 계산기 — 집계산 | 총부채상환비율·스트레스DTI 자동 계산</title>
+<meta name="description" content="연소득·대출금액·금리·기간으로 DTI(총부채상환비율)를 즉시 계산합니다. 원리금균등·원금균등·만기일시, 스트레스DTI(+2%p), 기타부채 반영. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/dti/">
+<meta property="og:title" content="DTI 계산기 — 집계산">
+<meta property="og:description" content="DTI(총부채상환비율)를 즉시 계산. 스트레스DTI·기타부채 반영. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/dti/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  .seg { display:flex; gap:4px; background:#F1F2F4; border-radius:11px; padding:4px; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"DTI 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/dti/","inLanguage":"ko-KR","description":"연소득·대출금액·금리·기간으로 DTI(총부채상환비율)를 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-28" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"DTI 계산기","item":"https://model-house.net/calc/dti/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"DTI는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"DTI = (해당 주택담보대출 연원리금 상환액 + 기타부채 연이자 상환액) ÷ 연소득 × 100 으로 계산합니다."}},
+ {"@type":"Question","name":"DTI와 DSR은 무엇이 다른가요?","acceptedAnswer":{"@type":"Answer","text":"DTI는 주택담보대출 원리금에 기타부채는 이자만 더하지만, DSR은 모든 대출의 원금과 이자를 모두 합산해 더 엄격합니다."}},
+ {"@type":"Question","name":"스트레스DTI는 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"향후 금리 상승에 대비해 적용 금리에 가산금리(보통 2%p)를 더해 계산한 DTI입니다."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">DTI</span>
+    </nav>
+
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">DTI 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 600px;">연소득 대비 대출 상환 부담률(총부채상환비율)을 즉시 계산합니다. 원리금균등·원금균등·만기일시, 스트레스DTI(+2%p)와 기타부채를 반영합니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 16px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">상환 방식</label>
+            <div class="seg" id="segMethod">
+              <button data-method="amort" style="flex:1;">원리금균등</button>
+              <button data-method="equal" style="flex:1;">원금균등</button>
+              <button data-method="bullet" style="flex:1;">만기일시</button>
+            </div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>연소득</span><span id="incLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">5,000만원</span></label>
+            <div style="position:relative;"><input id="income" type="text" inputmode="numeric" value="5,000" class="fld tnum"><span class="unit">만원</span></div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>대출금액</span><span id="loanLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">3억원</span></label>
+            <div style="position:relative;"><input id="loan" type="text" inputmode="numeric" value="30,000" class="fld tnum"><span class="unit">만원</span></div>
+          </div>
+
+          <div style="display:flex; gap:12px; padding: 18px 0 0;">
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">대출금리</label><div style="position:relative;"><input id="rate" type="text" inputmode="decimal" value="5" class="fld tnum"><span class="unit">%</span></div></div>
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">대출기간</label><div style="position:relative;"><input id="term" type="text" inputmode="numeric" value="30" class="fld tnum"><span class="unit">년</span></div></div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>기타부채 연이자 상환액</span><span style="font-size:11.5px; color:#9298A1; font-weight:500;">선택</span></label>
+            <div style="position:relative;"><input id="other" type="text" inputmode="numeric" value="0" class="fld tnum"><span class="unit">만원</span></div>
+            <p style="font-size:12px; color:#9298A1; margin:8px 0 0;">신용대출·기존 대출 등의 <b style="color:#5A616B;">연간 이자</b> 합계(원금 제외)를 입력하세요.</p>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px; padding: 18px 0 0; border-top:1px solid #F0F1F3; margin-top:18px; padding-top:18px;">
+            <button id="stressBtn" style="position:relative; width:44px; height:26px; border-radius:13px; border:none; background:#D8DAE0; cursor:pointer; transition:background .15s; flex-shrink:0;"><span id="stressDot" style="position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:left .15s; box-shadow:0 1px 2px rgba(0,0,0,.2);"></span></button>
+            <div><div style="font-size:13.5px; font-weight:600; color:#31363F;">스트레스DTI 적용</div><div style="font-size:12px; color:#9298A1;">적용 금리에 +2%p 가산</div></div>
+          </div>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;"><span id="dtiTitle">DTI</span></div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="big" class="tnum" style="font-size: clamp(32px, 4.8vw, 44px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">38.65</span>
+              <span style="font-size: 19px; font-weight: 700; color: #15171C;">%</span>
+            </div>
+            <div id="judgeBadge" style="font-size:12px; font-weight:600; padding:6px 10px; border-radius:8px; margin-top:12px; display:inline-block;">규제지역 한도 40% 이내</div>
+            <div style="margin-top: 22px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">적용 금리</span><span id="r-rate" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">5%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;"><span id="mLabel">월 원리금</span></span><span id="r-month" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">1,610,465원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">연 상환액(원리금)</span><span id="r-year" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">19,325,580원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0 0;">
+                <span style="font-size: 14px; font-weight: 700; color: #15171C;">DTI</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="r-total">38.65</span>%</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <a href="/calc/dsr/" style="width:100%; margin-top:10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#fff; color:#5A616B; border:1px solid #E4E6EA; border-radius:12px; padding:11px; font-size:13px; font-weight:600;">DSR 계산기 →</a>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">은행 실제 심사는 신용·소득증빙·상품별 내규에 따라 달라집니다. 참고용으로만 사용하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 44px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">DTI 계산 공식</h2>
+        <p class="kw" style="margin:0 0 8px; font-size:14px; line-height:1.75; color:#31363F; font-weight:600;">DTI = (주택담보대출 연 원리금 + 기타부채 연 이자) ÷ 연소득 × 100</p>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li>해당 주택담보대출은 <b style="color:#31363F;">원금+이자</b>를 모두 반영하고, 기타부채는 <b style="color:#31363F;">이자만</b> 더합니다.</li>
+          <li>연 상환액 = (원금 + 총이자) ÷ 대출기간(월) × 12 로 계산합니다.</li>
+          <li><b style="color:#31363F;">스트레스DTI</b>는 향후 금리 인상에 대비해 금리에 +2%p를 가산해 더 보수적으로 계산합니다.</li>
+        </ul>
+      </div>
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">DTI vs DSR</h2>
+        <table class="rate-tbl"><thead><tr><th>구분</th><th>DTI</th><th>DSR</th></tr></thead><tbody>
+          <tr><td>주택담보대출</td><td>원금+이자</td><td>원금+이자</td></tr>
+          <tr><td>기타 대출</td><td>이자만</td><td>원금+이자</td></tr>
+          <tr><td>규제 강도</td><td>상대적으로 완화</td><td>더 엄격</td></tr>
+        </tbody></table>
+        <p class="kw" style="font-size:12.5px; color:#9298A1; margin:12px 0 0;">규제지역·고가주택은 DTI 40%, 그 외 지역은 50~60%가 일반적이며, 현재는 차주별 DSR 40%(은행권) 규제가 함께 적용됩니다.</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">DTI가 높으면 대출이 안 되나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">지역·주택 가격에 따른 DTI 한도(보통 40~60%)를 넘으면 대출 한도가 줄거나 거절될 수 있습니다. 함께 적용되는 DSR 한도도 확인하세요.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">연소득은 무엇을 기준으로 하나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">원천징수영수증·소득금액증명원 등으로 증빙되는 세전 연소득이 기준입니다. 부부 합산이 가능한 경우도 있습니다.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · DTI는 금융기관·상품별 내규에 따라 실제 결과가 다를 수 있으며, 본 계산은 참고용입니다.</p>
+  </div>
+</div>
+
+<script>
+var DEF = { method:'amort', income:5000, loan:30000, rate:5, term:30, other:0, stress:false, copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0원'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won); return p.join(' ')+'원'; }
+function segStyle(on){ var b='flex:1; border:none; border-radius:9px; padding:9px 6px; font-size:13px; cursor:pointer; transition:all .15s ease; white-space:nowrap;'; return on? b+' background:#fff; color:#15171C; font-weight:600; box-shadow:0 1px 2px rgba(21,23,28,.10), 0 1px 3px rgba(21,23,28,.06);' : b+' background:transparent; color:#7A828E; font-weight:500;'; }
+function compute(){
+  var P=(S.loan||0)*10000, income=(S.income||0)*10000, other=(S.other||0)*10000;
+  var n=Math.round((S.term||0)*12);
+  var rate=(S.rate||0)/100 + (S.stress?0.02:0);
+  var i=rate/12;
+  var month=0, totInt=0;
+  if(n>0 && P>0){
+    if(S.method==='amort'){
+      if(i>0){ var pow=Math.pow(1+i,n); month=P*i*pow/(pow-1); } else { month=P/n; }
+      totInt=month*n-P;
+    } else if(S.method==='equal'){
+      var pm=P/n; month=pm+P*i;
+      totInt=P*i*(n+1)/2;
+    } else {
+      month=P*i; totInt=P*i*n;
+    }
+  }
+  var yearPay=n>0?(P+totInt)/n*12:0;
+  var dti=income>0?(yearPay+other)/income*100:0;
+  return { P:P, n:n, rate:rate, month:month, totInt:totInt, yearPay:yearPay, dti:dti };
+}
+function render(){
+  document.querySelectorAll('[data-method]').forEach(function(b){ b.style.cssText=segStyle(b.dataset.method===S.method); });
+  $('incLabel').textContent=korWon((S.income||0)*10000);
+  $('loanLabel').textContent=korWon((S.loan||0)*10000);
+  $('mLabel').textContent = S.method==='amort'?'월 원리금' : (S.method==='equal'?'첫 달 상환액' : '월 이자');
+  var c=compute();
+  $('dtiTitle').textContent = S.stress?'스트레스DTI':'DTI';
+  $('big').textContent=c.dti.toFixed(2);
+  $('r-rate').textContent=(c.rate*100).toFixed(c.rate*100%1===0?0:2)+'%'+(S.stress?' (+2%p)':'');
+  $('r-month').textContent=comma(c.month)+'원';
+  $('r-year').textContent=comma(c.yearPay)+'원';
+  $('r-total').textContent=c.dti.toFixed(2);
+  var jb=$('judgeBadge'), d=c.dti;
+  if(d<=40){ jb.textContent='규제지역 한도 40% 이내'; jb.style.color='#18794E'; jb.style.background='#E6F4EA'; }
+  else if(d<=60){ jb.textContent='비규제지역 한도(50~60%) 수준'; jb.style.color='#9A6700'; jb.style.background='#FFF4D6'; }
+  else { jb.textContent='한도 초과 가능 — 대출 어려울 수 있음'; jb.style.color='#B42318'; jb.style.background='#FEE4E2'; }
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key,dec){ var el=$(id); if(!el)return; el.addEventListener('input',function(e){ var raw=(e.target.value||'').replace(dec?/[^0-9.]/g:/[^0-9]/g,''); S[key]=raw?parseFloat(raw):0; if(dec||key==='term'){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } S.copied=false; render(); }); }
+document.querySelectorAll('[data-method]').forEach(function(b){ b.style.cursor='pointer'; b.addEventListener('click',function(){ S.method=b.dataset.method; S.copied=false; render(); }); });
+$('stressBtn').addEventListener('click',function(){ S.stress=!S.stress; var dot=$('stressDot'); this.style.background=S.stress?'#6155F5':'#D8DAE0'; dot.style.left=S.stress?'21px':'3px'; S.copied=false; render(); });
+bindNum('income','income',false); bindNum('loan','loan',false); bindNum('rate','rate',true); bindNum('term','term',true); bindNum('other','other',false);
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('income').value='5,000'; $('loan').value='30,000'; $('rate').value='5'; $('term').value='30'; $('other').value='0'; $('stressBtn').style.background='#D8DAE0'; $('stressDot').style.left='3px'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t=(S.stress?'스트레스DTI':'DTI')+' '+c.dti.toFixed(2)+'% · 연소득 '+korWon((S.income||0)*10000)+' / 대출 '+korWon((S.loan||0)*10000)+' '+(c.rate*100).toFixed(2)+'% '+S.term+'년 · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
