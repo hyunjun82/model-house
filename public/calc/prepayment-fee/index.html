@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>중도상환수수료 계산기 — 집계산 | 대출 중도상환 수수료 자동 계산</title>
+<meta name="description" content="대출 중도상환수수료를 상환원금·수수료율·경과기간으로 즉시 계산합니다. 잔여기간 슬라이딩(3년 경과 면제) 반영, 갈아타기 손익 비교. 가입 없이 무료.">
+<link rel="canonical" href="https://model-house.net/calc/prepayment-fee/">
+<meta property="og:title" content="중도상환수수료 계산기 — 집계산">
+<meta property="og:description" content="대출 중도상환수수료를 즉시 계산. 잔여기간 슬라이딩·3년 면제 반영. 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://model-house.net/calc/prepayment-fee/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif; background: #F6F7F9; color: #15171C; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  input { font-family: inherit; }
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .kw { word-break: keep-all; }
+  ::selection { background: #DEDEFA; }
+  .rate-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .rate-tbl th, .rate-tbl td { border:1px solid #ECEEF1; padding:9px 10px; text-align:center; }
+  .rate-tbl th { background:#F4F4FB; font-weight:600; color:#31363F; }
+  .rate-tbl td { color:#5A616B; }
+  .fld { width:100%; padding:13px 52px 13px 15px; border:1.5px solid #E4E6EA; border-radius:11px; font-size:17px; font-weight:700; color:#15171C; background:#fff; text-align:right; outline:none; letter-spacing:-0.02em; }
+  .unit { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:13px; font-weight:600; color:#9298A1; }
+  @media(max-width:760px){ .sheet-grid{ grid-template-columns:1fr !important; } .summary{ border-left:none !important; border-top:1px solid #ECEEF1; } }
+</style>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"SoftwareApplication","name":"중도상환수수료 계산기 — 집계산","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://model-house.net/calc/prepayment-fee/","inLanguage":"ko-KR","description":"대출 중도상환수수료를 상환원금·수수료율·경과기간으로 자동 계산합니다.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"집계산","url":"https://model-house.net/"},"datePublished":"2025-06-01","dateModified":"2026-06-27" }
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"홈","item":"https://model-house.net/"},
+ {"@type":"ListItem","position":2,"name":"부동산 계산기","item":"https://model-house.net/calc/"},
+ {"@type":"ListItem","position":3,"name":"중도상환수수료 계산기","item":"https://model-house.net/calc/prepayment-fee/"}]}
+</script>
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"중도상환수수료는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"상환원금 × 수수료율 × (잔여일수 ÷ 부과기간)으로 계산합니다. 보통 부과기간은 3년이며, 3년이 지나면 수수료가 면제됩니다."}},
+ {"@type":"Question","name":"2025년 개편으로 수수료율이 낮아졌나요?","acceptedAnswer":{"@type":"Answer","text":"2025년 1월 13일 이후 신규 계약분은 실비 기반으로 인하되어 주택담보대출 고정금리가 평균 0.56% 수준입니다. 기존 대출은 계약 당시 수수료율이 유지됩니다."}},
+ {"@type":"Question","name":"3년이 지나면 수수료가 없나요?","acceptedAnswer":{"@type":"Answer","text":"대부분 대출은 중도상환수수료 부과기간이 3년이라 3년이 지나면 0원입니다. 일부 상품은 기간이 다를 수 있어 약정서를 확인하세요."}}]}
+</script>
+</head>
+<body>
+<div style="min-height: 100vh;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #ECEEF1;">
+    <nav style="max-width: 960px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 12px;">
+      <a href="/calc/" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 27px; height: 27px; border-radius: 8px; background: #15171C; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.04em;">집</span>
+        <span style="font-size: 16.5px; font-weight: 700; color: #15171C; letter-spacing: -0.03em;">집계산</span>
+      </a>
+      <a href="/calc/" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: #5A616B; padding: 7px 12px; border-radius: 8px; white-space: nowrap;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        전체 계산기
+      </a>
+    </nav>
+  </header>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 40px 24px 96px;">
+    <nav style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #9298A1; margin-bottom: 18px;">
+      <a href="/">홈</a><span>/</span><a href="/calc/">부동산 계산기</a><span>/</span><span style="color: #15171C; font-weight: 500;">중도상환수수료</span>
+    </nav>
+
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: #15171C; letter-spacing: -0.035em; margin: 0 0 12px; line-height: 1.1;">중도상환수수료 계산기</h1>
+      <p class="kw" style="font-size: 16px; line-height: 1.55; color: #5A616B; margin: 0; max-width: 580px;">대출을 미리 갚거나 갈아탈 때 내는 중도상환수수료를 즉시 계산합니다. 잔여기간 슬라이딩(3년 경과 면제)을 반영합니다.</p>
+    </div>
+
+    <div style="background: #fff; border: 1px solid #ECEEF1; border-radius: 18px; box-shadow: 0 1px 2px rgba(21,23,28,.03), 0 12px 28px rgba(21,23,28,.05); overflow: hidden;">
+      <div class="sheet-grid" style="display: grid; grid-template-columns: 1fr 360px;">
+        <div style="padding: 32px 32px 34px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase;">조건 입력</span>
+            <button id="reset" style="display: inline-flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-size: 12.5px; font-weight: 500; color: #9298A1; padding: 4px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>초기화
+            </button>
+          </div>
+
+          <div style="padding: 16px 0 0;">
+            <label style="display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;"><span>중도상환 금액(원금)</span><span id="loanLabel" style="font-size:12.5px; color:#6155F5; font-weight:600;">2억원</span></label>
+            <div style="position:relative;"><input id="loan" type="text" inputmode="numeric" value="20,000" class="fld tnum"><span class="unit">만원</span></div>
+          </div>
+
+          <div style="padding: 18px 0 0;">
+            <label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">중도상환 수수료율</label>
+            <div style="position:relative;"><input id="rate" type="text" inputmode="decimal" value="1.2" class="fld tnum"><span class="unit">%</span></div>
+            <div style="display: flex; gap: 6px; margin-top: 10px;">
+              <button data-rrate="0.56" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12px; font-weight:600; color:#5A616B; cursor:pointer;">신규 고정 0.56%</button>
+              <button data-rrate="0.7" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12px; font-weight:600; color:#5A616B; cursor:pointer;">신규 변동 0.7%</button>
+              <button data-rrate="1.2" style="flex:1; background:#fff; border:1px solid #E4E6EA; border-radius:9px; padding:8px; font-size:12px; font-weight:600; color:#5A616B; cursor:pointer;">기존 1.2%</button>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:12px; padding: 18px 0 0; border-bottom:1px solid #F0F1F3; padding-bottom:18px;">
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">대출 경과기간</label><div style="position:relative;"><input id="elapsed" type="text" inputmode="numeric" value="12" class="fld tnum"><span class="unit">개월</span></div></div>
+            <div style="flex:1;"><label style="display:block; font-size:13px; font-weight:600; color:#31363F; margin-bottom:8px;">수수료 부과기간</label><div style="position:relative;"><input id="period" type="text" inputmode="numeric" value="36" class="fld tnum"><span class="unit">개월</span></div></div>
+          </div>
+          <p style="font-size:12px; color:#9298A1; margin:10px 0 0;">부과기간은 보통 3년(36개월)입니다. 경과기간이 부과기간을 넘으면 수수료가 0원입니다.</p>
+        </div>
+
+        <div class="summary" style="padding: 32px; background: #FBFBFC; border-left: 1px solid #ECEEF1; display: flex; flex-direction: column;">
+          <div style="position: sticky; top: 84px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: #9298A1; text-transform: uppercase; margin-bottom: 14px;">계산 결과</div>
+            <div style="font-size: 13.5px; color: #5A616B; margin-bottom: 6px;">중도상환수수료</div>
+            <div style="display: flex; align-items: baseline; gap: 3px;">
+              <span id="big" class="tnum" style="font-size: clamp(32px, 4.8vw, 44px); font-weight: 800; color: #6155F5; letter-spacing: -0.035em; line-height: 0.95;">1,600,000</span>
+              <span style="font-size: 17px; font-weight: 700; color: #15171C;">원</span>
+            </div>
+            <div id="freeBadge" style="display:none; font-size:12px; font-weight:600; color:#18794E; background:#E6F4EA; padding:6px 10px; border-radius:8px; margin-top:12px;">부과기간 경과 — 수수료 면제(0원)</div>
+            <div style="margin-top: 22px; border-top: 1px solid #ECEEF1; padding-top: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">상환원금</span><span id="r-loan" class="tnum" style="font-size: 14px; font-weight: 600; color: #15171C;">2억원</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">수수료율 × 잔여비율</span><span id="r-factor" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">1.2% × 66.7%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #F0F1F3;">
+                <span style="font-size: 13.5px; color: #5A616B;">잔여기간</span><span id="r-remain" class="tnum" style="font-size: 13.5px; font-weight: 600; color: #15171C;">24개월</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0 0;">
+                <span style="font-size: 14px; font-weight: 700; color: #15171C;">수수료</span><span class="tnum" style="font-size: 16px; font-weight: 800; color: #15171C;"><span id="r-total">1,600,000</span>원</span>
+              </div>
+            </div>
+            <button id="copy" style="width: 100%; margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #6155F5; color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyLabel">결과 복사</span>
+            </button>
+            <a href="/calc/mortgage-loan/" style="width:100%; margin-top:10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#fff; color:#5A616B; border:1px solid #E4E6EA; border-radius:12px; padding:11px; font-size:13px; font-weight:600;">주택담보대출 계산기 →</a>
+            <p class="kw" style="font-size: 11.5px; line-height: 1.55; color: #B0B5BD; margin: 14px 0 0;">실제 수수료율·부과기간·일할 계산 방식은 은행·상품별로 다릅니다. 정확한 금액은 약정서·거래 은행에서 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-top: 44px; display:grid; gap:14px;">
+      <div style="background:#fff; border:1px solid #ECEEF1; border-radius:14px; padding:20px 22px;">
+        <h2 style="font-size:16px; font-weight:700; color:#15171C; margin:0 0 12px;">중도상환수수료 계산 공식</h2>
+        <p class="kw" style="margin:0 0 8px; font-size:14px; line-height:1.75; color:#31363F; font-weight:600;">수수료 = 상환원금 × 수수료율 × (잔여기간 ÷ 부과기간)</p>
+        <ul class="kw" style="margin:0; padding-left:18px; font-size:14px; line-height:1.8; color:#5A616B;">
+          <li>부과기간은 보통 <b style="color:#31363F;">3년(36개월)</b>이며, 시간이 지날수록 수수료가 줄어듭니다(슬라이딩).</li>
+          <li>대출 실행 후 <b style="color:#31363F;">3년이 지나면 0원</b>입니다.</li>
+          <li>2025년 1월 개편으로 <b style="color:#31363F;">신규 계약</b>은 주담대 고정 약 0.56%로 인하됐고, 기존 대출은 종전 요율(1.2~1.4%)이 유지됩니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-top: 40px; max-width: 640px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #15171C; letter-spacing: -0.02em; margin: 0 0 14px;">자주 묻는 질문</h2>
+      <div style="display: grid; gap: 8px;">
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">3년 지나면 정말 안 내나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">대부분 대출은 부과기간이 3년이라 3년이 지나면 0원입니다. 일부 상품은 기간이 다를 수 있어 약정서를 확인하세요.</p></details>
+        <details style="background: #fff; border: 1px solid #ECEEF1; border-radius: 12px; padding: 2px 18px;"><summary style="list-style: none; cursor: pointer; padding: 15px 0; font-size: 14.5px; font-weight: 600; color: #15171C; display: flex; justify-content: space-between; align-items: center;">갈아타기(대환) 때도 내나요?<span style="color: #C2C6CD; font-size: 20px;">+</span></summary><p class="kw" style="font-size: 14px; line-height: 1.7; color: #5A616B; margin: 0; padding: 0 0 15px;">3년 이내 대환·상환이면 부과됩니다. 새 대출의 이자 절감액과 이 수수료를 비교해 갈아타기 손익을 따져보세요.</p></details>
+      </div>
+    </section>
+
+    <p style="margin-top: 44px; font-size: 12px; color: #B0B5BD; line-height:1.6;">© 2026 집계산 by model-house.net · 근거 금융위원회 중도상환수수료 개편(2025) · 수수료율·부과기간은 상품별로 다르며 실제 금액은 약정서·은행으로 확인하세요.</p>
+  </div>
+</div>
+
+<script>
+var DEF = { loan:20000, rate:1.2, elapsed:12, period:36, copied:false };
+var S = Object.assign({}, DEF);
+var comma=function(n){ return Math.round(n).toLocaleString('ko-KR'); };
+var won0=function(x){ return Math.floor(x+1e-4); };
+var $=function(id){return document.getElementById(id);};
+function korWon(won){ if(!won||won<=0) return '0원'; var eok=Math.floor(won/100000000), man=Math.round((won%100000000)/10000), p=[]; if(eok>0)p.push(eok+'억'); if(man>0)p.push(man.toLocaleString('ko-KR')+'만'); if(p.length===0)return comma(won); return p.join(' ')+'원'; }
+function compute(){
+  var loan=(S.loan||0)*10000, period=S.period||36, elapsed=S.elapsed||0;
+  var remain=Math.max(0, period-elapsed);
+  var factor= period>0 ? remain/period : 0;
+  var fee=won0(loan*(S.rate||0)/100*factor);
+  return { loan:loan, remain:remain, factor:factor, fee:fee, free:(remain<=0) };
+}
+function render(){
+  var c=compute();
+  $('loanLabel').textContent=korWon(S.loan*10000);
+  $('big').textContent=comma(c.fee);
+  $('freeBadge').style.display=c.free?'block':'none';
+  $('r-loan').textContent=korWon(S.loan*10000);
+  $('r-factor').textContent=(S.rate||0)+'% × '+(c.factor*100).toFixed(1)+'%';
+  $('r-remain').textContent=c.remain+'개월';
+  $('r-total').textContent=comma(c.fee);
+  $('copyLabel').textContent=S.copied?'복사되었습니다':'결과 복사';
+}
+function bindNum(id,key,dec){ var el=$(id); if(!el)return; el.addEventListener('input',function(e){ var raw=(e.target.value||'').replace(dec?/[^0-9.]/g:/[^0-9]/g,''); S[key]=raw?parseFloat(raw):0; if(dec||key==='elapsed'||key==='period'){ e.target.value=raw; } else { e.target.value=raw?parseInt(raw,10).toLocaleString('ko-KR'):''; } S.copied=false; render(); }); }
+document.querySelectorAll('[data-rrate]').forEach(function(b){ b.addEventListener('click',function(){ S.rate=parseFloat(b.dataset.rrate); $('rate').value=S.rate; S.copied=false; render(); }); });
+bindNum('loan','loan',false); bindNum('rate','rate',true); bindNum('elapsed','elapsed',false); bindNum('period','period',false);
+$('reset').addEventListener('click',function(){ S=Object.assign({},DEF); $('loan').value='20,000'; $('rate').value='1.2'; $('elapsed').value='12'; $('period').value='36'; render(); });
+$('copy').addEventListener('click',function(){ var c=compute(); var t='중도상환수수료 · 상환 '+korWon(S.loan*10000)+' / 율 '+S.rate+'% / 경과 '+S.elapsed+'개월 → '+comma(c.fee)+'원 · 집계산'; try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} S.copied=true; render(); clearTimeout(window._t); window._t=setTimeout(function(){ S.copied=false; render(); },1800); });
+render();
+</script>
+</body>
+</html>
